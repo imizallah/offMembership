@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import { Card, CardBody,Button } from 'reactstrap';
+import { Card, CardBody, Button } from 'reactstrap';
 import GlideComponent from 'components/carousel/GlideComponent';
 
 const handleRedirect = (e) => {
@@ -16,16 +16,17 @@ const getInfo = () => {
 
 
 
-const IconCard = ({ className = 'mb-4', icon, title, value, button, buttonTitle, func,cardClassName }) => {
+const IconCard = ({ className = 'mb-4', icon, title, value, button, buttonTitle, func, cardClassName }) => {
   return (
     <div className={`icon-row-item icon-card ${className}`}>
-      <Card style={{minHeight:'200px', maxHeight:'200px'}}>
+      <Card style={{ minHeight: '200px', maxHeight: '200px' }}>
         <CardBody className={`text-center  font-family-m ${cardClassName}`}>
           <i className={`${icon} carousel-icon`} />
-          <p className="card-text icon-card-text font-family-m font-weight-semibold mb-0" style={{fontSize:'12px'}}>
+          <p className="card-text icon-card-text font-family-m font-weight-light mb-0" style={{ fontSize: '12px' }}>
             {title}
           </p>
-          <p className="lead text-center">{value}</p>
+          {value ? <p className="lead text-center">{value}</p> : null}
+
           {button ?
             <Button color='primary' className='px-0 mx-2 my-2' onClick={() => func()}>
               {buttonTitle}
@@ -39,10 +40,10 @@ const IconCard = ({ className = 'mb-4', icon, title, value, button, buttonTitle,
 
 const IconCardsCarousel = ({ className = 'icon-cards-row' }) => {
   const counterData = [
-    { title: 'Credit Balance', value: 'N34,000', button: true, buttonTitle:'Fund', func: handleRedirect },
+    { title: 'Credit Balance', value: 'N34,000', button: true, buttonTitle: 'Fund', func: handleRedirect },
     { title: 'Total Advert', icon: 'iconsminds-clock', button: false, value: 12 },
-    { title: 'Help Center', icon: 'iconsminds-bar-chart-4', button: true,buttonTitle:'Contact', func: getHelp, value: 5, cardClassName :'py-3 pb-5'},
-    { title: 'Knowledge Base', icon: 'iconsminds-arrow-shuffle', button: true,buttonTitle:'Get Info', func: getInfo, value: 25,cardClassName:'py-3 pb-5' },
+    { title: 'Help Center', icon: 'iconsminds-bar-chart-4', button: true, buttonTitle: 'Contact', func: getHelp, cardClassName: 'py-3 pb-5' },
+    { title: 'Knowledge Base', icon: 'iconsminds-arrow-shuffle', button: true, buttonTitle: 'Get Info', func: getInfo, cardClassName: 'py-3 pb-5' },
   ];
 
 

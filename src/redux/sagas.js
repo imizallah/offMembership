@@ -4,6 +4,8 @@ import todoSagas from './todo/saga';
 import chatSagas from './chat/saga';
 import surveyListSagas from './surveyList/saga';
 import surveyDetailSagas from './surveyDetail/saga';
+import FAQSagas from'./knowledgebase/saga';
+import AdvertSaga from'./advert/saga'
 
 export default function* rootSaga() {
   yield all([
@@ -12,5 +14,7 @@ export default function* rootSaga() {
     chatSagas(),
     surveyListSagas(),
     surveyDetailSagas(),
+    FAQSagas(),
+    AdvertSaga()
   ]);
 }

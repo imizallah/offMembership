@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Card, CardTitle, Label, FormGroup, Button } from 'reactstrap';
+import { Row, Card, Label, FormGroup, Button } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,86 +9,90 @@ import { NotificationManager } from 'components/common/react-notifications';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { loginUser } from 'redux/actions';
+// import emChatlogo from '../../assets/logos/emChatlogo.png'
 
 const validatePassword = (value) => {
   let error;
   if (!value) {
     error = 'Please enter your password';
-  } else if (value.length < 4) {
-    error = 'Value must be longer than 3 characters';
   }
   return error;
 };
 
-const validateEmail = (value) => {
+function padLeadingZeros(num, size) {
+  let s = `${num}`;
+  while (s.length < size) s = `0${s}`;
+  return s;
+}
+
+const validatePhone = (value) => {
   let error;
   if (!value) {
-    error = 'Please enter your email address';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-    error = 'Invalid email address';
+    error = 'Please enter your phone number';
   }
   return error;
 };
 
-const Login = ({ history, loading, error, loginUserAction }) => {
-  const [email] = useState('demo@gogo.com');
-  const [password] = useState('gogo123');
+const Login = ({ history, loading, error, message, 
+  loginUserAction
+ }) => {
+  const [phone] = useState('');
+  const [password] = useState('');
 
   useEffect(() => {
     if (error) {
       NotificationManager.warning(error, 'Login Error', 3000, null, null, '');
+    } else if (message) {
+      NotificationManager.success(message, 'Login Successful', 3000, null, null, '');
     }
-  }, [error]);
+  }, [error, message]);
 
   const onUserLogin = (values) => {
     if (!loading) {
-      if (values.email !== '' && values.password !== '') {
-        loginUserAction(values, history);
+      if (values.phone !== '' && values.password !== '') {
+        const user = { phoneNumber: padLeadingZeros(values.phone, 11), password: values.password }
+        loginUserAction(user, history);
       }
     }
   };
 
-  const initialValues = { email, password };
+  const initialValues = { phone, password };
 
   return (
     <Row className="h-100">
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h2">MAGIC IS IN THE DETAILS</p>
-            <p className="white mb-0">
+            <p className="text-white h3">Welcome to <span className='h2'>Taskr</span></p>
+            <p className="white mb-0 mt-2">
               Please use your credentials to login.
-              <br />
-              If you are not a member, please{' '}
-              <NavLink to="/user/register" className="white">
-                register
-              </NavLink>
-              .
             </p>
           </div>
           <div className="form-side">
             <NavLink to="/" className="white">
               <span className="logo-single" />
+              {/* <img src={emChatlogo} width='130px' alt='navbrand-logo' /> */}
             </NavLink>
-            <CardTitle className="mb-4">
+            {/* <CardTitle className="mb-4">
               <IntlMessages id="user.login-title" />
-            </CardTitle>
+            </CardTitle> */}
 
             <Formik initialValues={initialValues} onSubmit={onUserLogin}>
               {({ errors, touched }) => (
-                <Form className="av-tooltip tooltip-label-bottom">
+                <Form className="av-tooltip tooltip-label-bottom mt-5">
                   <FormGroup className="form-group has-float-label">
                     <Label>
-                      <IntlMessages id="user.email" />
+                     Phone Number
                     </Label>
                     <Field
+                      type='number'
                       className="form-control"
-                      name="email"
-                      validate={validateEmail}
+                      name="phone"
+                      validate={validatePhone}
                     />
-                    {errors.email && touched.email && (
+                    {errors.phone && touched.phone && (
                       <div className="invalid-feedback d-block">
-                        {errors.email}
+                        {errors.phone}
                       </div>
                     )}
                   </FormGroup>
@@ -109,14 +113,13 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                     )}
                   </FormGroup>
                   <div className="d-flex justify-content-between align-items-center">
-                    <NavLink to="/user/forgot-password">
+                    <NavLink to="/auth/forgot-password">
                       <IntlMessages id="user.forgot-password-question" />
                     </NavLink>
                     <Button
                       color="primary"
-                      className={`btn-shadow btn-multiple-state ${
-                        loading ? 'show-spinner' : ''
-                      }`}
+                      className={`btn-authorization btn-shadow btn-multiple-state ${loading ? 'show-spinner' : ''
+                        }`}
                       size="lg"
                     >
                       <span className="spinner d-inline-block">
@@ -128,19 +131,33 @@ const Login = ({ history, loading, error, loginUserAction }) => {
                         <IntlMessages id="user.login-button" />
                       </span>
                     </Button>
+
                   </div>
                 </Form>
+
               )}
             </Formik>
+
+
+            <p className="text-dark mb-0 mt-2">
+              If you are not a member, please{' '}
+              <NavLink to="/auth/register" className=" text-info">
+                <u>
+                  register
+                </u>
+              </NavLink>
+              .
+            </p>
           </div>
+
         </Card>
       </Colxx>
     </Row>
   );
 };
 const mapStateToProps = ({ authUser }) => {
-  const { loading, error } = authUser;
-  return { loading, error };
+  const { loading, error, message } = authUser;
+  return { loading, error, message };
 };
 
 export default connect(mapStateToProps, {

@@ -2,54 +2,75 @@ import React, { useState } from 'react';
 import { Card, Row, FormGroup, Label, CardBody, CardHeader, Collapse, Button } from 'reactstrap'
 import { Separator, Colxx } from 'components/common/CustomBootstrap';
 import { Formik, Form, Field } from 'formik';
+import { connect } from 'react-redux';
+import { createFAQ } from 'redux/actions';
 
-
-const Knowledgebase = () => {
+const Knowledgebase = ({ createFAQRequest, createFAQloading }) => {
     const [toggleQuestion, setToggequestion] = useState(1);
+    // const [question, updateQuestion]=useState('')
+    // const [answer, updateAnswer]=useState('')
     const initialValues = {
-        name: ""
+        question: "",
+        answer: ""
     }
 
 
-    const validateName = (value) => {
+    const validateQuestion = (value) => {
         let err;
         if (!value) {
-            err = 'Please enter name';
+            err = 'Please enter Questioin';
         }
         return err;
     };
+
+
+    const validateAnswer = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter Answer';
+        }
+        return err;
+    };
+
+    const createFAQs = (values) => {
+        createFAQRequest(values)
+    }
+
     return (
         <>
             <h2 className=''>Knowledge Base</h2>
             <Separator />
             <Row className='mt-5'>
                 <Colxx xl='6'>
-                    <Card style={{ borderRadius: '20px' }}>
-                        <div className='my-3 '>
-                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>New Information</h1>
-                            <Separator />
-                        </div>
-                        <CardBody className='pt-0'>
-                            <Formik initialValues={initialValues} onSubmit={(e) => { console.log(e) }}>
-                                {({ errors, touched }) => (
-                                    <Form encType="multipart/form-data" method="post" action="#">
+                    <Formik initialValues={initialValues} onSubmit={createFAQs} >
+                        {({ errors, touched }) => (
+                            <Form encType="multipart/form-data" method="post" action="#">
+
+                                <Card style={{ borderRadius: '20px' }}>
+                                    <div className='my-3 '>
+                                        <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>New Information</h1>
+                                        <Separator />
+                                    </div>
+                                    <CardBody className='pt-0'>
+
                                         <Row  >
                                             <Colxx className='' xxs="12" md='12' sm='12'>
                                                 <Label className='mb-0 text-muted'> Question</Label>
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         component='textarea'
+                                                        required
                                                         style={{ resize: 'none' }}
                                                         cols='30'
                                                         row='30'
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
-
-                                                        validate={validateName}
+                                                        name="question"
+                                                        // onChange={(e)=>updateQuestion(e)}
+                                                        validate={validateQuestion}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.question && touched.question && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.question}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -63,20 +84,20 @@ const Knowledgebase = () => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         component='textarea'
+                                                        required
                                                         style={{ resize: 'none' }}
-
-
+                                                        // onChange={(e)=>updateAnswer(e)}
                                                         type='textarea'
                                                         cols='12'
                                                         rows='12'
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="answer"
 
-                                                        validate={validateName}
+                                                        validate={validateAnswer}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.answer && touched.answer && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.answer}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -85,15 +106,30 @@ const Knowledgebase = () => {
 
                                         </Row>
 
-                                    </Form>)
-                                }
-                            </Formik >
 
 
-                        </CardBody>
+                                    </CardBody>
 
-                    </Card>
-                    <Button style={{ fontSize: '12px' }} className='font-family-m mt-5 px-5 py-1  btn-lg' color='primary'>Add</Button>
+                                </Card>
+                                <Button
+                                    type='submit'
+                                    style={{ fontSize: '12px' }}
+                                    className={` font-family-m font-weight-light my-5 px-5 py-1  btn-lgbtn-multiple-state ${createFAQloading ? 'show-spinner' : ''}`}
+                                    color='primary' >
+                                    <span className="spinner d-inline-block">
+                                        <span className="bounce1" />
+                                        <span className="bounce2" />
+                                        <span className="bounce3" />
+                                    </span>
+                                    <span className="label">
+                                        Add
+                                    </span>
+                                </Button>
+                            </Form>
+
+                        )
+                        }
+                    </Formik >
                 </Colxx>
                 <Colxx xl='6'>
                     <Card className='mb-3 shadow'>
@@ -168,4 +204,9 @@ const Knowledgebase = () => {
     )
 
 }
-export default Knowledgebase
+
+const mapStateToProps = ({ FAQ }) => {
+    const { loading, createFAQloading, error, message } = FAQ;
+    return { createFAQloading, error, loading, message };
+};
+export default connect(mapStateToProps, { createFAQRequest: createFAQ })(Knowledgebase)

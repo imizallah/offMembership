@@ -1,22 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { injectIntl } from 'react-intl';
-import { Row, Card, CardBody, CardTitle, Button, CardSubtitle,
-  CustomInput, } from 'reactstrap';
-
+import {
+  Row, Card, CardBody, CardSubtitle,
+  CustomInput
+} from 'reactstrap';
+import { connect } from 'react-redux';
+import { createAdvert, getAdvert } from 'redux/actions';
 import { Colxx } from 'components/common/CustomBootstrap';
+import AdvertFeed from './AdvertFeed';
+import PostAdvert from './PostAdvert';
 // import {NavLink } from 'react-dom';
 // import Breadcrumb from 'containers/navs/Breadcrumb';
-import RecentOrders from 'containers/dashboards/RecentOrders';
-import ReactQuill from 'react-quill';
+// import RecentOrders from 'containers/dashboards/RecentOrders';
+// import ReactQuill from 'react-quill';
+
 import Table from './ReactTableCards'
 import IconCardsCarousel from './IconCardsCarousel';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 
-const DefaultDashboard = ({history}
+const DefaultDashboard = ({ history,
+  createAdvertRequest,
+  createAdvertLoading,
+  getAdvertRequest,
+  adverts,
+  loading }
 ) => {
+
+
+  useEffect(() => {
+    getAdvertRequest()
+    console.log(adverts);
+  }, [])
   // const { messages } = intl;
-  const [textQuillBubble, setTextQuillBubble] = useState('');
+  const [advertFeed, updateAdvertFeed] = useState([]);
+
+  const postAdvert = (message) => {
+    console.log(message);
+    const data = { message }
+    createAdvertRequest(data);
+  }
+
+  useEffect(() => {
+    updateAdvertFeed(adverts);
+    console.log(advertFeed)
+
+  }, [adverts])
 
 
   return (
@@ -28,29 +57,20 @@ const DefaultDashboard = ({history}
           <IconCardsCarousel />
           <Row className="mt-4">
             <Colxx md="12" className="mb-4">
-              <Card>
-                <CardBody>
-                  <CardTitle className='font-weight-bold'>
-                    Post an Advert
-                  </CardTitle>
-                  <ReactQuill
-                    theme="bubble"
-                    value={textQuillBubble}
-                    onChange={(val) => setTextQuillBubble(val)}
-                  />
-                  <div>
-                    <Button color='primary' className='  my-3' >
-                      Post Advert
-                    </Button>
-                  </div>
-
-                </CardBody>
-              </Card>
+              <PostAdvert
+                createAdvertLoading={createAdvertLoading}
+                postAdvert={postAdvert}
+              />
             </Colxx>
           </Row>
         </Colxx>
         <Colxx lg="5" xl="5" md='6' className="mb-4">
-          <RecentOrders />
+          {loading ? <div className='loading' /> :
+            <>
+              {adverts && <AdvertFeed adverts={advertFeed.reverse()} />}
+            </>
+          }
+
         </Colxx>
       </Row>
       <Row>
@@ -72,7 +92,7 @@ const DefaultDashboard = ({history}
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={()=>{history.push('membership')}}
+                    onClick={() => { history.push('membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('Advertiser')}
                     id="advertiser"
@@ -99,7 +119,7 @@ const DefaultDashboard = ({history}
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={()=>{history.push('/membership')}}
+                    onClick={() => { history.push('/membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('EVP')}
                     id="EVP"
@@ -125,7 +145,7 @@ const DefaultDashboard = ({history}
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={()=>{history.push('/membership')}}
+                    onClick={() => { history.push('/membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('Customer')}
                     id="customer"
@@ -151,7 +171,7 @@ const DefaultDashboard = ({history}
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={()=>{history.push('/membership')}}
+                    onClick={() => { history.push('/membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('Vendor')}
                     id="vendor"
@@ -177,7 +197,7 @@ const DefaultDashboard = ({history}
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={()=>{history.push('/membership')}}
+                    onClick={() => { history.push('/membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('superEVP')}
                     id="superEVP"
@@ -198,4 +218,8 @@ const DefaultDashboard = ({history}
     </>
   );
 };
-export default injectIntl(DefaultDashboard);
+const mapStateToProps = ({ advert }) => {
+  const { loading, createAdvertLoading, error, message, adverts } = advert;
+  return { createAdvertLoading, error, loading, message, adverts };
+};
+export default injectIntl(connect(mapStateToProps, { createAdvertRequest: createAdvert, getAdvertRequest: getAdvert })(DefaultDashboard))

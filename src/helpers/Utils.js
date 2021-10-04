@@ -148,12 +148,13 @@ export const setCurrentLanguage = (locale) => {
   }
 };
 
+
 export const getCurrentUser = () => {
   let user = null;
   try {
     user =
-      localStorage.getItem('gogo_current_user') != null
-        ? JSON.parse(localStorage.getItem('gogo_current_user'))
+      localStorage.getItem('taskrCurrentUser') != null
+        ? JSON.parse(localStorage.getItem('taskrCurrentUser'))
         : null;
   } catch (error) {
     console.log('>>>>: src/helpers/Utils.js  : getCurrentUser -> error', error);
@@ -162,12 +163,14 @@ export const getCurrentUser = () => {
   return user;
 };
 
-export const setCurrentUser = (user) => {
+export const setCurrentUser = (data) => {
   try {
-    if (user) {
-      localStorage.setItem('gogo_current_user', JSON.stringify(user));
+    if (data) {
+      localStorage.setItem('taskrUserToken', data.token);
+      localStorage.setItem('taskrCurrentUser', JSON.stringify(data.user));
     } else {
-      localStorage.removeItem('gogo_current_user');
+      localStorage.removeItem('taskrUserToken');
+      localStorage.removeItem('taskrCurrentUser');
     }
   } catch (error) {
     console.log('>>>>: src/helpers/Utils.js : setCurrentUser -> error', error);

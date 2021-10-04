@@ -16,6 +16,15 @@ export const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR';
 export const RESET_PASSWORD = 'RESET_PASSWORD';
 export const RESET_PASSWORD_SUCCESS = 'RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_ERROR = 'RESET_PASSWORD_ERROR';
+export const CHECK_PASSWORD_TOKEN = 'CHECK_PASSWORD_TOKEN';
+export const CHECK_PASSWORD_TOKEN_SUCCESS = 'CHECK_PASSWORD_TOKEN_SUCCESS';
+export const CHECK_PASSWORD_TOKEN_ERROR = 'CHECK_PASSWORD_TOKEN_ERROR';
+export const VERIFY_PHONE = 'VERIFY_PHONE';
+export const VERIFY_PHONE_SUCCESS = 'VERIFY_PHONE_SUCCESS';
+export const VERIFY_PHONE_ERROR = 'VERIFY_PHONE_ERROR';
+export const VERIFY_PHONE_TOKEN = 'VERIFY_PHONE_TOKEN';
+export const VERIFY_PHONE_TOKEN_SUCCESS = 'VERIFY_PHONE_TOKEN_SUCCESS';
+export const VERIFY_PHONE_TOKEN_ERROR = 'VERIFY_PHONE_TOKEN_ERROR';
 
 /* MENU */
 export const MENU_SET_CLASSNAMES = 'MENU_SET_CLASSNAMES';
@@ -72,9 +81,51 @@ export const SURVEY_GET_DETAILS_ERROR = 'SURVEY_GET_DETAILS_ERROR';
 export const SURVEY_DELETE_QUESTION = 'SURVEY_DELETE_QUESTION';
 export const SURVEY_SAVE = 'SURVEY_SAVE';
 
+/* Knowledge Base */
+export const CREATE_FAQ = 'CREATE_FAQ'
+export const CREATE_FAQ_FAILED = 'CREATE_FAQ_FAILED'
+export const CREATE_FAQ_SUCCESS = 'CREATE_FAQ_SUCCESS'
+
+export const EDIT_FAQ = 'EDIT_FAQ'
+export const EDIT_FAQ_FAILED = 'EDIT_FAQ_FAILED'
+export const EDIT_FAQ_SUCCESS = 'EDIT_FAQ_SUCCESS'
+
+export const DELETE_FAQ = 'DELETE_FAQ'
+export const DELETE_FAQ_FAILED = 'DELETE_FAQ_FAILED'
+export const DELETE_FAQ_SUCCESS = 'DELETE_FAQ_SUCCESS'
+
+export const GET_FAQ = 'GET_FAQ'
+export const GET_FAQ_FAILED = 'GET_FAQ_FAILED'
+export const GET_FAQ_SUCCESS = 'GET_FAQ_SUCCESS'
+
+
+/* Knowledge Base */
+export const CREATE_ADVERT = 'CREATE_ADVERT'
+export const CREATE_ADVERT_FAILED = 'CREATE_ADVERT_FAILED'
+export const CREATE_ADVERT_SUCCESS = 'CREATE_ADVERT_SUCCESS'
+
+export const EDIT_ADVERT = 'EDIT_ADVERT'
+export const EDIT_ADVERT_FAILED = 'EDIT_ADVERT_FAILED'
+export const EDIT_ADVERT_SUCCESS = 'EDIT_ADVERT_SUCCESS'
+
+export const DELETE_ADVERT = 'DELETE_ADVERT'
+export const DELETE_ADVERT_FAILED = 'DELETE_ADVERT_FAILED'
+export const DELETE_ADVERT_SUCCESS = 'DELETE_ADVERT_SUCCESS'
+
+export const GET_ADVERT = 'GET_ADVERT'
+export const GET_ADVERT_FAILED = 'GET_ADVERT_FAILED'
+export const GET_ADVERT_SUCCESS = 'GET_ADVERT_SUCCESS'
+
+export const GET_USER_ADVERT = 'GET_USER_ADVERT'
+export const GET_USER_ADVERT_FAILED = 'GET_USER_ADVERT_FAILED'
+export const GET_USER_ADVERT_SUCCESS = 'GET_USER_ADVERT_SUCCESS'
+
+
 export * from './menu/actions';
 export * from './settings/actions';
 export * from './auth/actions';
+export * from './knowledgebase/action';
+export * from './advert/action'
 export * from './todo/actions';
 export * from './chat/actions';
 export * from './surveyList/actions';

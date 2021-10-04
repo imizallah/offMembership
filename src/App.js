@@ -17,7 +17,7 @@ import {
   UserRole,
 } from './constants/defaultValues';
 import { getDirection } from './helpers/Utils';
-import { ProtectedRoute } from './helpers/authHelper';
+import ProtectedRoute  from './helpers/authHelper';
 
 // const ViewHome = React.lazy(() =>
 //   import(/* webpackChunkName: "views" */ './views/home')
@@ -26,7 +26,7 @@ const ViewApp = React.lazy(() =>
   import(/* webpackChunkName: "views-app" */ './views/app')
 );
 const ViewUser = React.lazy(() =>
-  import(/* webpackChunkName: "views-user" */ './views/user')
+  import(/* webpackChunkName: "views-user" */ './views/auth')
 );
 const ViewError = React.lazy(() =>
   import(/* webpackChunkName: "views-error" */ './views/error')
@@ -66,7 +66,7 @@ const App = ({ locale }) => {
                   roles={[UserRole.Admin, UserRole.Editor]}
                 />
                 <Route
-                  path="/user"
+                  path="/auth"
                   render={(props) => <ViewUser {...props} />}
                 />
                 <Route
@@ -81,8 +81,7 @@ const App = ({ locale }) => {
                 />
                 <Route
                   path="/"
-                  exact
-                  render={(props) => <ViewApp {...props} />}
+                  render={() => <Redirect to="/app" />}
                 />
                 {/*
                 <Redirect exact from="/" to={adminRoot} />

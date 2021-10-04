@@ -8,29 +8,33 @@ import AppLayout from 'layout/AppLayout';
 const Dashboards = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './dashboards')
 );
-const SEVPDashboard= React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './sevpDashboard')
+const SEVPDashboard = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './sevpDashboard')
 );
-const EVPDashboard= React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './evpDashboard')
+const EVPDashboard = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './evpDashboard')
 );
-const SuperEVPCenter=React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './superEvpCenter')
+const SuperEVPCenter = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './superEvpCenter')
 );
-const SuperAdminDashboard=React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './superAdminDashboard')
+const SuperAdminDashboard = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './superAdminDashboard')
 );
-const KnowledgebaseSettings=React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './knowledgebaseSettings')
+const KnowledgebaseSettings = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './knowledgebaseSettings')
 );
-const Knowledgebase=React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './knowledgebase')
+const Knowledgebase = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './knowledgebase')
 );
-const Settings=React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './settings')
+const Settings = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './settings')
 );
-const EVPCenter=React.lazy(() =>
-import(/* webpackChunkName: "dashboards" */ './evpCenter')
+const EVPCenter = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './evpCenter')
+);
+
+const AdvertCenter = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './advertCenter')
 );
 
 const Pages = React.lazy(() =>
@@ -60,42 +64,49 @@ const App = ({ match }) => {
               path={`${match.url}/dashboards`}
               render={(props) => <Dashboards {...props} />}
             />
-             <Route
+            <Route
               path={`${match.url}/sevp`}
               render={(props) => <SEVPDashboard {...props} />}
             />
-             <Route
+            <Route
               path={`${match.url}/evp`}
               render={(props) => <EVPDashboard {...props} />}
             />
             <Route
-             path={`${match.url}/super-evp`}
-             render={(props) => <SuperEVPCenter {...props} />}
+              path={`${match.url}/super-evp`}
+              render={(props) => <SuperEVPCenter {...props} />}
 
             />
 
             <Route
-             path={`${match.url}/super-admin`}
-             render={(props) => <SuperAdminDashboard {...props} />}
+              path={`${match.url}/super-admin`}
+              render={(props) => <SuperAdminDashboard {...props} />}
             />
-              <Route
-             path={`${match.url}/evp-center`}
-             render={(props) => <EVPCenter {...props} />}
+            <Route
+              path={`${match.url}/evp-center`}
+              render={(props) => <EVPCenter {...props} />}
+
+            />
+
+            <Route
+              path={`${match.url}/advert-center`}
+              render={(props) => <AdvertCenter {...props} />}
+
+            />
+
+            <Route
+              path={`${match.url}/set-knowledgebase`}
+              render={(props) => <KnowledgebaseSettings {...props} />}
 
             />
             <Route
-             path={`${match.url}/set-knowledgebase`}
-             render={(props) => <KnowledgebaseSettings {...props} />}
+              path={`${match.url}/knowledgebase`}
+              render={(props) => <Knowledgebase {...props} />}
 
             />
             <Route
-             path={`${match.url}/knowledgebase`}
-             render={(props) => <Knowledgebase {...props} />}
-
-            />
-             <Route
-             path={`${match.url}/settings`}
-             render={(props) => <Settings {...props} />}
+              path={`${match.url}/settings`}
+              render={(props) => <Settings {...props} />}
 
             />
             <Route
