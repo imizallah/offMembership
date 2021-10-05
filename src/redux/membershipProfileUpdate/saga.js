@@ -24,10 +24,11 @@ import {
 
 
 
-const currentUser = getCurrentUser();
-const {phoneNumber}=currentUser
 
 function* updateAdvertiser(payload) {
+    
+const currentUser = getCurrentUser();
+const {phoneNumber}=currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
         const response = yield axios.post('profile/advertiser', {...payload.payload.data, phoneNumber})
@@ -62,6 +63,9 @@ function* updateAdvertiser(payload) {
 }
 
 function* updateCustomer(payload) {
+    
+const currentUser = getCurrentUser();
+const {phoneNumber}=currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
         const response = yield axios.post('profile/customer', {...payload.payload.data, phoneNumber})
@@ -98,6 +102,9 @@ function* updateCustomer(payload) {
 
 
 function* updateVendor(payload) {
+    
+const currentUser = getCurrentUser();
+const {phoneNumber}=currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
         const response = yield axios.post('profile/vendor', {...payload.payload.data, phoneNumber})
@@ -133,6 +140,9 @@ function* updateVendor(payload) {
 
 
 function* updateEVP(payload) {
+    
+const currentUser = getCurrentUser();
+const {phoneNumber}=currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
         const response = yield axios.post('profile/evp', {...payload.payload.data, phoneNumber})
@@ -166,6 +176,9 @@ function* updateEVP(payload) {
     }
 }
 function* updateSEVP(payload) {
+    
+const currentUser = getCurrentUser();
+const {phoneNumber}=currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
         const response = yield axios.post('/profile/superevp', {...payload.payload.data, phoneNumber})

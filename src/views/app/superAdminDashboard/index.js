@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 // import { ProtectedRoute, UserRole } from 'helpers/authHelper';
 
 const DashboardDefault = React.lazy(() =>
-    import(/* webpackChunkName: "dashboard-default" */ './home')
+    import(/* webpackChunkName: "dashboard-default" */ './Home/index')
 );
 
 

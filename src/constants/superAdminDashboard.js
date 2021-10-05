@@ -5,13 +5,13 @@ const data = [
     id: 'dashboards',
     icon: 'iconsminds-shop-4',
     label: 'menu.dashboards',
-    to: `${adminRoot}/dashboards`,
+    to: `${adminRoot}/super-admin`,
     // roles: [UserRole.Admin, UserRole.Editor],
     subs: [
       {
         icon: 'simple-icon-briefcase',
         label: 'Home',
-        to: `${adminRoot}/dashboards/home`,
+        to: `${adminRoot}/super-admin/home`,
         // roles: [UserRole.Admin],
       },
       // {

@@ -84,11 +84,15 @@ function* createFAQ(payload) {
     }
 }
 
-function* updateFAQ({ id, formData }) {
+function* updateFAQ(payload) {
+  
+
     try {
-        const response = yield axios.put(`/faq/update?faqId=${id}`, formData)
+        const response = yield axios.patch(`/faq/update?faqId=${payload.payload.id}`, payload.payload.data)
         if (response.data.success) {
             yield put(updateFAQSuccess(response.data.message));
+    yield call(getFAQ);
+
         } else {
             yield put(updateFAQFailed(response.data.message));
         }

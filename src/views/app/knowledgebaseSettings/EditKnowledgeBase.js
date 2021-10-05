@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { updateFAQ } from 'redux/actions';
 
 
-const Knowledgebase = ({ faq, updateFAQRequest, editFAQLoading }) => {
+const Knowledgebase = ({ faq, updateFAQRequest, editLoading }) => {
 const {question,answer}=faq
 // const [editFAQ,setEditFAQ]=useState(faq)
  /* eslint prefer-const: 0 */
@@ -120,7 +120,7 @@ const {question,answer}=faq
                         <Button
                             type='submit'
                             style={{ fontSize: '12px' }}
-                            className={` font-family-m font-weight-light my-5 px-5 py-1  btn-lg btn-multiple-state ${editFAQLoading ? 'show-spinner' : ''}`}
+                            className={` font-family-m font-weight-light my-5 px-5 py-1  btn-lg btn-multiple-state ${editLoading ? 'show-spinner' : ''}`}
                             color='primary' >
                             <span className="spinner d-inline-block">
                                 <span className="bounce1" />
@@ -142,8 +142,8 @@ const {question,answer}=faq
 }
 
 const mapStateToProps = ({ FAQ }) => {
-    const { loading, editFAQLoading, error, message, faqs } = FAQ;
-    return { editFAQLoading, error, loading, message, faqs };
+    const { loading, editLoading, error, message, faqs } = FAQ;
+    return { editLoading, error, loading, message, faqs };
 };
 
 export default connect(mapStateToProps, { updateFAQRequest: updateFAQ })(Knowledgebase)

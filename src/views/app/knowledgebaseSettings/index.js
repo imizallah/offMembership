@@ -23,9 +23,21 @@ const Knowledgebase = ({ createFAQRequest, getFAQRequest, createFAQLoading, faqs
 
 
     const handleEditing = (faq) => {
-        updateEditing(false)
-        setEditFAQ(faq)
-        updateEditing(true)
+        /* eslint no-unused-vars :0 */
+        if (editing) {
+            console.log(editing)
+            updateEditing(false)
+            setEditFAQ(faq)
+            // updateEditing(true)
+
+        }
+        if (!editing) {
+            updateEditing(true)
+            setEditFAQ(faq)
+
+        }
+        // setEditFAQ(faq)
+        // updateEditing(true)
 
     }
     const validateQuestion = (value) => {

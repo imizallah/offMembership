@@ -86,7 +86,7 @@ const SuperEVP = () => {
 
                     </Card>
 
-                    <Button style={{fontSize:'12px'}} className='font-family-m mt-5 px-4 py-1  btn-lg' color='primary'>Verify</Button>
+                    <Button style={{fontSize:'12px'}} className='font-weight-light font-family-m mt-5 px-4 py-1  btn-lg' color='primary'>Verify</Button>
                 </Colxx>
                 <Colxx xxs="6" md='6' sm='12'>
                     <Card style={{ borderRadius: '20px' }}>
@@ -207,7 +207,7 @@ const SuperEVP = () => {
                         </CardBody>
 
                     </Card>
-                    <Button style={{fontSize:'12px'}} className='font-family-m mt-3 px-4 py-1 btn-lg' color='primary'>Register</Button>
+                    <Button style={{fontSize:'12px'}} className='font-weight-light font-family-m mt-3 px-4 py-1 btn-lg' color='primary'>Register</Button>
 
                 </Colxx>
                 

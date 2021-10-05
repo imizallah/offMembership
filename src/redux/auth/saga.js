@@ -143,7 +143,11 @@ function* loginWithEmailPassword({ payload }) {
     if (response.data.success) {
       setCurrentUser(response.data.data)
       yield put(loginUserSuccess(response.data));
-          history.push('/app');
+      if(response.data.data.user.role==='superadmin'){
+      history.push('/app/super-admin');
+      }else{
+       history.push('/app');
+      }
           yield put(loginUserError(response.data.message));
       }  else {
       yield put(loginUserError(response.data.message));

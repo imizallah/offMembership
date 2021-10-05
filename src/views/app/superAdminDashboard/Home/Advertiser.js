@@ -25,7 +25,7 @@ const SuperEVP = () => {
 
     return (
         <>
-            <Row className='mt-4'>
+            <Row className='mt-1'>
                 <Colxx xxs="6" md='6' sm='12'>
                     <Card style={{ borderRadius: '20px' }}>
                         <div className='my-3 '>

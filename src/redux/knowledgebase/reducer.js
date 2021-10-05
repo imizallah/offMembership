@@ -21,6 +21,7 @@ import {
 const init = {
     loading: false,
     createFAQLoading: false,
+    editLoading:false,
     error: false,
     message: '',
     faqs: [],
@@ -39,11 +40,11 @@ const FAQReducer = (state = init, action) => {
             return { ...state, createFAQLoading: false, message: '', error: payload }
 
         case EDIT_FAQ:
-            return { ...state, loading: true }
+            return { ...state, editLoading: true }
         case EDIT_FAQ_SUCCESS:
-            return { ...state, loading: false, message: payload, error: '' }
+            return { ...state, editLoading: false, message: payload, error: '' }
         case EDIT_FAQ_FAILED:
-            return { ...state, loading: false, message: '', error: payload }
+            return { ...state, editLoading: false, message: '', error: payload }
 
         case DELETE_FAQ:
             return { ...state, loading: true }

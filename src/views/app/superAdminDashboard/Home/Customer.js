@@ -25,8 +25,8 @@ const SuperEVP = () => {
 
     return (
         <>
-            <Row className='mt-4'>
-                <Colxx xxs="6" md='6' sm='12'>
+            <Row className='mt-0'>
+            <Colxx xxs="6" md='6' sm='12'>
                     <Card style={{ borderRadius: '20px' }}>
                         <div className='my-3 '>
                             <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>General Information</h1>
@@ -86,13 +86,12 @@ const SuperEVP = () => {
 
                     </Card>
 
-                    <Button style={{fontSize:'12px'}} className='font-family-m font-weight-light mt-5 px-4 py-1  btn-lg' color='primary'>Verify</Button>
+                    <Button style={{fontSize:'12px'}} className='font-weight-light font-family-m mt-5 px-4 py-1  btn-lg' color='primary'>Verify</Button>
                 </Colxx>
-
                 <Colxx xxs="6" md='6' sm='12'>
                     <Card style={{ borderRadius: '20px' }}>
                         <div className='my-3 '>
-                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>Advertiser Membership</h1>
+                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>Customer Membership</h1>
                             <Separator />
                         </div>
                         <CardBody className='pt-0'>
@@ -199,7 +198,7 @@ const SuperEVP = () => {
                                             </Colxx>
 
                                         </Row>
-                                        
+                                       
                                     </Form>)
                                 }
                             </Formik >
@@ -208,12 +207,11 @@ const SuperEVP = () => {
                         </CardBody>
 
                     </Card>
-                    <Button style={{fontSize:'12px'}} className='font-family-m font-weight-light font-family-m mt-5 py-1 px-4 btn-lg' color='primary'>Register</Button>
+                    <Button style={{fontSize:'12px'}} className='font-weight-light font-family-m mt-3 px-4 py-1 btn-lg' color='primary'>Register</Button>
+
                 </Colxx>
                 
-                
             </Row>
-          
 
         </>
 

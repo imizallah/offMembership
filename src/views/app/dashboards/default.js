@@ -5,7 +5,9 @@ import {
   CustomInput
 } from 'reactstrap';
 import { connect } from 'react-redux';
+import { IoMdCheckmarkCircle } from 'react-icons/io'
 import { createAdvert, getAdvert } from 'redux/actions';
+import { getCurrentUser } from 'helpers/Utils';
 import { Colxx } from 'components/common/CustomBootstrap';
 import AdvertFeed from './AdvertFeed';
 import PostAdvert from './PostAdvert';
@@ -13,12 +15,12 @@ import PostAdvert from './PostAdvert';
 // import Breadcrumb from 'containers/navs/Breadcrumb';
 // import RecentOrders from 'containers/dashboards/RecentOrders';
 // import ReactQuill from 'react-quill';
-
 import Table from './ReactTableCards'
 import IconCardsCarousel from './IconCardsCarousel';
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
 
+const currentUser = getCurrentUser();
 const DefaultDashboard = ({ history,
   createAdvertRequest,
   createAdvertLoading,
@@ -54,7 +56,7 @@ const DefaultDashboard = ({ history,
 
       <Row>
         <Colxx lg="7" xl="7" md='6' className='mb-4'>
-          <IconCardsCarousel />
+          <IconCardsCarousel history={history} userDetails={currentUser} />
           <Row className="mt-4">
             <Colxx md="12" className="mb-4">
               <PostAdvert
@@ -90,14 +92,18 @@ const DefaultDashboard = ({ history,
 
                   </div>
                   {/* <NavLink to='/membership-registration'> */}
-                  <CustomInput
-                    type="checkbox"
-                    onClick={() => { history.push('membership') }}
-                    name='membership'
-                    // onClick={() => setActiveTab('Advertiser')}
-                    id="advertiser"
+                  {currentUser.role === 'advertiser' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
+                    <CustomInput
+                      type="checkbox"
+                      onClick={() => { history.push('membership') }}
+                      name='membership'
+                      // onClick={() => setActiveTab('Advertiser')}
+                      id="advertiser"
 
-                  />
+                    />
+                  }
+
                   {/* </NavLink> */}
                 </CardBody>
               </div>
@@ -117,13 +123,15 @@ const DefaultDashboard = ({ history,
 
                   </div>
                   {/* <NavLink to='/membership-registration'> */}
-                  <CustomInput
-                    type="checkbox"
-                    onClick={() => { history.push('membership') }}
-                    name='membership'
-                    // onClick={() => setActiveTab('EVP')}
-                    id="EVP"
-                  />
+                  {currentUser.role === 'evp' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
+                    <CustomInput
+                      type="checkbox"
+                      onClick={() => { history.push('membership') }}
+                      name='membership'
+                      // onClick={() => setActiveTab('EVP')}
+                      id="EVP"
+                    />}
                   {/* </NavLink> */}
                 </CardBody>
               </div>
@@ -143,13 +151,15 @@ const DefaultDashboard = ({ history,
 
                   </div>
                   {/* <NavLink to='/membership-registration'> */}
-                  <CustomInput
-                    type="checkbox"
-                    onClick={() => { history.push('membership') }}
-                    name='membership'
-                    // onClick={() => setActiveTab('Customer')}
-                    id="customer"
-                  />
+                  {currentUser.role === 'customer' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
+                    <CustomInput
+                      type="checkbox"
+                      onClick={() => { history.push('membership') }}
+                      name='membership'
+                      // onClick={() => setActiveTab('Customer')}
+                      id="customer"
+                    />}
                   {/* </NavLink> */}
                 </CardBody>
               </div>
@@ -169,13 +179,15 @@ const DefaultDashboard = ({ history,
 
                   </div>
                   {/* <NavLink to='/membership-registration'> */}
-                  <CustomInput
-                    type="checkbox"
-                    onClick={() => { history.push('membership') }}
-                    name='membership'
-                    // onClick={() => setActiveTab('Vendor')}
-                    id="vendor"
-                  />
+                  {currentUser.role === 'vendor' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
+                    <CustomInput
+                      type="checkbox"
+                      onClick={() => { history.push('membership') }}
+                      name='membership'
+                      // onClick={() => setActiveTab('Vendor')}
+                      id="vendor"
+                    />}
                   {/* </NavLink> */}
                 </CardBody>
               </div>
@@ -195,13 +207,15 @@ const DefaultDashboard = ({ history,
 
                   </div>
                   {/* <NavLink to='/membership-registration'> */}
-                  <CustomInput
-                    type="checkbox"
-                    onClick={() => { history.push('membership') }}
-                    name='membership'
-                    // onClick={() => setActiveTab('superEVP')}
-                    id="superEVP"
-                  />
+                  {currentUser.role === 'superevp' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
+                    <CustomInput
+                      type="checkbox"
+                      onClick={() => { history.push('membership') }}
+                      name='membership'
+                      // onClick={() => setActiveTab('superEVP')}
+                      id="superEVP"
+                    />}
                   {/* </NavLink> */}
                 </CardBody>
               </div>
