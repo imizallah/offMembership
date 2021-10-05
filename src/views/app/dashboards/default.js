@@ -33,6 +33,8 @@ const DefaultDashboard = ({ history,
   useEffect(() => {
     getAdvertRequest()
     console.log(adverts);
+
+    // eslint-disable-next-line
   }, [])
   // const { messages } = intl;
   const [advertFeed, updateAdvertFeed] = useState([]);
@@ -46,7 +48,7 @@ const DefaultDashboard = ({ history,
   useEffect(() => {
     updateAdvertFeed(adverts);
     console.log(advertFeed)
-
+// eslint-disable-next-line
   }, [adverts])
 
 

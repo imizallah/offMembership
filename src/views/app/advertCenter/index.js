@@ -31,6 +31,7 @@ const AdvertCenter = ({
     useEffect(() => {
         getAdvertRequest()
         console.log(userAdverts);
+        // eslint-disable-next-line
     }, [])
     // const { messages } = intl;
     const [advertFeed, updateAdvertFeed] = useState([]);
@@ -45,7 +46,7 @@ const AdvertCenter = ({
         updateAdvertFeed(userAdverts);
         updateEditing(false);
         // console.log(advertFeed)
-
+// eslint-disable-next-line
     }, [userAdverts])
 
 

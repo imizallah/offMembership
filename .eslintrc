@@ -54,11 +54,7 @@
     "react/jsx-props-no-spreading": 0,
     "no-console": "off",
     "react/prop-types": 0
-    // "prettier/prettier": [
-    //   "warn",
-    //   "error",{
-    //     "endOfLine": "auto"}
-    //   ]
+  
   },
   "globals": {
     "window": true,

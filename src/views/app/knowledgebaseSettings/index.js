@@ -63,10 +63,12 @@ const Knowledgebase = ({ createFAQRequest, getFAQRequest, createFAQLoading, faqs
 
     useEffect(() => {
         getFAQRequest()
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         updateKnowledge(faqs.reverse())
+        // eslint-disable-next-line
     }, [faqs])
 
     return (
