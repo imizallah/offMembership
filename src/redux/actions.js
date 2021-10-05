@@ -120,12 +120,34 @@ export const GET_USER_ADVERT = 'GET_USER_ADVERT'
 export const GET_USER_ADVERT_FAILED = 'GET_USER_ADVERT_FAILED'
 export const GET_USER_ADVERT_SUCCESS = 'GET_USER_ADVERT_SUCCESS'
 
+export const UPDATE_ADVERTISER='UPDATE_ADVERTISER'
+export const UPDATE_ADVERTISER_FAILED = 'UPDATE_ADVERTISER_FAILED'
+export const UPDATE_ADVERTISER_SUCCESS = 'UPDATE_ADVERTISER_SUCCESS'
+
+export const UPDATE_CUSTOMER='UPDATE_CUSTOMER'
+export const UPDATE_CUSTOMER_FAILED = 'UPDATE_CUSTOMER_FAILED'
+export const UPDATE_CUSTOMER_SUCCESS = 'UPDATE_CUSTOMER_SUCCESS'
+
+export const UPDATE_VENDOR='UPDATE_VENDOR'
+export const UPDATE_VENDOR_FAILED = 'UPDATE_VENDOR_FAILED'
+export const UPDATE_VENDOR_SUCCESS = 'UPDATE_VENDOR_SUCCESS'
+
+export const UPDATE_EVP='UPDATE_EVP'
+export const UPDATE_EVP_FAILED = 'UPDATE_EVP_FAILED'
+export const UPDATE_EVP_SUCCESS = 'UPDATE_EVP_SUCCESS'
+
+export const UPDATE_SEVP='UPDATE_SEVP'
+export const UPDATE_SEVP_FAILED = 'UPDATE_SEVP_FAILED'
+export const UPDATE_SEVP_SUCCESS = 'UPDATE_SEVP_SUCCESS'
+
+
 
 export * from './menu/actions';
 export * from './settings/actions';
 export * from './auth/actions';
 export * from './knowledgebase/action';
 export * from './advert/action'
+export * from './membershipProfileUpdate/action'
 export * from './todo/actions';
 export * from './chat/actions';
 export * from './surveyList/actions';

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-cycle
-import { all, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, fork, put,call, takeEvery } from 'redux-saga/effects';
 import axios from 'helpers/axios';
 import {
     CREATE_FAQ,
@@ -16,6 +16,38 @@ import {
     getFAQFailed
 } from '../actions';
 
+function* getFAQ() {
+    try {
+        const response = yield axios.get(`faq/all-faqs`)
+        if (response.data.success) {
+            yield put(getFAQSucces(response.data));
+        } else {
+            yield put(getFAQFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(getFAQFailed(message));
+    }
+}
 
 function* createFAQ(payload) {
 //    yield console.log(payload.payload.data)
@@ -23,6 +55,7 @@ function* createFAQ(payload) {
         const response = yield axios.post('faq/create', payload.payload.data)
         if (response.data.success) {
             yield put(createFAQSuccess(response.data.message));
+            yield call(getFAQ);
         } else {
             yield put(createFAQFailed(response.data.message));
         }
@@ -53,7 +86,7 @@ function* createFAQ(payload) {
 
 function* updateFAQ({ id, formData }) {
     try {
-        const response = yield axios.put(`event-management/update-event-type/${id}`, formData)
+        const response = yield axios.put(`/faq/update?faqId=${id}`, formData)
         if (response.data.success) {
             yield put(updateFAQSuccess(response.data.message));
         } else {
@@ -85,11 +118,13 @@ function* updateFAQ({ id, formData }) {
 }
 
 
-function* deleteFAQ(id) {
+function* deleteFAQ(payload) {
+  
     try {
-        const response = yield axios.del(`event-management/delete-event-type${id}`)
+        const response = yield axios.delete(`/faq/delete?faqId=${payload.payload.id}`)
         if (response.data.success) {
             yield put(deleteFAQSuccess(response.data.message));
+            yield call(getFAQ);
         } else {
             yield put(deleteFAQFailed(response.data.message));
         }
@@ -119,39 +154,7 @@ function* deleteFAQ(id) {
 }
 
 
-function* getFAQ({ payload: { page } }) {
-    console.log(page)
-    try {
-        const response = yield axios.get(`event/all-events?page=${page}&eventLimits=10`)
-        if (response.data.success) {
-            yield put(getFAQSucces(response.data));
-        } else {
-            yield put(getFAQFailed(response.data.message));
-        }
-    } catch (error) {
-        console.log(error.response);
-        let message;
-        if (error.response) {
-            switch (error.response.status) {
-                case 500:
-                    message = 'Internal Server Error';
-                    break;
-                case 404:
-                    message = 'Not found';
-                    break;
-                case 401:
-                    message = 'Invalid credentials';
-                    break;
-                default:
-                    message = error.response.data.message;
-            }
-        }
-        else if (error.message) {
-            message = error.message;
-        }
-        yield put(getFAQFailed(message));
-    }
-}
+
 
 export function* watchCreateFAQ() {
     yield takeEvery(CREATE_FAQ, createFAQ);

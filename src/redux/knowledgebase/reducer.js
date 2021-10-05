@@ -22,8 +22,8 @@ const init = {
     loading: false,
     createFAQLoading: false,
     error: false,
-    message: null,
-    faqs: null,
+    message: '',
+    faqs: [],
     singleFaq: null
 }
 
@@ -32,11 +32,11 @@ const FAQReducer = (state = init, action) => {
     const { type, payload } = action
     switch (type) {
         case CREATE_FAQ:
-            return { ...state, createFAQloading: true }
+            return { ...state, createFAQLoading: true }
         case CREATE_FAQ_SUCCESS:
-            return { ...state, createFAQloading: false, message: payload, error: '' }
+            return { ...state, createFAQLoading: false, message: payload, error: '' }
         case CREATE_FAQ_FAILED:
-            return { ...state, createFAQloading: false, message: '', error: payload }
+            return { ...state, createFAQLoading: false, message: '', error: payload }
 
         case EDIT_FAQ:
             return { ...state, loading: true }
@@ -56,7 +56,7 @@ const FAQReducer = (state = init, action) => {
         case GET_FAQ:
             return { ...state, loading: true }
         case GET_FAQ_SUCCESS:
-            return { ...state, loading: false, message: payload, error: '', faqs: payload }
+            return { ...state, loading: false, message: payload, error: '', faqs: payload.data }
         case GET_FAQ_FAILED:
             return { ...state, loading: false, message: '', error: payload }
 

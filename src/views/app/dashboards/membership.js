@@ -28,7 +28,7 @@ const Membership = () => {
       <Separator />
       <div className='mt-4 d-flex justify-content-between align-items-center flex-wrap flex-row'>
 
-        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
+        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '210px', height: '60px' }}>
 
 
           <div className=" d-flex flex-grow-1 min-width-zero">
@@ -52,7 +52,7 @@ const Membership = () => {
         </Card>
 
 
-        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
+        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '210px', height: '60px' }}>
 
 
           <div className=" d-flex flex-grow-1 min-width-zero">
@@ -75,7 +75,7 @@ const Membership = () => {
         </Card>
 
 
-        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
+        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '210px', height: '60px' }}>
 
 
           <div className=" d-flex flex-grow-1 min-width-zero">
@@ -98,7 +98,7 @@ const Membership = () => {
         </Card>
 
 
-        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
+        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '210px', height: '60px' }}>
 
 
           <div className=" d-flex flex-grow-1 min-width-zero">
@@ -121,7 +121,7 @@ const Membership = () => {
         </Card>
 
 
-        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
+        <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '210px', height: '60px' }}>
 
 
           <div className=" d-flex flex-grow-1 min-width-zero">

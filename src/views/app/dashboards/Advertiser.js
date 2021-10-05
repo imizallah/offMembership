@@ -1,59 +1,118 @@
-import React from 'react';
-import { Card, Row, FormGroup, Label, CardBody,Button } from 'reactstrap'
+import React, {useEffect} from 'react';
+import { Card, Row, FormGroup, Label, CardBody, Button } from 'reactstrap'
+import { NotificationManager } from 'components/common/react-notifications';
+
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import { Formik, Form, Field } from 'formik';
+import { connect } from 'react-redux';
+import { updateAdvertiser } from 'redux/actions';
 
 
 
-const SuperEVP = () => {
+const Advertiser = ({loading,
+    updateAdvertiserRequest,
+    message,
+    error
+}) => {
 
-    
+
+    useEffect(() => {
+        if (error) {
+          NotificationManager.warning(error, 'Update Membership', 3000, null, null, '');
+        } else if (message) {
+          NotificationManager.success(message, 'Update Membership', 3000, null, null, '');
+        }
+      }, [error, message]);
+
     const initialValues = {
-        name: ""
+        bvn: "",
+        nin: "",
+        country: "",
+        state: '',
+        address: "",
+
     }
-   
 
 
 
-    const validateName = (value) => {
+
+    const validateBVN = (value) => {
         let err;
         if (!value) {
-            err = 'Please enter name';
+            err = 'Please enter your BVN';
+        }
+        return err;
+
+    };
+
+    const validateNIN = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter your NIN';
         }
         return err;
     };
 
+    const validateCountry = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter Country';
+        }
+        return err;
+    };
+
+    const validateState = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter State';
+        }
+        return err;
+    };
+    const validateLocation = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter your current location';
+        }
+        return err;
+    };
+
+
+    const registerAdvertiser = (values) => {
+        updateAdvertiserRequest(values);
+        // console.log(values)
+    }
+
     return (
         <>
             <div>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the EVP. Your required start up capital is N50,000</h3>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}> You will enjoy a profit Margin of 10%.</h3>
-
+                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the Advertiser Membership Package. Membership is N1000 yearly</h3>
             </div>
             <Row className='mt-5'>
                 <Colxx xxs="6" md='6' sm='12'>
-                    <Card style={{ borderRadius: '20px' }}>
-                        <div className='my-3 '>
-                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>Membership Requirements</h1>
-                            <Separator />
-                        </div>
-                        <CardBody className='pt-0'>
-                            <Formik initialValues={initialValues} onSubmit={(e) => { console.log(e) }}>
-                                {({ errors, touched }) => (
-                                    <Form encType="multipart/form-data" method="post" action="#">
+                    <Formik initialValues={initialValues} onSubmit={registerAdvertiser}>
+                        {({ errors, touched }) => (
+                            <Form encType="multipart/form-data"  >
+                                <Card style={{ borderRadius: '20px' }}>
+                                    <div className='my-3 '>
+                                        <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>Membership Requirements</h1>
+                                        <Separator />
+                                    </div>
+                                    <CardBody className='pt-0'>
+
+
                                         <Row  >
                                             <Colxx className='' xxs="12" md='12' sm='12'>
                                                 <Label className='mb-0 text-muted'>BVN</Label>
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="bvn"
 
-                                                        validate={validateName}
+                                                        validate={validateBVN}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.bvn && touched.bvn && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.bvn}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -67,13 +126,13 @@ const SuperEVP = () => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="nin"
 
-                                                        validate={validateName}
+                                                        validate={validateNIN}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.nin && touched.nin && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.nin}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -87,13 +146,13 @@ const SuperEVP = () => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="country"
 
-                                                        validate={validateName}
+                                                        validate={validateCountry}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.country && touched.country && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.country}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -107,13 +166,13 @@ const SuperEVP = () => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="state"
 
-                                                        validate={validateName}
+                                                        validate={validateState}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.state && touched.state && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.state}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -127,13 +186,13 @@ const SuperEVP = () => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="address"
 
-                                                        validate={validateName}
+                                                        validate={validateLocation}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.address && touched.address && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.address}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -141,44 +200,42 @@ const SuperEVP = () => {
                                             </Colxx>
 
                                         </Row>
-                                        <Row  >
-                                            <Colxx className='mt-2' xxs="12" md='12' sm='12'>
-                                                <Label className='mb-0 text-muted'>EVP Category</Label>
-                                                <FormGroup className="w-100 my-1">
-                                                    <Field
-                                                        className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
 
-                                                        validate={validateName}
-                                                    />
-                                                    {errors.name && touched.name && (
-                                                        <div className="invalid-feedback d-block">
-                                                            {errors.name}
-                                                        </div>
-                                                    )}
-                                                </FormGroup>
 
-                                            </Colxx>
 
-                                        </Row>
-                                       
-                                    </Form>)
-                                }
-                            </Formik >
 
-                           
-                        </CardBody>
 
-                    </Card>
+                                    </CardBody>
 
+                                </Card>
+                                <Button
+                                    type='submit' color='primary'
+                                    className={`mt-3 btn-lg font-weight-light py-1 font-weight-light  my-3 btn-multiple-state ${loading ? 'show-spinner' : ''
+                                        }`}
+                                >
+                                    <span className="spinner d-inline-block">
+                                        <span className="bounce1" />
+                                        <span className="bounce2" />
+                                        <span className="bounce3" />
+                                    </span>
+                                    <span className="label">
+                                        Pay N1000
+                                    </span>
+                                </Button>
+                            </Form>)
+                        }
+                    </Formik >
                 </Colxx>
-                
+
             </Row>
-            <Button className='mt-3 btn-lg' color='primary'>Pay N50000</Button>
 
         </>
 
 
     )
 }
-export default SuperEVP;
+const mapStateToProps = ({ membership }) => {
+    const { loading, message, error } = membership;
+    return { loading, message, error };
+};
+export default connect(mapStateToProps, { updateAdvertiserRequest: updateAdvertiser })(Advertiser)

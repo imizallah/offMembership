@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Row, FormGroup, Label, CardBody, CardHeader, Collapse, Button } from 'reactstrap'
 import { Separator, Colxx } from 'components/common/CustomBootstrap';
 import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
-import { createFAQ } from 'redux/actions';
+import { createFAQ, getFAQ, deleteFAQ } from 'redux/actions';
+import { MdDelete } from 'react-icons/md';
+import { BiEdit } from 'react-icons/bi';
+import EditFAQ from './EditKnowledgeBase';
 
-const Knowledgebase = ({ createFAQRequest, createFAQloading }) => {
-    const [toggleQuestion, setToggequestion] = useState(1);
+const Knowledgebase = ({ createFAQRequest, getFAQRequest, createFAQLoading, faqs, deleteFAQRequest }) => {
+    console.log(createFAQLoading)
+    const [toggleQuestion, setToggequestion] = useState(0);
+    const [knowledge, updateKnowledge] = useState([]);
+    const [editing, updateEditing] = useState(false);
+    const [editFAQ, setEditFAQ] = useState('');
     // const [question, updateQuestion]=useState('')
     // const [answer, updateAnswer]=useState('')
     const initialValues = {
@@ -15,6 +22,12 @@ const Knowledgebase = ({ createFAQRequest, createFAQloading }) => {
     }
 
 
+    const handleEditing = (faq) => {
+        updateEditing(false)
+        setEditFAQ(faq)
+        updateEditing(true)
+
+    }
     const validateQuestion = (value) => {
         let err;
         if (!value) {
@@ -36,167 +49,145 @@ const Knowledgebase = ({ createFAQRequest, createFAQloading }) => {
         createFAQRequest(values)
     }
 
+    useEffect(() => {
+        getFAQRequest()
+    }, [])
+
+    useEffect(() => {
+        updateKnowledge(faqs.reverse())
+    }, [faqs])
+
     return (
         <>
             <h2 className=''>Knowledge Base</h2>
             <Separator />
             <Row className='mt-5'>
                 <Colxx xl='6'>
-                    <Formik initialValues={initialValues} onSubmit={createFAQs} >
-                        {({ errors, touched }) => (
-                            <Form encType="multipart/form-data" method="post" action="#">
+                    {editing ? <EditFAQ
+                        faq={editFAQ}
+                    /> :
 
-                                <Card style={{ borderRadius: '20px' }}>
-                                    <div className='my-3 '>
-                                        <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>New Information</h1>
-                                        <Separator />
-                                    </div>
-                                    <CardBody className='pt-0'>
+                        <Formik initialValues={initialValues} onSubmit={createFAQs} >
+                            {({ errors, touched }) => (
+                                <Form encType="multipart/form-data" method="post" action="#">
 
-                                        <Row  >
-                                            <Colxx className='' xxs="12" md='12' sm='12'>
-                                                <Label className='mb-0 text-muted'> Question</Label>
-                                                <FormGroup className="w-100 my-1">
-                                                    <Field
-                                                        component='textarea'
-                                                        required
-                                                        style={{ resize: 'none' }}
-                                                        cols='30'
-                                                        row='30'
-                                                        className="py-2 w-100 border-muted custom-input"
-                                                        name="question"
-                                                        // onChange={(e)=>updateQuestion(e)}
-                                                        validate={validateQuestion}
-                                                    />
-                                                    {errors.question && touched.question && (
-                                                        <div className="invalid-feedback d-block">
-                                                            {errors.question}
-                                                        </div>
-                                                    )}
-                                                </FormGroup>
+                                    <Card style={{ borderRadius: '20px' }}>
+                                        <div className='my-3 '>
+                                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>New Information</h1>
+                                            <Separator />
+                                        </div>
+                                        <CardBody className='pt-0'>
 
-                                            </Colxx>
+                                            <Row  >
+                                                <Colxx className='' xxs="12" md='12' sm='12'>
+                                                    <Label className='mb-0 text-muted'> Question</Label>
+                                                    <FormGroup className="w-100 my-1">
+                                                        <Field
+                                                            component='textarea'
+                                                            required
+                                                            style={{ resize: 'none' }}
+                                                            cols='30'
+                                                            row='30'
+                                                            className="py-2 w-100 border-muted custom-input"
+                                                            name="question"
+                                                            // onChange={(e)=>updateQuestion(e)}
+                                                            validate={validateQuestion}
+                                                        />
+                                                        {errors.question && touched.question && (
+                                                            <div className="invalid-feedback d-block">
+                                                                {errors.question}
+                                                            </div>
+                                                        )}
+                                                    </FormGroup>
 
-                                        </Row>
-                                        <Row  >
-                                            <Colxx className='mt-2' xxs="12" md='12' sm='12'>
-                                                <Label className='mb-0 text-muted'>Answer</Label>
-                                                <FormGroup className="w-100 my-1">
-                                                    <Field
-                                                        component='textarea'
-                                                        required
-                                                        style={{ resize: 'none' }}
-                                                        // onChange={(e)=>updateAnswer(e)}
-                                                        type='textarea'
-                                                        cols='12'
-                                                        rows='12'
-                                                        className="py-2 w-100 border-muted custom-input"
-                                                        name="answer"
+                                                </Colxx>
 
-                                                        validate={validateAnswer}
-                                                    />
-                                                    {errors.answer && touched.answer && (
-                                                        <div className="invalid-feedback d-block">
-                                                            {errors.answer}
-                                                        </div>
-                                                    )}
-                                                </FormGroup>
+                                            </Row>
+                                            <Row  >
+                                                <Colxx className='mt-2' xxs="12" md='12' sm='12'>
+                                                    <Label className='mb-0 text-muted'>Answer</Label>
+                                                    <FormGroup className="w-100 my-1">
+                                                        <Field
+                                                            component='textarea'
+                                                            required
+                                                            style={{ resize: 'none' }}
+                                                            // onChange={(e)=>updateAnswer(e)}
+                                                            type='textarea'
+                                                            cols='12'
+                                                            rows='12'
+                                                            className="py-2 w-100 border-muted custom-input"
+                                                            name="answer"
 
-                                            </Colxx>
+                                                            validate={validateAnswer}
+                                                        />
+                                                        {errors.answer && touched.answer && (
+                                                            <div className="invalid-feedback d-block">
+                                                                {errors.answer}
+                                                            </div>
+                                                        )}
+                                                    </FormGroup>
 
-                                        </Row>
+                                                </Colxx>
+
+                                            </Row>
 
 
 
-                                    </CardBody>
+                                        </CardBody>
 
-                                </Card>
-                                <Button
-                                    type='submit'
-                                    style={{ fontSize: '12px' }}
-                                    className={` font-family-m font-weight-light my-5 px-5 py-1  btn-lgbtn-multiple-state ${createFAQloading ? 'show-spinner' : ''}`}
-                                    color='primary' >
-                                    <span className="spinner d-inline-block">
-                                        <span className="bounce1" />
-                                        <span className="bounce2" />
-                                        <span className="bounce3" />
-                                    </span>
-                                    <span className="label">
-                                        Add
-                                    </span>
-                                </Button>
-                            </Form>
+                                    </Card>
+                                    <Button
+                                        type='submit'
+                                        style={{ fontSize: '12px' }}
+                                        className={` font-family-m font-weight-light my-5 px-5 py-1  btn-lg btn-multiple-state ${createFAQLoading ? 'show-spinner' : ''}`}
+                                        color='primary' >
+                                        <span className="spinner d-inline-block">
+                                            <span className="bounce1" />
+                                            <span className="bounce2" />
+                                            <span className="bounce3" />
+                                        </span>
+                                        <span className="label">
+                                            Add
+                                        </span>
+                                    </Button>
+                                </Form>
 
-                        )
-                        }
-                    </Formik >
+                            )
+                            }
+                        </Formik >
+                    }
+
                 </Colxx>
                 <Colxx xl='6'>
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(1)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 1}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
 
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(2)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 2}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
+                    {knowledge.map((el, i) =>
+                        /* eslint no-underscore-dangle: 0 */
+                        <Card className='mb-3 shadow' key={el._id}>
+                            <CardHeader className='py-3' onClick={() => setToggequestion(i)}>
+                                <div className='d-flex align-items-center justify-content-between'>
+                                    <div>
+                                        <span className="font-weight-bold">{el.question}</span>
+                                    </div>
+                                    <div className='text-right d-flex top-right'>
+                                        <BiEdit size='16px' color='' className='mr-1' style={{ cursor: 'pointer' }}
+                                            onClick={() => { handleEditing(el) }}
+                                        />
+                                        {/* eslint no-underscore-dangle: 0 */}
+                                        <MdDelete size='16px' color='#dc3545' style={{ cursor: 'pointer' }} onClick={() => { deleteFAQRequest(el._id) }} />
+                                    </div>
+                                </div>
 
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(3)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 3}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
+                            </CardHeader>
+                            <Collapse isOpen={toggleQuestion === i}>
+                                <CardBody className='shadow'>
+                                    {el.answer}
+                                </CardBody>
+                            </Collapse>
+                        </Card>
 
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(4)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 4}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
+                    )}
 
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(5)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 5}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
 
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(6)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 6}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
 
                 </Colxx>
             </Row>
@@ -206,7 +197,7 @@ const Knowledgebase = ({ createFAQRequest, createFAQloading }) => {
 }
 
 const mapStateToProps = ({ FAQ }) => {
-    const { loading, createFAQloading, error, message } = FAQ;
-    return { createFAQloading, error, loading, message };
+    const { loading, createFAQLoading, error, message, faqs } = FAQ;
+    return { createFAQLoading, error, loading, message, faqs };
 };
-export default connect(mapStateToProps, { createFAQRequest: createFAQ })(Knowledgebase)
+export default connect(mapStateToProps, { createFAQRequest: createFAQ, deleteFAQRequest: deleteFAQ, getFAQRequest: getFAQ, })(Knowledgebase)

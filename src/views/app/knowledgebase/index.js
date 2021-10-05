@@ -1,81 +1,47 @@
-import React,{useState} from 'react';
-import { Separator, Colxx } from 'components/common/CustomBootstrap';
+import React, { useState, useEffect } from 'react';
 import { Card, Row, CardBody, CardHeader, Collapse } from 'reactstrap'
+import { Separator, Colxx } from 'components/common/CustomBootstrap';
+import { connect } from 'react-redux';
+import { createFAQ, getFAQ } from 'redux/actions';
 
-const Knowledgebase = () => {
-    const [toggleQuestion, setToggequestion] = useState(1);
+const Knowledgebase = ({  getFAQRequest,faqs }) => {
+    
+    const [toggleQuestion, setToggequestion] = useState(0);
+    const [knowledge, updateKnowledge] = useState([]);
+    // const [question, updateQuestion]=useState('')
+  
+
+
+    useEffect(() => {
+        getFAQRequest()
+    }, [])
+
+    useEffect(() => {
+        updateKnowledge(faqs.reverse())
+    }, [faqs])
 
     return (
         <>
-            <h2 className=''>Knowledgebase</h2>
+            <h2 className=''>Knowledge Base</h2>
             <Separator />
             <Row className='mt-5'>
-            <Colxx xl='6'>
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(1)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 1}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
+                <Colxx xl='6'>
+                    {knowledge.map((el, i) =>
+                   /* eslint no-underscore-dangle: 0 */
+                        <Card className='mb-3 shadow' key={el._id}>
+                            <CardHeader className='py-3'  onClick={() => setToggequestion(i)}>
+                                <span className="font-weight-bold">{el.question}</span>
+                            </CardHeader>
+                            <Collapse isOpen={toggleQuestion === i}>
+                                <CardBody className='shadow'>
+                                    {el.answer}
+                                </CardBody>
+                            </Collapse>
+                        </Card>
 
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(2)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 2}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
+                    )}
 
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(3)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 3}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
-
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(4)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 4}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
-
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(5)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 5}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
-
-                    <Card className='mb-3 shadow'>
-                        <CardHeader className='py-3' onClick={() => setToggequestion(6)}>
-                            <span className="font-weight-bold">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam.</span>
-                        </CardHeader>
-                        <Collapse isOpen={toggleQuestion === 6}>
-                            <CardBody className='shadow'>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo.
-                            </CardBody>
-                        </Collapse>
-                    </Card>
+                
 
                 </Colxx>
             </Row>
@@ -83,4 +49,9 @@ const Knowledgebase = () => {
     )
 
 }
-export default Knowledgebase
+
+const mapStateToProps = ({ FAQ }) => {
+    const { loading, createFAQLoading, error, message, faqs } = FAQ;
+    return { createFAQLoading, error, loading, message, faqs };
+};
+export default connect(mapStateToProps, { createFAQRequest: createFAQ, getFAQRequest: getFAQ, })(Knowledgebase)

@@ -18,7 +18,7 @@ const AdvertFeed = ({ adverts }) => {
                 <CardTitle>
                     <IntlMessages className='font-family-m' id="Advert Feeds" />
                 </CardTitle>
-                <div className="scroll dashboard-list-with-thumbs">
+                <div className="scroll dashboard-list-with-thumbs" style={{height:'540px'}}>
                     <PerfectScrollbar
                         options={{ suppressScrollX: true, wheelPropagation: false }}
                     >

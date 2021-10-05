@@ -36,6 +36,8 @@ import {
 import TopnavEasyAccess from './Topnav.EasyAccess';
 import TopnavNotifications from './Topnav.Notifications';
 import TopnavDarkSwitch from './Topnav.DarkSwitch';
+import { getCurrentUser } from '../../helpers/Utils';
+
 
 const TopNav = ({
   intl,
@@ -198,7 +200,7 @@ const TopNav = ({
     e.preventDefault();
     clickOnMobileMenuAction(_containerClassnames);
   };
-
+  const currentUser = getCurrentUser();
   const { messages } = intl;
   return (
     <nav className="navbar fixed-top">
@@ -299,7 +301,7 @@ const TopNav = ({
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
-              <span className="name mr-1">Sarah Kortney</span>
+              <span className="name mr-1">{currentUser.fullName.replace(/\b\w/g, c => c.toUpperCase())}</span>
               <span>
                 <img alt="Profile" src="/assets/img/profiles/l-1.jpg" />
               </span>

@@ -7,10 +7,25 @@ import IntlMessages from 'helpers/IntlMessages';
 import { MdDelete } from 'react-icons/md'
 import { BiEdit } from 'react-icons/bi'
 
-const AdvertFeed = ({ adverts, deleteAdvert }) => {
-    console.log(adverts);
+const AdvertFeed = ({
+    adverts,
+    deleteAdvert,
+    setEdit,
+    setEditingAdvert
+}) => {
+
+    // editAdvert = { updateAdvertRequest }
+    // setEdit = { updateEditing }
+    // setEditingAdvert = { setEditingAdvert }
+    // console.log(adverts);
+
+    const handleAdvertEdit=(advert)=>{
+        setEditingAdvert(advert)
+        setEdit(true);
+    }
+
     return (
-        <Card style={{maxHeight:'auto'}}>
+        <Card style={{ maxHeight: 'auto' }}>
             {/* <div className="position-absolute card-top-buttons">
                 <button type="button" className="btn btn-header-light icon-button">
                     <i className="simple-icon-refresh" />
@@ -20,7 +35,7 @@ const AdvertFeed = ({ adverts, deleteAdvert }) => {
                 <CardTitle>
                     <IntlMessages className='font-family-m' id="Advert Feeds" />
                 </CardTitle>
-                <div style={{height:'317px'}} className="scroll dashboard-list-with-thumbs" >
+                <div style={{ height: '317px' }} className="scroll dashboard-list-with-thumbs" >
                     <PerfectScrollbar
                         options={{ suppressScrollX: true, wheelPropagation: false }}
                     >
@@ -31,10 +46,10 @@ const AdvertFeed = ({ adverts, deleteAdvert }) => {
                                         <p className='font-weight-bold mb-0'>{order.user.fullName.replace(/\b\w/g, c => c.toUpperCase())}</p>
                                     </div> */}
                                     <div>
-                                        <p className='mb-1'>{order.message}</p>
+                                        <p className='mb-2'>{order.message}</p>
                                     </div>
                                     <div className='text-right d-flex top-right'>
-                                        <BiEdit size='16px' color='' className='mr-1' style={{ cursor: 'pointer' }} />
+                                        <BiEdit size='16px' color='' className='mr-1' style={{ cursor: 'pointer' }} onClick={()=>{handleAdvertEdit(order)}}/>
                                         {/* eslint no-underscore-dangle: 0 */}
                                         <MdDelete size='16px' color='#dc3545' style={{ cursor: 'pointer' }} onClick={() => { deleteAdvert(order._id) }} />
                                     </div>

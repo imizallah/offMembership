@@ -4,10 +4,12 @@ import {
     Row
 } from 'reactstrap';
 import { connect } from 'react-redux';
-import { createAdvert, getUserAdvert, deleteAdvert } from 'redux/actions';
+import { createAdvert, getUserAdvert, deleteAdvert, updateAdvert } from 'redux/actions';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import AdvertFeed from './AdvertFeed';
 import PostAdvert from './PostAdvert';
+import EditingAdvert from './EditingAdvert';
+
 
 import 'react-quill/dist/quill.snow.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -17,8 +19,13 @@ const AdvertCenter = ({
     createAdvertLoading,
     getAdvertRequest,
     deleteAdvertRequest,
+    updateAdvertRequest,
+    editAdvertLoading,
     userAdverts }
 ) => {
+
+    const [editing, updateEditing] = useState(false);
+    const [editingAdvert, setEditingAdvert] = useState('')
 
 
     useEffect(() => {
@@ -36,7 +43,8 @@ const AdvertCenter = ({
 
     useEffect(() => {
         updateAdvertFeed(userAdverts);
-        console.log(advertFeed)
+        updateEditing(false);
+        // console.log(advertFeed)
 
     }, [userAdverts])
 
@@ -47,20 +55,34 @@ const AdvertCenter = ({
             <Separator />
             <Row className='mt-4'>
                 <Colxx lg="6" xl="6" md='6' className="mb-4">
-                    <PostAdvert
-                        createAdvertLoading={createAdvertLoading}
-                        postAdvert={postAdvert}
-                    />
+                    {
+                        editing ?
+                            <EditingAdvert
+                                editAdvert={editingAdvert}
+                                updateAdvert={updateAdvertRequest}
+                                editAdvertLoading={editAdvertLoading}
+                            /> :
+                            <PostAdvert
+                                createAdvertLoading={createAdvertLoading}
+                                postAdvert={postAdvert}
+                            />
+                    }
+
                 </Colxx>
                 <Colxx lg="6" xl="6" md='6' className="mb-4">
-                    {userAdverts && <AdvertFeed adverts={advertFeed.reverse()} deleteAdvert={deleteAdvertRequest} />}
+                    {userAdverts && <AdvertFeed
+                        adverts={advertFeed.reverse()}
+                        deleteAdvert={deleteAdvertRequest}
+                        setEdit={updateEditing}
+                        setEditingAdvert={setEditingAdvert}
+                    />}
                 </Colxx>
             </Row>
         </>
     );
 };
 const mapStateToProps = ({ advert }) => {
-    const { loading, createAdvertLoading, error, message, userAdverts } = advert;
-    return { createAdvertLoading, error, loading, message, userAdverts };
+    const { loading, createAdvertLoading,editAdvertLoading, error, message, userAdverts } = advert;
+    return { createAdvertLoading,editAdvertLoading, error, loading, message, userAdverts };
 };
-export default injectIntl(connect(mapStateToProps, { createAdvertRequest: createAdvert, getAdvertRequest: getUserAdvert, deleteAdvertRequest:deleteAdvert })(AdvertCenter))
+export default injectIntl(connect(mapStateToProps, { createAdvertRequest: createAdvert, getAdvertRequest: getUserAdvert, deleteAdvertRequest: deleteAdvert, updateAdvertRequest: updateAdvert })(AdvertCenter))

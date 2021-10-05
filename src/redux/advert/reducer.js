@@ -46,11 +46,11 @@ const AdvertReducer = (state = init, action) => {
             return { ...state, createAdvertLoading: false, message: '', error: payload }
 
         case EDIT_ADVERT:
-            return { ...state, loading: true }
+            return { ...state, editAdvertLoading: true }
         case EDIT_ADVERT_SUCCESS:
-            return { ...state, loading: false, message: payload, error: '' }
+            return { ...state, editAdvertLoading: false, message: payload, error: '' }
         case EDIT_ADVERT_FAILED:
-            return { ...state, loading: false, message: '', error: payload }
+            return { ...state, editAdvertLoading: false, message: '', error: payload }
 
         case DELETE_ADVERT:
             return { ...state, loading: true }

@@ -8,6 +8,7 @@ import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import IntlMessages from 'helpers/IntlMessages';
+import { getCurrentUser } from 'helpers/Utils';
 
 import {
   setContainerClassnames,
@@ -16,10 +17,30 @@ import {
   changeSelectedMenuHasSubItems,
 } from 'redux/actions';
 
-// import menuItems from 'constants/menu';
-//  import menuItems from 'constants/SEVPDashboard';
-// import menuItems from 'constants/EVPDashboard';
-import menuItems from 'constants/superAdminDashboard';
+import userMenu from 'constants/menu';
+import SEVPDashboard from 'constants/SEVPDashboard';
+import EVPDashboard from 'constants/EVPDashboard';
+import superAdminDashboard from 'constants/superAdminDashboard';
+
+
+const user = getCurrentUser();
+const { role } = user
+console.log(role)
+let menuItems = ''
+
+if (role === 'superadmin') {
+  menuItems = superAdminDashboard
+}
+else if (role === 'superevp') {
+  menuItems = SEVPDashboard
+}
+else if (role === 'evp') {
+  menuItems = EVPDashboard
+} else {
+  menuItems = userMenu
+
+}
+
 
 
 
@@ -434,11 +455,10 @@ class Sidebar extends Component {
                           return (
                             <NavItem
                               key={`${item.id}_${index}`}
-                              className={`${
-                                sub.subs && sub.subs.length > 0
-                                  ? 'has-sub-item'
-                                  : ''
-                              }`}
+                              className={`${sub.subs && sub.subs.length > 0
+                                ? 'has-sub-item'
+                                : ''
+                                }`}
                             >
                               {/* eslint-disable-next-line no-nested-ternary */}
                               {sub.newWindow ? (
@@ -453,13 +473,12 @@ class Sidebar extends Component {
                               ) : sub.subs && sub.subs.length > 0 ? (
                                 <>
                                   <NavLink
-                                    className={`rotate-arrow-icon opacity-50 ${
-                                      collapsedMenus.indexOf(
-                                        `${item.id}_${index}`
-                                      ) === -1
-                                        ? ''
-                                        : 'collapsed'
-                                    }`}
+                                    className={`rotate-arrow-icon opacity-50 ${collapsedMenus.indexOf(
+                                      `${item.id}_${index}`
+                                    ) === -1
+                                      ? ''
+                                      : 'collapsed'
+                                      }`}
                                     to={sub.to}
                                     id={`${item.id}_${index}`}
                                     onClick={(e) =>

@@ -119,7 +119,7 @@ const DefaultDashboard = ({ history,
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={() => { history.push('/membership') }}
+                    onClick={() => { history.push('membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('EVP')}
                     id="EVP"
@@ -145,7 +145,7 @@ const DefaultDashboard = ({ history,
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={() => { history.push('/membership') }}
+                    onClick={() => { history.push('membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('Customer')}
                     id="customer"
@@ -171,7 +171,7 @@ const DefaultDashboard = ({ history,
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={() => { history.push('/membership') }}
+                    onClick={() => { history.push('membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('Vendor')}
                     id="vendor"
@@ -197,7 +197,7 @@ const DefaultDashboard = ({ history,
                   {/* <NavLink to='/membership-registration'> */}
                   <CustomInput
                     type="checkbox"
-                    onClick={() => { history.push('/membership') }}
+                    onClick={() => { history.push('membership') }}
                     name='membership'
                     // onClick={() => setActiveTab('superEVP')}
                     id="superEVP"

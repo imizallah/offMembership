@@ -1,34 +1,40 @@
 // eslint-disable-next-line import/no-cycle
-import { all, fork, put, call, takeEvery } from 'redux-saga/effects';
+import { all, fork, put, takeEvery } from 'redux-saga/effects';
 import axios from 'helpers/axios';
+import { getCurrentUser } from 'helpers/Utils';
+
 import {
-    CREATE_ADVERT,
-    EDIT_ADVERT,
-    DELETE_ADVERT,
-    GET_ADVERT,
-    GET_USER_ADVERT,
-    createAdvertSuccess,
-    createAdvertFailed,
-    updateAdvertSuccess,
-    updateAdvertFailed,
-    deleteAdvertSuccess,
-    deleteAdvertFailed,
-    getAdvertSucces,
-    getAdvertFailed,
-    getUserAdvertSucces,
-    getUserAdvertFailed
+    UPDATE_ADVERTISER,
+    UPDATE_CUSTOMER,
+    UPDATE_VENDOR,
+    UPDATE_EVP,
+    UPDATE_SEVP,
+    updateAdvertiserSuccess,
+    updateAdvertiserFailed,
+    updateCustomerSuccess,
+    updateCustomerFailed,
+    updateVendorSuccess,
+    updateVendorFailed,
+    updateEVPSuccess,
+    updateEVPFailed,
+    updateSEVPSuccess,
+    updateSEVPFailed,
 } from '../actions';
 
 
-function* getAdvert() {
 
+
+const currentUser = getCurrentUser();
+const {phoneNumber}=currentUser
+
+function* updateAdvertiser(payload) {
+    //    yield console.log({...payload.payload.data, phoneNumber})
     try {
-        const response = yield axios.get(`/advert/all-adverts`)
-        console.log(response.data)
+        const response = yield axios.post('profile/advertiser', {...payload.payload.data, phoneNumber})
         if (response.data.success) {
-            yield put(getAdvertSucces(response.data));
+            yield put(updateAdvertiserSuccess(response.data.message))
         } else {
-            yield put(getAdvertFailed(response.data.message));
+            yield put(updateAdvertiserFailed(response.data.message));
         }
     } catch (error) {
         console.log(error.response);
@@ -51,20 +57,19 @@ function* getAdvert() {
         else if (error.message) {
             message = error.message;
         }
-        yield put(getAdvertFailed(message));
+        yield put(updateAdvertiserFailed(message));
     }
 }
 
-
-function* getUserAdvert() {
-
+function* updateCustomer(payload) {
+    //    yield console.log({...payload.payload.data, phoneNumber})
     try {
-        const response = yield axios.get(`/advert/user-adverts`)
-        console.log(response.data)
+        const response = yield axios.post('profile/customer', {...payload.payload.data, phoneNumber})
+        console.log(response)
         if (response.data.success) {
-            yield put(getUserAdvertSucces(response.data));
+            yield put(updateCustomerSuccess(response.data.message))
         } else {
-            yield put(getUserAdvertFailed(response.data.message));
+            yield put(updateCustomerFailed(response.data.message));
         }
     } catch (error) {
         console.log(error.response);
@@ -87,21 +92,19 @@ function* getUserAdvert() {
         else if (error.message) {
             message = error.message;
         }
-        yield put(getUserAdvertFailed(message));
+        yield put(updateCustomerFailed(message));
     }
 }
 
 
-function* createAdvert(payload) {
-    //    yield console.log(payload.payload.data)
+function* updateVendor(payload) {
+    //    yield console.log({...payload.payload.data, phoneNumber})
     try {
-        const response = yield axios.post('advert/create', payload.payload.data)
+        const response = yield axios.post('profile/vendor', {...payload.payload.data, phoneNumber})
         if (response.data.success) {
-            yield put(createAdvertSuccess(response.data.message));
-            yield call(getAdvert);
-            yield call(getUserAdvert)
+            yield put(updateVendorSuccess(response.data.message))
         } else {
-            yield put(createAdvertFailed(response.data.message));
+            yield put(updateVendorFailed(response.data.message));
         }
     } catch (error) {
         console.log(error.response);
@@ -124,60 +127,22 @@ function* createAdvert(payload) {
         else if (error.message) {
             message = error.message;
         }
-        yield put(createAdvertFailed(message));
+        yield put(updateVendorFailed(message));
     }
 }
 
-function* updateAdvert(payload) {
-   yield console.log(payload);
-   const {id,message}=payload.payload
-    try {
-        const response = yield axios.patch(`advert/update?advertId=${id}`, {message})
-        if (response.data.success) {
-            yield put(updateAdvertSuccess(response.data.message));
-    yield call(getUserAdvert)
 
+function* updateEVP(payload) {
+    //    yield console.log({...payload.payload.data, phoneNumber})
+    try {
+        const response = yield axios.post('profile/evp', {...payload.payload.data, phoneNumber})
+        if (response.data.success) {
+            yield put(updateEVPSuccess(response.data.message))
         } else {
-            yield put(updateAdvertFailed(response.data.message));
+            yield put(updateEVPFailed(response.data.message));
         }
     } catch (error) {
         console.log(error.response);
-        let errMessage;
-        if (error.response) {
-            switch (error.response.status) {
-                case 500:
-                    errMessage = 'Internal Server Error';
-                    break;
-                case 404:
-                    errMessage = 'Not found';
-                    break;
-                case 401:
-                    errMessage = 'Invalid credentials';
-                    break;
-                default:
-                    errMessage = error.response.data.message;
-            }
-        }
-        else if (error.message) {
-            errMessage = error.message;
-        }
-        yield put(updateAdvertFailed(errMessage));
-    }
-}
-
-
-function* deleteAdvert(payload) {
-   
-    try {
-        const response = yield axios.delete(`advert/delete?advertId=${payload.payload.id}`)
-        if (response.data.success) {
-            yield put(deleteAdvertSuccess(response.data.message));
-    yield call(getUserAdvert);
-        } else {
-            yield put(deleteAdvertFailed(response.data.message));
-        }
-    } catch (error) {
-        console.log(error);
         let message;
         if (error.response) {
             switch (error.response.status) {
@@ -197,38 +162,67 @@ function* deleteAdvert(payload) {
         else if (error.message) {
             message = error.message;
         }
-        yield put(deleteAdvertFailed(message));
+        yield put(updateEVPFailed(message));
+    }
+}
+function* updateSEVP(payload) {
+    //    yield console.log({...payload.payload.data, phoneNumber})
+    try {
+        const response = yield axios.post('/profile/superevp', {...payload.payload.data, phoneNumber})
+        if (response.data.success) {
+            yield put(updateSEVPSuccess(response.data.message))
+        } else {
+            yield put(updateSEVPFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(updateSEVPFailed(message));
     }
 }
 
 
 
-export function* watchCreateAdvert() {
-    yield takeEvery(CREATE_ADVERT, createAdvert);
+export function* watchUpdateAdvertiser() {
+    yield takeEvery(UPDATE_ADVERTISER, updateAdvertiser);
 }
-
-export function* watchEditAdvert() {
-    yield takeEvery(EDIT_ADVERT, updateAdvert);
+export function* watchUpdateCustomer() {
+    yield takeEvery(UPDATE_CUSTOMER, updateCustomer);
 }
-
-export function* watchDeleteAdvert() {
-    yield takeEvery(DELETE_ADVERT, deleteAdvert);
+export function* watchUpdateVendor() {
+    yield takeEvery(UPDATE_VENDOR, updateVendor);
 }
-
-export function* watchGetAdvert() {
-    yield takeEvery(GET_ADVERT, getAdvert);
+export function* watchUpdateEVP() {
+    yield takeEvery(UPDATE_EVP, updateEVP);
 }
-
-export function* watchGetUserAdvert() {
-    yield takeEvery(GET_USER_ADVERT, getUserAdvert);
+export function* watchUpdateSEVP() {
+    yield takeEvery(UPDATE_SEVP, updateSEVP);
 }
 
 export default function* rootSaga() {
     yield all([
-        fork(watchCreateAdvert),
-        fork(watchEditAdvert),
-        fork(watchDeleteAdvert),
-        fork(watchGetAdvert),
-        fork(watchGetUserAdvert),
+        fork(watchUpdateAdvertiser),
+        fork(watchUpdateCustomer),
+        fork(watchUpdateVendor),
+        fork(watchUpdateEVP),
+        fork(watchUpdateSEVP),
     ]);
 }

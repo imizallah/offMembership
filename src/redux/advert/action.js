@@ -38,9 +38,9 @@ export const createAdvertFailed = (message) => ({
 })
 
 
-export const updateAdvert = (data, id) => ({
+export const updateAdvert = (message, id) => ({
     type: EDIT_ADVERT,
-    payload: { data, id }
+    payload: { message, id }
 })
 
 export const updateAdvertSuccess = (message) => ({
