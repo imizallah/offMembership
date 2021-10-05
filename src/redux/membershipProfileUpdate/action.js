@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import {
     UPDATE_ADVERTISER,
     UPDATE_ADVERTISER_FAILED,
