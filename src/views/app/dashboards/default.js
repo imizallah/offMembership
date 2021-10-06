@@ -98,7 +98,7 @@ const DefaultDashboard = ({ history,
                     :
                     <CustomInput
                       type="checkbox"
-                      onClick={() => { history.push('membership') }}
+                      onClick={() => { history.push('membership/Advertiser') }}
                       name='membership'
                       // onClick={() => setActiveTab('Advertiser')}
                       id="advertiser"
@@ -129,7 +129,7 @@ const DefaultDashboard = ({ history,
                     :
                     <CustomInput
                       type="checkbox"
-                      onClick={() => { history.push('membership') }}
+                      onClick={() => { history.push('membership/EVP') }}
                       name='membership'
                       // onClick={() => setActiveTab('EVP')}
                       id="EVP"
@@ -157,7 +157,7 @@ const DefaultDashboard = ({ history,
                     :
                     <CustomInput
                       type="checkbox"
-                      onClick={() => { history.push('membership') }}
+                      onClick={() => { history.push('membership/Customer') }}
                       name='membership'
                       // onClick={() => setActiveTab('Customer')}
                       id="customer"
@@ -185,7 +185,7 @@ const DefaultDashboard = ({ history,
                     :
                     <CustomInput
                       type="checkbox"
-                      onClick={() => { history.push('membership') }}
+                      onClick={() => { history.push('membership/Vendor') }}
                       name='membership'
                       // onClick={() => setActiveTab('Vendor')}
                       id="vendor"
@@ -213,7 +213,7 @@ const DefaultDashboard = ({ history,
                     :
                     <CustomInput
                       type="checkbox"
-                      onClick={() => { history.push('membership') }}
+                      onClick={() => { history.push('membership/superEVP') }}
                       name='membership'
                       // onClick={() => setActiveTab('superEVP')}
                       id="superEVP"

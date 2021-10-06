@@ -50,7 +50,7 @@ const Dashboards = ({ match }) => (
         render={(props) => <AnalyticsDefault {...props} />}
       />
       <Route
-        path={`${match.url}/membership`}
+        path={`${match.url}/membership/:role`}
         render={(props) => <Membership {...props} />}
       />
         <Route

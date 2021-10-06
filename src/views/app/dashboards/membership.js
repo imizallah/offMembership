@@ -19,8 +19,9 @@ import EVP from './EVP'
 
 
 
-const Membership = () => {
-  const [activeTab, setActiveTab] = useState('Advertiser');
+const Membership = ({match:{params:{role}}}) => {
+  const [activeTab, setActiveTab] = useState(role);
+  
 
   return (
     <>
@@ -44,6 +45,7 @@ const Membership = () => {
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('Advertiser')}
+                checked={activeTab==='Advertiser'}
                 id="advertiser"
 
               />
@@ -68,6 +70,8 @@ const Membership = () => {
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('EVP')}
+                checked={activeTab==='EVP'}
+
                 id="EVP"
               />
             </CardBody>
@@ -91,6 +95,8 @@ const Membership = () => {
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('Customer')}
+                checked={activeTab==='Customer'}
+
                 id="customer"
               />
             </CardBody>
@@ -114,7 +120,8 @@ const Membership = () => {
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('Vendor')}
-                id="vendor"
+                checked={activeTab==='Vendor'}
+              
               />
             </CardBody>
           </div>
@@ -137,6 +144,8 @@ const Membership = () => {
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('superEVP')}
+                checked={activeTab==='superEVP'}
+
                 id="superEVP"
               />
             </CardBody>

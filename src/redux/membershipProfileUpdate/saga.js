@@ -26,12 +26,12 @@ import {
 
 
 function* updateAdvertiser(payload) {
-    
-const currentUser = getCurrentUser();
-const {phoneNumber}=currentUser
+
+    const currentUser = getCurrentUser();
+    const { phoneNumber } = currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
-        const response = yield axios.post('profile/advertiser', {...payload.payload.data, phoneNumber})
+        const response = yield axios.post('profile/advertiser', { ...payload.payload.data, phoneNumber })
         if (response.data.success) {
             yield put(updateAdvertiserSuccess(response.data.message))
         } else {
@@ -63,12 +63,12 @@ const {phoneNumber}=currentUser
 }
 
 function* updateCustomer(payload) {
-    
-const currentUser = getCurrentUser();
-const {phoneNumber}=currentUser
+
+    const currentUser = getCurrentUser();
+    const { phoneNumber } = currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
-        const response = yield axios.post('profile/customer', {...payload.payload.data, phoneNumber})
+        const response = yield axios.post('profile/customer', { ...payload.payload.data, phoneNumber })
         console.log(response)
         if (response.data.success) {
             yield put(updateCustomerSuccess(response.data.message))
@@ -102,12 +102,12 @@ const {phoneNumber}=currentUser
 
 
 function* updateVendor(payload) {
-    
-const currentUser = getCurrentUser();
-const {phoneNumber}=currentUser
-    //    yield console.log({...payload.payload.data, phoneNumber})
+
+    const currentUser = getCurrentUser();
+    const { phoneNumber } = currentUser
+    yield console.log({ ...payload.payload.data, phoneNumber })
     try {
-        const response = yield axios.post('profile/vendor', {...payload.payload.data, phoneNumber})
+        const response = yield axios.post('profile/vendor', { ...payload.payload.data, phoneNumber })
         if (response.data.success) {
             yield put(updateVendorSuccess(response.data.message))
         } else {
@@ -140,12 +140,12 @@ const {phoneNumber}=currentUser
 
 
 function* updateEVP(payload) {
-    
-const currentUser = getCurrentUser();
-const {phoneNumber}=currentUser
+
+    const currentUser = getCurrentUser();
+    const { phoneNumber } = currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
-        const response = yield axios.post('profile/evp', {...payload.payload.data, phoneNumber})
+        const response = yield axios.post('profile/evp', { ...payload.payload.data, phoneNumber })
         if (response.data.success) {
             yield put(updateEVPSuccess(response.data.message))
         } else {
@@ -175,11 +175,15 @@ const {phoneNumber}=currentUser
         yield put(updateEVPFailed(message));
     }
 }
+
+
+
 function* updateSEVP(payload) {
-    
-const currentUser = getCurrentUser();
-const {phoneNumber}=currentUser
-    //    yield console.log({...payload.payload.data, phoneNumber})
+
+    const currentUser = getCurrentUser();
+    const {phoneNumber}=currentUser
+    yield console.log(payload.payload.data)
+   
     try {
         const response = yield axios.post('/profile/superevp', {...payload.payload.data, phoneNumber})
         if (response.data.success) {
