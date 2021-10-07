@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 // import { injectIntl } from 'react-intl';
 import {
     Card,
@@ -9,8 +9,11 @@ import {
     TabPane,
     Row
 } from 'reactstrap';
-
+import { connect } from 'react-redux';
+import {  getActivities,getAdvert } from 'redux/actions';
 import { Colxx } from 'components/common/CustomBootstrap';
+
+
 // import {NavLink } from 'react-dom';
 // import Breadcrumb from 'containers/navs/Breadcrumb';
 
@@ -24,8 +27,22 @@ import EVP from './EVP'
 // import 'react-quill/dist/quill.bubble.css';
 
 const EVPDashboard = (
+    { 
+        getAnalytics,
+        adverts,
+        getAdvertRequest,
+        activities
+    }
     // {history}
 ) => {
+    useEffect(()=>{
+        getAdvertRequest()
+        // eslint-disable-next-line
+    },[])
+    useEffect(()=>{
+        getAnalytics()
+        // eslint-disable-next-line
+    },[])
     // const { messages } = intl;
     const [activeTab, setActiveTab] = useState('Advertiser');
 
@@ -35,7 +52,8 @@ const EVPDashboard = (
         <>
             <Row>
                 <Colxx lg="12" xl="12" md='12' className='mb-4'>
-                    <IconCardsCarousel />
+                    {activities? <IconCardsCarousel activities={activities} advertsCount={adverts.length}/>:null}
+                   
                 </Colxx>
             </Row>
 
@@ -58,6 +76,7 @@ const EVPDashboard = (
                                 type="checkbox"
                                 name='membership'
                                 onClick={() => setActiveTab('Advertiser')}
+                                checked={activeTab==='Advertiser'}
                                 id="advertiser"
 
                             />
@@ -83,6 +102,8 @@ const EVPDashboard = (
                                 type="checkbox"
                                 name='membership'
                                 onClick={() => setActiveTab('Customer')}
+                                checked={activeTab==='Customer'}
+
                                 id="customer"
                             />
                         </CardBody>
@@ -108,6 +129,8 @@ const EVPDashboard = (
                                 type="checkbox"
                                 name='membership'
                                 onClick={() => setActiveTab('Vendor')}
+                                checked={activeTab==='Vendor'}
+
                                 id="vendor"
                             />
                         </CardBody>
@@ -132,6 +155,8 @@ const EVPDashboard = (
                                 type="checkbox"
                                 name='membership'
                                 onClick={() => setActiveTab('EVP')}
+                                checked={activeTab==='EVP'}
+
                                 id="EVP"
                             />
                         </CardBody>
@@ -159,6 +184,7 @@ const EVPDashboard = (
                                 type="checkbox"
                                 name='membership'
                                 onClick={() => setActiveTab('superEVP')}
+                                checked={activeTab==='superEVP'}
                                 id="superEVP"
                             />
                         </CardBody>
@@ -231,4 +257,10 @@ const EVPDashboard = (
         </>
     );
 };
-export default EVPDashboard;
+const mapStateToProps = ({ analytics ,advert }) => {
+    const { loading,  error, message, activities } = analytics;
+  const {  adverts } = advert;
+    
+    return {  error, loading, message,activities ,adverts };
+};
+export default connect(mapStateToProps, {  getAnalytics: getActivities ,getAdvertRequest:getAdvert})(EVPDashboard);

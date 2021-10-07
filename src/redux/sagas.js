@@ -6,7 +6,8 @@ import surveyListSagas from './surveyList/saga';
 import surveyDetailSagas from './surveyDetail/saga';
 import FAQSagas from'./knowledgebase/saga';
 import AdvertSaga from'./advert/saga';
-import membershipSaga from './membershipProfileUpdate/saga'
+import membershipSaga from './membershipProfileUpdate/saga';
+import analyticSaga from './analytics/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     surveyDetailSagas(),
     FAQSagas(),
     AdvertSaga(),
-    membershipSaga()
+    membershipSaga(),
+    analyticSaga()
   ]);
 }

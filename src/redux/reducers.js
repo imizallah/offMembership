@@ -8,7 +8,8 @@ import surveyListApp from './surveyList/reducer';
 import surveyDetailApp from './surveyDetail/reducer';
 import FAQ from './knowledgebase/reducer';
 import advert from'./advert/reducer';
-import membership from './membershipProfileUpdate/reducer'
+import membership from './membershipProfileUpdate/reducer';
+import analytics from './analytics/reducer';
 
 const reducers = combineReducers({
   menu,
@@ -21,6 +22,7 @@ const reducers = combineReducers({
   FAQ,
   advert,
   membership,
+  analytics
 });
 
 export default reducers;

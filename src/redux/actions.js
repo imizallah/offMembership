@@ -140,6 +140,10 @@ export const UPDATE_SEVP='UPDATE_SEVP'
 export const UPDATE_SEVP_FAILED = 'UPDATE_SEVP_FAILED'
 export const UPDATE_SEVP_SUCCESS = 'UPDATE_SEVP_SUCCESS'
 
+export const GET_ACTIVITIES='GET_ACTIVITIES'
+export const GET_ACTIVITIES_FAILED = 'GET_ACTIVITIES_FAILED'
+export const GET_ACTIVITIES_SUCCESS = 'GET_ACTIVITIES_SUCCESS'
+
 
 
 
@@ -154,3 +158,4 @@ export * from './todo/actions';
 export * from './chat/actions';
 export * from './surveyList/actions';
 export * from './surveyDetail/actions';
+export * from'./analytics/action'

@@ -16,15 +16,15 @@ const IconCard = ({ className = 'mb-4', icon, title, value, button, buttonTitle,
     <div className={`icon-row-item icon-card ${className}`}>
       <Card style={{ minHeight: '200px', maxHeight: '200px' }}>
         <CardBody className={`text-center  font-family-m ${cardClassName}`}>
-          {icon?<i className={`${icon} carousel-icon`} />:<div className='mb-3'/>}
-          
+          {icon ? <i className={`${icon} carousel-icon`} /> : <div className='mb-3' />}
+
           <p className="card-text icon-card-text font-family-m  mb-0" style={{ fontSize: '12px' }}>
             {title}
           </p>
-          {value?<p className="card-text icon-card-text font-family-m text-primary text-center mb-0" style={{fontSize:'25px'}}>{value}</p>:null}
-          
+          {value ? <p className="card-text icon-card-text font-family-m text-primary text-center mb-0" style={{ fontSize: '25px' }}>{value}</p> : null}
+
           {button ?
-            <Button color='primary' className='px-0 mx-2 ' onClick={() => func()}>
+            <Button color='primary' className='px-2 mx-2 ' onClick={() => func()}>
               {buttonTitle}
             </Button> : null
           }
@@ -34,16 +34,24 @@ const IconCard = ({ className = 'mb-4', icon, title, value, button, buttonTitle,
   );
 };
 
-const IconCardsCarousel = ({ className = 'icon-cards-row' }) => {
+const IconCardsCarousel = ({ className = 'icon-cards-row', activities,advertsCount }) => {
+  const { advertisersCount,
+    customersCount,
+    evpsCount,
+    incomeCount,
+    superevpsCount,
+    vendorsCount } = activities;
+
+  console.log(activities);
   const counterData = [
-    { title: 'Total Income', value: 'N34,000', button: true, buttonTitle: 'Transaction', func: handleRedirect },
-    { title: 'Total Advert', icon: 'iconsminds-clock', button: false, value: 12 },
-    { title: 'Super EVPs', icon: 'iconsminds-bar-chart-4', value:12 },
-    { title: 'EVPs', icon: 'iconsminds-arrow-shuffle', value: 12 },
-    { title: 'Advertisers', icon: 'iconsminds-clock', button: false, value: 12 }, 
-    { title: 'Vendors', icon: 'iconsminds-clock', button: false, value: 12 },
-     { title: 'Customers', icon: 'iconsminds-clock', button: false, value: 12 },
-      { title: 'Sub EVPs', icon: 'iconsminds-clock', button: false, value: 12 },
+    { title: 'Total Income', value: incomeCount.toString(), button: true, buttonTitle: 'Transaction', func: handleRedirect },
+    { title: 'Total Advert', icon: 'iconsminds-clock', button: false, value: advertsCount.toString() },
+    { title: 'Super EVPs', icon: 'iconsminds-bar-chart-4', value: 12 },
+    { title: 'EVPs', icon: 'iconsminds-arrow-shuffle', value: evpsCount.toString() },
+    { title: 'Advertisers', icon: 'iconsminds-clock', button: false, value: advertisersCount.toString()},
+    { title: 'Vendors', icon: 'iconsminds-clock', button: false, value: vendorsCount.toString() },
+    { title: 'Customers', icon: 'iconsminds-clock', button: false, value: customersCount.toString() },
+    { title: 'Sub EVPs', icon: 'iconsminds-clock', button: false, value: superevpsCount.toString(), },
   ];
 
 
