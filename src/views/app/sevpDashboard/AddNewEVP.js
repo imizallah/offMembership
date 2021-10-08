@@ -162,9 +162,7 @@ const NewEVP = ({ history }) => {
                                                         </div>
                                                     )}
                                                 </FormGroup>
-
                                             </Colxx>
-
                                         </Row>
                                         <Row className='mb-3'>
                                             <Colxx className='mt-2' xxs="12" md='12' sm='12'>

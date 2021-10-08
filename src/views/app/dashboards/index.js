@@ -58,7 +58,7 @@ const Dashboards = ({ match }) => (
         render={(props) => <Sevp {...props} />}
       />
         <Route
-        path={`${match.url}/evp/details`}
+        path={`${match.url}/evp/details/:userId`}
         render={(props) => <EVPDetails {...props} />}
       />
        <Route

@@ -38,6 +38,7 @@ const IconCard = ({ className = 'mb-4', icon, title, value, button, buttonTitle,
   );
 };
 
+
 const IconCardsCarousel = ({ className = 'icon-cards-row' }) => {
   const counterData = [
     { title: 'Credit Balance', value: 'N34,000', button: true, buttonTitle: 'Fund', func: handleRedirect },

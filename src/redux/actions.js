@@ -145,6 +145,18 @@ export const GET_ACTIVITIES_FAILED = 'GET_ACTIVITIES_FAILED'
 export const GET_ACTIVITIES_SUCCESS = 'GET_ACTIVITIES_SUCCESS'
 
 
+export const CREATE_SEVP = 'CREATE_SEVP'
+export const CREATE_SEVP_FAILED = 'CREATE_SEVP_FAILED'
+export const CREATE_SEVP_SUCCESS = 'CREATE_SEVP_SUCCESS'
+
+export const GET_SEVP = 'GET_SEVP'
+export const GET_SEVP_FAILED = 'GET_SEVP_FAILED'
+export const GET_SEVP_SUCCESS = 'GET_SEVP_SUCCESS'
+
+export const GET_SINGLE_SEVP = 'GET_SINGLE_SEVP'
+export const GET_SINGLE_SEVP_FAILED = 'GET_SINGLE_SEVP_FAILED'
+export const GET_SINGLE_SEVP_SUCCESS = 'GET_SINGLE_SEVP_SUCCESS'
+
 
 
 
@@ -158,4 +170,5 @@ export * from './todo/actions';
 export * from './chat/actions';
 export * from './surveyList/actions';
 export * from './surveyDetail/actions';
-export * from'./analytics/action'
+export * from'./analytics/action';
+export * from './subEVP/action';

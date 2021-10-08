@@ -10,6 +10,7 @@ import FAQ from './knowledgebase/reducer';
 import advert from'./advert/reducer';
 import membership from './membershipProfileUpdate/reducer';
 import analytics from './analytics/reducer';
+import subEVP from'./subEVP/reducer';
 
 const reducers = combineReducers({
   menu,
@@ -22,7 +23,8 @@ const reducers = combineReducers({
   FAQ,
   advert,
   membership,
-  analytics
+  analytics,
+  subEVP
 });
 
 export default reducers;

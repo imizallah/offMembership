@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import { Card, Row, FormGroup, Label, CardBody, Button } from 'reactstrap'
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import { Formik, Form, Field } from 'formik';
@@ -9,14 +9,24 @@ import classNames from 'classnames';
 const NewEVP = ({ history }) => {
     const [error, setError] = useState('');
     const initialValues = {
-        name: ""
+        phoneNumber: '',
+        fullName: '',
+        country: '',
+        state: '',
+        address: '',
+        addFund: '',
+        photo: '',
     }
+
+
     const [file, setFile] = useState('');
     const [isValid, updateIsValid] = useState(false);
     const [isInvalid, updateIsInvalid] = useState(false);
     const [fileName, updatefileName] = useState('');
 
     console.log(file)
+
+
     const validateUpload = (e) => {
         const res = e.target.value;
         const arr = res.split("\\");
@@ -46,34 +56,81 @@ const NewEVP = ({ history }) => {
         }
         return err;
     };
+
+    const validateNumber = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter number';
+        }
+        return err;
+    };
+
+    const validateAddress = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter address';
+        }
+        return err;
+    };
+
+
+    const validateCountry = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter country';
+        }
+        return err;
+    };
+
+    const validateState = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter state';
+        }
+        return err;
+    };
+
+    const validateFund = (value) => {
+        let err;
+        if (!value) {
+            err = 'Please enter fund';
+        }
+        return err;
+    };
+
+    const handleSubEVP = (values) => {
+        console.log(values);
+    }
+
     return (
         <div >
             <div className='d-flex align-items-center justify-content-between'>
                 <h2 className='mb-0'>
-                    <BsArrowLeft onClick={() => { history.goBack() }} style={{ cursor: 'pointer' }} /> New EVP
+                    <BsArrowLeft onClick={() => { history.goBack() }} style={{ cursor: 'pointer' }} />New EVP
                 </h2>
                 <Button color='primary' className='mx-2 mb-3' onClick={() => { history.push('/app/dashboards/add-new-evp') }}>Add New</Button>
             </div>
             <Separator />
             <Row className='mt-4 className= mt-5'>
                 <Colxx xxs="6" md='6' sm='12'>
-                    <Card style={{ borderRadius: '20px' }}>
-                        <div className='my-3 '>
-                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>New Sub EVP</h1>
-                            <Separator className=''/>
-                        </div>
-                        <CardBody className='pt-0'>
-                            <Formik initialValues={initialValues} onSubmit={(e) => { console.log(e) }}>
-                                {({ errors, touched }) => (
-                                    <Form encType="multipart/form-data" method="post" action="#">
+                    <Formik initialValues={initialValues} onSubmit={handleSubEVP}>
+                        {({ errors, touched }) => (
+                            <Form encType="multipart/form-data" method="post" action="#">
+                                <Card style={{ borderRadius: '20px' }}>
+                                    <div className='my-3 '>
+                                        <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>New Sub EVP</h1>
+                                        <Separator className='' />
+                                    </div>
+                                    <CardBody className='pt-0'>
+
                                         <Row  >
                                             <Colxx className='' xxs="12" md='12' sm='12'>
                                                 <Label className='mb-0 text-muted'>Fullname</Label>
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="Fullname"
-                                                 
+                                                        name="fullName"
+
                                                         validate={validateName}
                                                     />
                                                     {errors.name && touched.name && (
@@ -92,13 +149,13 @@ const NewEVP = ({ history }) => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name=" phoneNumber"
 
-                                                        validate={validateName}
+                                                        validate={validateNumber}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors. phoneNumber && touched. phoneNumber && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.phoneNumber}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -112,13 +169,13 @@ const NewEVP = ({ history }) => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="country"
 
-                                                        validate={validateName}
+                                                        validate={validateCountry}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.country && touched.country && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.country}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -132,13 +189,13 @@ const NewEVP = ({ history }) => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="state"
 
-                                                        validate={validateName}
+                                                        validate={validateState}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.state && touched.state && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.state}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -152,13 +209,13 @@ const NewEVP = ({ history }) => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="address"
 
-                                                        validate={validateName}
+                                                        validate={validateAddress}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.address && touched.address && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.address}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -172,13 +229,13 @@ const NewEVP = ({ history }) => {
                                                 <FormGroup className="w-100 my-1">
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
-                                                        name="name"
+                                                        name="addFund"
 
-                                                        validate={validateName}
+                                                        validate={validateFund}
                                                     />
-                                                    {errors.name && touched.name && (
+                                                    {errors.addFund && touched.addFund && (
                                                         <div className="invalid-feedback d-block">
-                                                            {errors.name}
+                                                            {errors.addFund}
                                                         </div>
                                                     )}
                                                 </FormGroup>
@@ -222,22 +279,23 @@ const NewEVP = ({ history }) => {
                                             </Colxx>
                                         </Row>
 
-                                    </Form>)
-                                }
-                            </Formik >
-                        </CardBody>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
-                        
 
-                    </Card>
+                                    </CardBody>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <br />
 
+
+                                </Card>
+                                <Button color='primary' className='font-weight-light btn-lg font-family-m mx-3 px-3 py-1 mt-5 mb-3' type='submit'>SUBMIT</Button>
+                            </Form>)
+                        }
+                    </Formik >
                 </Colxx>
 
             </Row>
-            <Button color='primary' className='btn-lg font-family-m mx-2 mt-5 mb-3' >SUBMIT</Button>
+
         </div>
     )
 }

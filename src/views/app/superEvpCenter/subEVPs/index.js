@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { injectIntl } from 'react-intl';
 import {
-    Row, 
+    Row,
 } from 'reactstrap';
+
+import { connect } from 'react-redux';
+import { getSEVP } from 'redux/actions';
 
 import { Colxx } from 'components/common/CustomBootstrap';
 // import {NavLink } from 'react-dom';
@@ -14,10 +17,16 @@ import IconCardsCarousel from './IconCardsCarousel';
 // import 'react-quill/dist/quill.bubble.css';
 
 const EVPDashboard = (
-    {history}
+    { history,
+        sevp,
+        getSEVPRequest,
+    }
 ) => {
     // const { messages } = intl;
-
+    useEffect(() => {
+        getSEVPRequest()
+        // eslint-disable-next-line
+    }, [])
 
 
     return (
@@ -30,10 +39,14 @@ const EVPDashboard = (
             </Row>
             <Row className='mt-5'>
                 <Colxx md='12'>
-                    <Table history={history} />
+                    <Table history={history} sevp={sevp} />
                 </Colxx>
             </Row>
         </>
     );
 };
-export default EVPDashboard;
+const mapStateToProps = ({ subEVP }) => {
+    const { loading, getSEVPLoading, SEVPError, message, sevp } = subEVP;
+    return { getSEVPLoading, SEVPError, loading, message, sevp };
+};
+export default (connect(mapStateToProps, { getSEVPRequest: getSEVP }))(EVPDashboard);
