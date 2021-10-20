@@ -5,40 +5,40 @@ const data = [
     id: 'dashboards',
     icon: 'iconsminds-shop-4',
     label: 'menu.dashboards',
-    to: `${adminRoot}/dashboards`,
+    to: `${adminRoot}/dashboards/home`,
     // roles: [UserRole.Admin, UserRole.Editor],
-    subs: [
-      {
-        icon: 'simple-icon-briefcase',
-        label: 'Home',
-        to: `${adminRoot}/dashboards/home`,
-        // roles: [UserRole.Admin],
-      },
-      // {
-      //   icon: 'simple-icon-pie-chart',
-      //   label: 'menu.analytics',
-      //   to: `${adminRoot}/dashboards/analytics`,
-      //   // roles: [UserRole.Admin],
-      // },
-      // {
-      //   icon: 'simple-icon-basket-loaded',
-      //   label: 'menu.ecommerce',
-      //   to: `${adminRoot}/dashboards/ecommerce`,
-      //   // roles: [UserRole.Editor],
-      // },
-      // {
-      //   icon: 'simple-icon-doc',
-      //   label: 'menu.content',
-      //   to: `${adminRoot}/dashboards/content`,
-      //   // roles: [UserRole.Editor],
-      // },
-      // {
-      //   icon: 'simple-icon-briefcase',
-      //   label: 'Membership',
-      //   to: `${adminRoot}/dashboards/membership`,
-      //   // roles: [UserRole.Admin],
-      // },
-    ],
+    // subs: [
+    //   {
+    //     icon: 'simple-icon-briefcase',
+    //     label: 'Home',
+    //     to: `${adminRoot}/dashboards/home`,
+    //     // roles: [UserRole.Admin],
+    //   },
+    //   // {
+    //   //   icon: 'simple-icon-pie-chart',
+    //   //   label: 'menu.analytics',
+    //   //   to: `${adminRoot}/dashboards/analytics`,
+    //   //   // roles: [UserRole.Admin],
+    //   // },
+    //   // {
+    //   //   icon: 'simple-icon-basket-loaded',
+    //   //   label: 'menu.ecommerce',
+    //   //   to: `${adminRoot}/dashboards/ecommerce`,
+    //   //   // roles: [UserRole.Editor],
+    //   // },
+    //   // {
+    //   //   icon: 'simple-icon-doc',
+    //   //   label: 'menu.content',
+    //   //   to: `${adminRoot}/dashboards/content`,
+    //   //   // roles: [UserRole.Editor],
+    //   // },
+    //   // {
+    //   //   icon: 'simple-icon-briefcase',
+    //   //   label: 'Membership',
+    //   //   to: `${adminRoot}/dashboards/membership`,
+    //   //   // roles: [UserRole.Admin],
+    //   // },
+    // ],
   },
  
   {
@@ -67,7 +67,7 @@ const data = [
     id:'knowledge',
     icon: 'iconsminds-digital-drawing',
     label: 'Knowledge Base',
-    to:`${adminRoot}/knowledge-base`,
+    to:`${adminRoot}/knowledgebase`,
   },
   // {
   //   id: 'pages',

@@ -37,6 +37,10 @@ const AdvertCenter = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './advertCenter')
 );
 
+const User = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './userManagement')
+);
+
 const Pages = React.lazy(() =>
   import(/* webpackChunkName: "pages" */ './pages')
 );
@@ -85,6 +89,12 @@ const App = ({ match }) => {
             <Route
               path={`${match.url}/evp-center`}
               render={(props) => <EVPCenter {...props} />}
+
+            />
+
+            <Route
+              path={`${match.url}/users`}
+              render={(props) => <User {...props} />}
 
             />
 

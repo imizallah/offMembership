@@ -5,15 +5,15 @@ const data = [
     id: 'dashboards',
     icon: 'iconsminds-shop-4',
     label: 'menu.dashboards',
-    to: `${adminRoot}/super-admin`,
+    to: `${adminRoot}/super-admin/home`,
     // roles: [UserRole.Admin, UserRole.Editor],
-    subs: [
-      {
-        icon: 'simple-icon-briefcase',
-        label: 'Home',
-        to: `${adminRoot}/super-admin/home`,
-        // roles: [UserRole.Admin],
-      },
+    // subs: [
+      // {
+      //   icon: 'simple-icon-briefcase',
+      //   label: 'Home',
+      //   to: `${adminRoot}/super-admin/home`,
+      //   // roles: [UserRole.Admin],
+      // },
       // {
       //   icon: 'simple-icon-pie-chart',
       //   label: 'menu.analytics',
@@ -38,44 +38,44 @@ const data = [
       //   to: `${adminRoot}/dashboards/membership`,
       //   // roles: [UserRole.Admin],
       // },
-    ],
+    // ],
   },
   
   {
-    id:'Evp',
+    id:'userrManagement',
     icon: 'iconsminds-digital-drawing',
-    label: 'EVP Center',
-    to:`${adminRoot}/evp-center`, 
-    subs: [
-      {
-        icon: 'simple-icon-briefcase',
-        label: 'EVP center',
-        to: `${adminRoot}/evp-center`,
-        // roles: [UserRole.Admin],
-      }
-    ]
+    label: 'User Management',
+    to:`${adminRoot}/users`, 
+    // subs: [
+    //   {
+    //     icon: 'simple-icon-briefcase',
+    //     label: 'EVP center',
+    //     to: `${adminRoot}/evp-center`,
+    //     // roles: [UserRole.Admin],
+    //   }
+    // ]
   },
  
-  {
-    id:'supEvp',
-    icon: 'iconsminds-digital-drawing',
-    label: 'Super EVP',
-    to:`${adminRoot}/super-evp`, 
-    subs: [
-      {
-        icon: 'simple-icon-briefcase',
-        label: 'Home',
-        to: `${adminRoot}/super-evp/home`,
-        // roles: [UserRole.Admin],
-      },
-      {
-        icon: 'simple-icon-user-following',
-        label: 'Sub EVPs',
-        to: `${adminRoot}/super-evp/sub-evps`,
-        // roles: [UserRole.Admin],
-      }
-    ]
-  },
+  // {
+  //   id:'supEvp',
+  //   icon: 'iconsminds-digital-drawing',
+  //   label: 'Super EVP',
+  //   to:`${adminRoot}/super-evp`, 
+  //   subs: [
+  //     {
+  //       icon: 'simple-icon-briefcase',
+  //       label: 'Home',
+  //       to: `${adminRoot}/super-evp/home`,
+  //       // roles: [UserRole.Admin],
+  //     },
+  //     {
+  //       icon: 'simple-icon-user-following',
+  //       label: 'Sub EVPs',
+  //       to: `${adminRoot}/super-evp/sub-evps`,
+  //       // roles: [UserRole.Admin],
+  //     }
+  //   ]
+  // },
 
   {
     id:'advert',

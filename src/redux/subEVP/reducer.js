@@ -38,7 +38,7 @@ const SEVPReducer = (state = init, action) => {
         case GET_SEVP:
             return { ...state, loading: true }
         case GET_SEVP_SUCCESS:
-            return { ...state, loading: false, message: payload, SEVPError: '', sevp: payload.data }
+            return { ...state, loading: false, message: payload, SEVPError: '', sevp: payload.data.subevps }
         case GET_SEVP_FAILED:
             return { ...state, loading: false, message: '', SEVPError: payload }
 

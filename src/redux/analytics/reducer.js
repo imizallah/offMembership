@@ -13,7 +13,7 @@ const init = {
 
 const ActivitiesReducer = (state = init, action) => {
     const { type, payload } = action
-    console.log(action);
+
     switch (type) {
         case GET_ACTIVITIES:
             return { ...state, loading: true }

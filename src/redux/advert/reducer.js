@@ -36,7 +36,6 @@ const init = {
 
 const AdvertReducer = (state = init, action) => {
     const { type, payload } = action
-    console.log(action);
     switch (type) {
         case CREATE_ADVERT:
             return { ...state, createAdvertLoading: true }

@@ -11,6 +11,8 @@ import advert from'./advert/reducer';
 import membership from './membershipProfileUpdate/reducer';
 import analytics from './analytics/reducer';
 import subEVP from'./subEVP/reducer';
+import user from'./userManagement/reducer';
+
 
 const reducers = combineReducers({
   menu,
@@ -24,7 +26,8 @@ const reducers = combineReducers({
   advert,
   membership,
   analytics,
-  subEVP
+  subEVP,
+  user
 });
 
 export default reducers;

@@ -158,6 +158,15 @@ export const GET_SINGLE_SEVP_FAILED = 'GET_SINGLE_SEVP_FAILED'
 export const GET_SINGLE_SEVP_SUCCESS = 'GET_SINGLE_SEVP_SUCCESS'
 
 
+export const GET_USER = 'GET_USER'
+export const GET_USER_FAILED = 'GET_USER_FAILED'
+export const GET_USER_SUCCESS = 'GET_USER_SUCCESS'
+
+export const GET_SINGLE_USER = 'GET_SINGLE_USER'
+export const GET_SINGLE_USER_FAILED = 'GET_SINGLE_USER_FAILED'
+export const GET_SINGLE_USER_SUCCESS = 'GET_SINGLE_USER_SUCCESS'
+
+
 
 
 export * from './menu/actions';
@@ -172,3 +181,5 @@ export * from './surveyList/actions';
 export * from './surveyDetail/actions';
 export * from'./analytics/action';
 export * from './subEVP/action';
+export * from './userManagement/action';
+

@@ -22,11 +22,16 @@ const AdvertFeed = ({ adverts }) => {
                     <PerfectScrollbar
                         options={{ suppressScrollX: true, wheelPropagation: false }}
                     >
-                        {adverts.map((order, index) => {
+                        {adverts.filter((el)=>el.user!==null).map((order, index) => {
                             return (
                                 <div key={index} className="mb-3 font-family-m border-bottom">
                                     <div>
-                                        <p className='font-weight-bold mb-0'>{order.user.fullName.replace(/\b\w/g, c => c.toUpperCase())}</p>
+                                        {order.user?
+                                         <p className='font-weight-bold mb-0'>{order.user.fullName.replace(/\b\w/g, c => c.toUpperCase())}</p>
+                                         :
+                                         <p className='font-weight-bold mb-0'>{order.user.replace(/\b\w/g, c => c.toUpperCase())}</p>
+                                    }
+                                       
                                     </div>
                                     <div>
                                         <p className='mb-0'>{order.message}</p>

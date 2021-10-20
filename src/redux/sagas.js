@@ -9,6 +9,7 @@ import AdvertSaga from'./advert/saga';
 import membershipSaga from './membershipProfileUpdate/saga';
 import analyticSaga from './analytics/saga';
 import EVPSaga from './subEVP/saga';
+import userSaga from './userManagement/saga';
 
 export default function* rootSaga() {
   yield all([
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     AdvertSaga(),
     membershipSaga(),
     analyticSaga(),
-    EVPSaga()
+    EVPSaga(),
+    userSaga()
   ]);
 }
