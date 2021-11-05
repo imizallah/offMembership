@@ -9,7 +9,7 @@ import { NotificationManager } from 'components/common/react-notifications';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { loginUser } from 'redux/actions';
-// import emChatlogo from '../../assets/logos/emChatlogo.png'
+import plugbayLogo from '../../assets/logos/plugbay.jpg'
 
 const validatePassword = (value) => {
   let error;
@@ -63,15 +63,15 @@ const Login = ({ history, loading, error, message,
       <Colxx xxs="12" md="10" className="mx-auto my-auto">
         <Card className="auth-card">
           <div className="position-relative image-side ">
-            <p className="text-white h3">Welcome to <span className='h2'>Taskr</span></p>
+            <p className="text-white h3">Welcome to <span className='h2'>Plugbay</span></p>
             <p className="white mb-0 mt-2">
               Please use your credentials to login.
             </p>
           </div>
           <div className="form-side">
             <NavLink to="/" className="white">
-              <span className="logo-single" />
-              {/* <img src={emChatlogo} width='130px' alt='navbrand-logo' /> */}
+              {/* <span className="logo-single" /> */}
+              <img src={plugbayLogo} width='85px' alt='navbrand-logo' />
             </NavLink>
             {/* <CardTitle className="mb-4">
               <IntlMessages id="user.login-title" />
@@ -79,7 +79,7 @@ const Login = ({ history, loading, error, message,
 
             <Formik initialValues={initialValues} onSubmit={onUserLogin}>
               {({ errors, touched }) => (
-                <Form className="av-tooltip tooltip-label-bottom mt-5">
+                <Form className="av-tooltip tooltip-label-bottom mt-4">
                   <FormGroup className="form-group has-float-label">
                     <Label>
                      Phone Number
@@ -112,7 +112,7 @@ const Login = ({ history, loading, error, message,
                       </div>
                     )}
                   </FormGroup>
-                  <div className="d-flex justify-content-between align-items-center">
+                  <div className="d-flex justify-content-between align-items-center mt-3">
                     <NavLink to="/auth/forgot-password">
                       <IntlMessages id="user.forgot-password-question" />
                     </NavLink>
@@ -139,7 +139,7 @@ const Login = ({ history, loading, error, message,
             </Formik>
 
 
-            <p className="text-dark mb-0 mt-2">
+            <p className="text-dark mb-0">
               If you are not a member, please{' '}
               <NavLink to="/auth/register" className=" text-info">
                 <u>

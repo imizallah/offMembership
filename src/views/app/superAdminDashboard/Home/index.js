@@ -67,7 +67,7 @@ const EVPDashboard = (
                             <div className="min-width-zero">
 
                                 <CardSubtitle className="truncate mt-3  font-weight-bold">
-                                    Add Advertiser
+                                    Add EmAds
                                 </CardSubtitle>
 
                             </div>
@@ -93,7 +93,7 @@ const EVPDashboard = (
                             <div className="min-width-zero">
 
                                 <CardSubtitle className="truncate mt-3 font-weight-bold">
-                                    Add Customer
+                                    Add EmHire
                                 </CardSubtitle>
 
                             </div>
@@ -120,7 +120,7 @@ const EVPDashboard = (
                             <div className="min-width-zero">
 
                                 <CardSubtitle className="truncate mt-3  font-weight-bold">
-                                    Add Vendor
+                                    Add EmJobs
                                 </CardSubtitle>
 
                             </div>

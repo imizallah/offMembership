@@ -4,12 +4,13 @@
 import React, { useState } from 'react';
 import { injectIntl } from 'react-intl';
 
+
 import {
   UncontrolledDropdown,
   DropdownItem,
   DropdownToggle,
   DropdownMenu,
-  Input,
+  // Input,
 } from 'reactstrap';
 
 import { NavLink } from 'react-router-dom';
@@ -17,7 +18,7 @@ import { connect } from 'react-redux';
 
 // import IntlMessages from 'helpers/IntlMessages';
 import {
-  menuHiddenBreakpoint,
+  // menuHiddenBreakpoint,
   searchPath,
   localeOptions,
   isDarkSwitchActive,
@@ -33,14 +34,14 @@ import {
   changeLocale,
 } from 'redux/actions';
 
-import TopnavEasyAccess from './Topnav.EasyAccess';
 import TopnavNotifications from './Topnav.Notifications';
 import TopnavDarkSwitch from './Topnav.DarkSwitch';
 import { getCurrentUser } from '../../helpers/Utils';
+import plugbayLogo from '../../assets/logos/plugbay.jpg'
 
 
 const TopNav = ({
-  intl,
+  // intl,
   history,
   containerClassnames,
   menuClickCount,
@@ -51,7 +52,6 @@ const TopNav = ({
   logoutUserAction,
   changeLocaleAction,
 }) => {
-  const [isInFullScreen, setIsInFullScreen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
 
   const search = () => {
@@ -71,43 +71,8 @@ const TopNav = ({
     }
   };
 
-  const isInFullScreenFn = () => {
-    return (
-      (document.fullscreenElement && document.fullscreenElement !== null) ||
-      (document.webkitFullscreenElement &&
-        document.webkitFullscreenElement !== null) ||
-      (document.mozFullScreenElement &&
-        document.mozFullScreenElement !== null) ||
-      (document.msFullscreenElement && document.msFullscreenElement !== null)
-    );
-  };
 
-  const handleSearchIconClick = (e) => {
-    if (window.innerWidth < menuHiddenBreakpoint) {
-      let elem = e.target;
-      if (!e.target.classList.contains('search')) {
-        if (e.target.parentElement.classList.contains('search')) {
-          elem = e.target.parentElement;
-        } else if (
-          e.target.parentElement.parentElement.classList.contains('search')
-        ) {
-          elem = e.target.parentElement.parentElement;
-        }
-      }
 
-      if (elem.classList.contains('mobile-view')) {
-        search();
-        elem.classList.remove('mobile-view');
-        removeEventsSearch();
-      } else {
-        elem.classList.add('mobile-view');
-        addEventsSearch();
-      }
-    } else {
-      search();
-    }
-    e.stopPropagation();
-  };
 
   const handleDocumentClickSearch = (e) => {
     let isSearchClick = false;
@@ -141,41 +106,10 @@ const TopNav = ({
     document.removeEventListener('click', handleDocumentClickSearch, true);
   };
 
-  const addEventsSearch = () => {
-    document.addEventListener('click', handleDocumentClickSearch, true);
-  };
+ 
 
-  const handleSearchInputKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      search();
-    }
-  };
 
-  const toggleFullScreen = () => {
-    const isFS = isInFullScreenFn();
-
-    const docElm = document.documentElement;
-    if (!isFS) {
-      if (docElm.requestFullscreen) {
-        docElm.requestFullscreen();
-      } else if (docElm.mozRequestFullScreen) {
-        docElm.mozRequestFullScreen();
-      } else if (docElm.webkitRequestFullScreen) {
-        docElm.webkitRequestFullScreen();
-      } else if (docElm.msRequestFullscreen) {
-        docElm.msRequestFullscreen();
-      }
-    } else if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) {
-      document.webkitExitFullscreen();
-    } else if (document.mozCancelFullScreen) {
-      document.mozCancelFullScreen();
-    } else if (document.msExitFullscreen) {
-      document.msExitFullscreen();
-    }
-    setIsInFullScreen(!isFS);
-  };
+ 
 
   const handleLogout = () => {
     logoutUserAction(history);
@@ -201,7 +135,7 @@ const TopNav = ({
     clickOnMobileMenuAction(_containerClassnames);
   };
   const currentUser = getCurrentUser();
-  const { messages } = intl;
+  // const { messages } = intl;
   return (
     <nav className="navbar fixed-top">
       <div className="d-flex align-items-center navbar-left">
@@ -224,22 +158,6 @@ const TopNav = ({
           <MobileMenuIcon />
         </NavLink>
 
-        <div className="search">
-          <Input
-            name="searchKeyword"
-            id="searchKeyword"
-            placeholder={messages['menu.search']}
-            value={searchKeyword}
-            onChange={(e) => setSearchKeyword(e.target.value)}
-            onKeyPress={(e) => handleSearchInputKeyPress(e)}
-          />
-          <span
-            className="search-icon"
-            onClick={(e) => handleSearchIconClick(e)}
-          >
-            <i className="simple-icon-magnifier" />
-          </span>
-        </div>
 
         <div className="d-inline-block">
           <UncontrolledDropdown className="ml-2">
@@ -265,53 +183,34 @@ const TopNav = ({
             </DropdownMenu>
           </UncontrolledDropdown>
         </div>
-        {/* <div className="position-relative d-none d-none d-lg-inline-block">
-          <a
-            className="btn btn-outline-primary btn-sm ml-2"
-            target="_top"
-            href={buyUrl}
-          >
-            <IntlMessages id="user.buy" />
-          </a>
-        </div> */}
+
       </div>
       <NavLink className="navbar-logo" to={adminRoot}>
+      <div className="d-none d-xs-block">
+            <img src={plugbayLogo} alt='navbrand-logo' className='' style={{ width: '50%' }} />
+          </div>
+          <div className="d-block d-xs-none">
+            <img src={plugbayLogo} alt='navbrand-logo' className='' style={{ width: '50%' }} />
+          </div>
+{/*         
         <span className="logo d-none d-xs-block" />
-        <span className="logo-mobile d-block d-xs-none" />
+        <span className="logo-mobile d-block d-xs-none" /> */}
       </NavLink>
 
       <div className="navbar-right">
         {isDarkSwitchActive && <TopnavDarkSwitch />}
         <div className="header-icons d-inline-block align-middle">
-          <TopnavEasyAccess />
           <TopnavNotifications />
-          <button
-            className="header-icon btn btn-empty d-none d-sm-inline-block"
-            type="button"
-            id="fullScreenButton"
-            onClick={toggleFullScreen}
-          >
-            {isInFullScreen ? (
-              <i className="simple-icon-size-actual d-block" />
-            ) : (
-              <i className="simple-icon-size-fullscreen d-block" />
-            )}
-          </button>
         </div>
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
               <span className="name mr-1">{currentUser.fullName.replace(/\b\w/g, c => c.toUpperCase())}</span>
               <span>
-                <img alt="Profile" src="/assets/img/profiles/l-1.jpg" />
+                <img alt="Profile" src={currentUser.profilePictureFull} />
               </span>
             </DropdownToggle>
             <DropdownMenu className="mt-3" right>
-              <DropdownItem>Account</DropdownItem>
-              <DropdownItem>Features</DropdownItem>
-              <DropdownItem>History</DropdownItem>
-              <DropdownItem>Support</DropdownItem>
-              <DropdownItem divider />
               <DropdownItem onClick={() => handleLogout()}>
                 Sign out
               </DropdownItem>

@@ -92,7 +92,7 @@ const SuperEVP = () => {
                 <Colxx xxs="6" md='6' sm='12'>
                     <Card style={{ borderRadius: '20px' }}>
                         <div className='my-3 '>
-                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>Advertiser Membership</h1>
+                            <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>EmAds Membership</h1>
                             <Separator />
                         </div>
                         <CardBody className='pt-0'>
