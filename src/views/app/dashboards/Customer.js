@@ -12,7 +12,8 @@ import { updateCustomer } from 'redux/actions';
 const Customer = ({loading,
     updateCustomerRequest,
     message,
-    error
+    error,
+    user
 }) => {
 
 
@@ -25,11 +26,11 @@ const Customer = ({loading,
       }, [error, message]);
 
     const initialValues = {
-        bvn: "",
-        nin: "",
-        country: "",
-        state: '',
-        address: "",
+        bvn: user.bvn,
+        nin: user.nin,
+        country: user.country,
+        state: user.state,
+        address: user.address,
 
     }
 

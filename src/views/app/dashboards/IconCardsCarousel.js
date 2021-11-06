@@ -45,7 +45,7 @@ const IconCardsCarousel = ({ className = 'icon-cards-row', history, userDetails 
 
   const counterData = [
     { title: 'Credit Balance', value: `N${userDetails.wallet}`, button: true, buttonTitle: 'Fund', func: handleRedirect },
-    { title: 'Total Advert', icon: 'iconsminds-clock', button: false, value: userDetails.adverts.length.toString() },
+    { title: 'My Adverts', icon: 'iconsminds-clock', button: false, value: userDetails.adverts.length.toString() },
     { title: 'Help Center', icon: 'iconsminds-bar-chart-4', button: true, buttonTitle: 'Contact', func: getHelp, cardClassName: 'py-3 pb-5' },
     { title: 'Knowledge Base', icon: 'iconsminds-arrow-shuffle', button: true, buttonTitle: 'Get Info', func: getInfo, cardClassName: 'py-3 pb-5' },
   ];

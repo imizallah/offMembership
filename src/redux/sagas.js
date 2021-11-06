@@ -10,6 +10,9 @@ import membershipSaga from './membershipProfileUpdate/saga';
 import analyticSaga from './analytics/saga';
 import EVPSaga from './subEVP/saga';
 import userSaga from './userManagement/saga';
+import paymentSaga from './payment/saga';
+
+
 
 export default function* rootSaga() {
   yield all([
@@ -23,6 +26,9 @@ export default function* rootSaga() {
     membershipSaga(),
     analyticSaga(),
     EVPSaga(),
-    userSaga()
+    userSaga(),
+    paymentSaga()
+
+
   ]);
 }

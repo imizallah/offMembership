@@ -9,7 +9,7 @@ import {
     TabPane,
     Row
 } from 'reactstrap';
-
+import { getCurrentUser } from 'helpers/Utils';
 import { Colxx } from 'components/common/CustomBootstrap';
 // import {NavLink } from 'react-dom';
 // import Breadcrumb from 'containers/navs/Breadcrumb';
@@ -23,8 +23,10 @@ import EVP from './EVP'
 // import 'react-quill/dist/quill.snow.css';
 // import 'react-quill/dist/quill.bubble.css';
 
+const currentUser = getCurrentUser();
+
 const EVPDashboard = (
-    // {history}
+    { history }
 ) => {
     // const { messages } = intl;
     const [activeTab, setActiveTab] = useState('Advertiser');
@@ -35,7 +37,11 @@ const EVPDashboard = (
         <>
             <Row>
                 <Colxx lg="12" xl="12" md='12' className='mb-4'>
-                    <IconCardsCarousel />
+                    <IconCardsCarousel
+                        history={history}
+                        user={currentUser}
+
+                    />
                 </Colxx>
             </Row>
 
@@ -49,15 +55,17 @@ const EVPDashboard = (
                                 <div className="min-width-zero">
 
                                     <CardSubtitle className="truncate mt-3  font-weight-bold">
-                                        Register Advertiser
+                                        Register EmAds
                                     </CardSubtitle>
 
                                 </div>
                                 <CustomInput
-                                className='mt-3'
+                                    className='mt-3'
                                     type="checkbox"
                                     name='membership'
                                     onClick={() => setActiveTab('Advertiser')}
+                                    checked={activeTab === 'Advertiser'}
+
                                     id="advertiser"
 
                                 />
@@ -75,15 +83,17 @@ const EVPDashboard = (
                                 <div className="min-width-zero">
 
                                     <CardSubtitle className="truncate mt-3 font-weight-bold">
-                                        Register Customer
+                                        Register EmHire
                                     </CardSubtitle>
 
                                 </div>
                                 <CustomInput
-                                className='mt-3'
+                                    className='mt-3'
                                     type="checkbox"
                                     name='membership'
                                     onClick={() => setActiveTab('Customer')}
+                checked={activeTab === 'Customer'}
+
                                     id="customer"
                                 />
                             </CardBody>
@@ -101,15 +111,17 @@ const EVPDashboard = (
                                 <div className="min-width-zero">
 
                                     <CardSubtitle className="truncate mt-3  font-weight-bold">
-                                        Register Vendor
+                                        Register EmJobs
                                     </CardSubtitle>
 
                                 </div>
                                 <CustomInput
-                                className='mt-3'
+                                    className='mt-3'
                                     type="checkbox"
                                     name='membership'
                                     onClick={() => setActiveTab('Vendor')}
+                checked={activeTab === 'Vendor'}
+                                    
                                     id="vendor"
                                 />
                             </CardBody>

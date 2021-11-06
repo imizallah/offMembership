@@ -12,7 +12,8 @@ const SuperEVP = (
     { loading,
         updateVendorRequest,
         message,
-        error
+        error,
+        user
     }
 ) => {
 
@@ -27,15 +28,16 @@ const SuperEVP = (
     const [volunteer, setvolunteer] = useState(false);
 
     const initialValues = {
-        bvn: "",
-        nin: "",
-        country: "",
-        state: '',
-        address: "",
-        specialty: '',
+        bvn: user.bvn,
+        nin: user.nin,
+        country: user.country,
+        state: user.state,
+        address: user.address,
+        specialty: user.specialty,
 
     }
 
+    console.log(user);
 
 
     const validateBVN = (value) => {
@@ -97,7 +99,7 @@ const SuperEVP = (
     return (
         <>
             <div>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the Vendor Membership Package. Membership is N1000 yearly</h3>
+                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the EmJobs Membership Package. Membership is N1000 yearly</h3>
             </div>
             <Row className='mt-5'>
                 <Colxx xxs="6" md='6' sm='12'>
@@ -118,6 +120,7 @@ const SuperEVP = (
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="bvn"
+                                                        defaultValue={user.bvn}
 
                                                         validate={validateBVN}
                                                     />
@@ -138,6 +141,7 @@ const SuperEVP = (
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="nin"
+                                                        defaultValue={user.nin}
 
                                                         validate={validateNIN}
                                                     />
@@ -158,6 +162,7 @@ const SuperEVP = (
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="country"
+                                                        defaultValue={user.country}
 
                                                         validate={validateCountry}
                                                     />
@@ -178,7 +183,8 @@ const SuperEVP = (
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="state"
-
+                                                        defaultValue={user.state}
+                                                        
                                                         validate={validateState}
                                                     />
                                                     {errors.state && touched.state && (
@@ -198,6 +204,7 @@ const SuperEVP = (
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="address"
+                                                        defaultValue={user.address}
 
                                                         validate={validateLocation}
                                                     />
@@ -218,6 +225,7 @@ const SuperEVP = (
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="specialty"
+                                                        defaultValue={user.specialty}
 
                                                         validate={validatespecialty}
                                                     />
@@ -245,10 +253,10 @@ const SuperEVP = (
 
                                 </Card>
                                 <Button
-                                color='primary'
+                                    color='primary'
                                     className={`mt-3 btn-lg font-weight-light py-1 font-weight-light  my-3 btn-multiple-state ${loading ? 'show-spinner' : ''
                                         }`}
-                                        type='submit'
+                                    type='submit'
                                 >
                                     <span className="spinner d-inline-block">
                                         <span className="bounce1" />
@@ -256,9 +264,9 @@ const SuperEVP = (
                                         <span className="bounce3" />
                                     </span>
                                     <span className="label">
-                                        Pay
+                                        Pay N1000
                                     </span>
-                               </Button>
+                                </Button>
 
                             </Form>)
                         }

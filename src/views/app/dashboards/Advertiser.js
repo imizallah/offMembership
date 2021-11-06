@@ -12,6 +12,7 @@ import { updateAdvertiser } from 'redux/actions';
 const Advertiser = ({loading,
     updateAdvertiserRequest,
     message,
+    user,
     error
 }) => {
 
@@ -25,11 +26,11 @@ const Advertiser = ({loading,
       }, [error, message]);
 
     const initialValues = {
-        bvn: "",
-        nin: "",
-        country: "",
-        state: '',
-        address: "",
+        bvn: user.bvn,
+        nin: user.nin,
+        country: user.country,
+        state: user.state,
+        address: user.address,
 
     }
 
@@ -85,7 +86,7 @@ const Advertiser = ({loading,
     return (
         <>
             <div>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the Advertiser Membership Package. Membership is N1000 yearly</h3>
+                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the EmAds Membership Package. Membership is N1000 yearly</h3>
             </div>
             <Row className='mt-5'>
                 <Colxx xxs="6" md='6' sm='12'>
@@ -107,7 +108,7 @@ const Advertiser = ({loading,
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="bvn"
-
+                                                        defaultValue={user.bvn}
                                                         validate={validateBVN}
                                                     />
                                                     {errors.bvn && touched.bvn && (
@@ -127,6 +128,7 @@ const Advertiser = ({loading,
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="nin"
+                                                        defaultValue={user.nin}
 
                                                         validate={validateNIN}
                                                     />
@@ -147,6 +149,7 @@ const Advertiser = ({loading,
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="country"
+                                                        defaultValue={user.country}
 
                                                         validate={validateCountry}
                                                     />
@@ -167,6 +170,7 @@ const Advertiser = ({loading,
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="state"
+                                                        defaultValue={user.state}
 
                                                         validate={validateState}
                                                     />
@@ -187,6 +191,7 @@ const Advertiser = ({loading,
                                                     <Field
                                                         className="py-2 w-100 border-muted custom-input"
                                                         name="address"
+                                                        defaultValue={user.location}
 
                                                         validate={validateLocation}
                                                     />

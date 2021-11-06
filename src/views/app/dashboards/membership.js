@@ -11,6 +11,8 @@ import {
   TabPane,
   Row
 } from 'reactstrap';
+import { IoMdCheckmarkCircle } from 'react-icons/io'
+import { getCurrentUser } from 'helpers/Utils';
 import Advertiser from './Advertiser'
 import Customer from './Customer'
 import Vendor from './Vendor'
@@ -19,9 +21,10 @@ import EVP from './EVP'
 
 
 
-const Membership = ({match:{params:{role}}}) => {
+const Membership = ({ match: { params: { role } } }) => {
   const [activeTab, setActiveTab] = useState(role);
-  
+  const currentUser = getCurrentUser();
+
 
   return (
     <>
@@ -37,18 +40,21 @@ const Membership = ({match:{params:{role}}}) => {
               <div className="min-width-zero">
 
                 <CardSubtitle className="truncate mb-1 font-weight-bold">
-                  Advertiser
+                  EmAds
                 </CardSubtitle>
 
               </div>
+              {currentUser.role === 'advertiser' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />:
+
               <CustomInput
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('Advertiser')}
-                checked={activeTab==='Advertiser'}
+                checked={activeTab === 'Advertiser'}
                 id="advertiser"
+                disabled={currentUser.role === 'advertiser'}
 
-              />
+              />}
             </CardBody>
           </div>
         </Card>
@@ -66,14 +72,17 @@ const Membership = ({match:{params:{role}}}) => {
                 </CardSubtitle>
 
               </div>
+              {currentUser.role === 'evp' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
               <CustomInput
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('EVP')}
-                checked={activeTab==='EVP'}
+                checked={activeTab === 'EVP'}
+                disabled={currentUser.role === 'evp'}
 
                 id="EVP"
-              />
+              />}
             </CardBody>
           </div>
         </Card>
@@ -87,18 +96,21 @@ const Membership = ({match:{params:{role}}}) => {
               <div className="min-width-zero">
 
                 <CardSubtitle className="truncate mb-1 font-weight-bold">
-                  Customer
+                  EmHire
                 </CardSubtitle>
 
               </div>
+              {currentUser.role === 'customer' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                   :
               <CustomInput
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('Customer')}
-                checked={activeTab==='Customer'}
+                checked={activeTab === 'Customer'}
+                disabled={currentUser.role === 'customer'}
 
                 id="customer"
-              />
+              />}
             </CardBody>
           </div>
         </Card>
@@ -112,17 +124,21 @@ const Membership = ({match:{params:{role}}}) => {
               <div className="min-width-zero">
 
                 <CardSubtitle className="truncate mb-1 font-weight-bold">
-                  Vendor
+                  EmJobs
                 </CardSubtitle>
 
               </div>
+              {currentUser.role === 'vendor' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
               <CustomInput
                 type="checkbox"
                 name='membership'
                 onClick={() => setActiveTab('Vendor')}
-                checked={activeTab==='Vendor'}
-              
-              />
+                checked={activeTab === 'Vendor'}
+                disabled={currentUser.role === 'vendor'}
+
+
+              />}
             </CardBody>
           </div>
         </Card>
@@ -140,14 +156,17 @@ const Membership = ({match:{params:{role}}}) => {
                 </CardSubtitle>
 
               </div>
+              {currentUser.role === 'superevp' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
               <CustomInput
                 type="checkbox"
                 name='membership'
+                disabled={currentUser.role === 'superevp'}
                 onClick={() => setActiveTab('superEVP')}
-                checked={activeTab==='superEVP'}
+                checked={activeTab === 'superEVP'}
 
                 id="superEVP"
-              />
+              />}
             </CardBody>
           </div>
         </Card>
@@ -158,6 +177,8 @@ const Membership = ({match:{params:{role}}}) => {
           <Row>
             <Colxx sm="12">
               <Advertiser
+
+                user={currentUser}
               // event={singleEvent} 
               />
             </Colxx>
@@ -167,6 +188,8 @@ const Membership = ({match:{params:{role}}}) => {
           <Row>
             <Colxx sm="12">
               <EVP
+                user={currentUser}
+
               // id={eventId}
               // event={singleEvent}
               // addParticipants={addParticipantAction}
@@ -179,6 +202,8 @@ const Membership = ({match:{params:{role}}}) => {
             <Colxx sm="12">
               <CardBody>
                 <Customer
+                  user={currentUser}
+
                 // data={item}
                 // key={`qa_${item.key}`}
                 />
@@ -192,6 +217,8 @@ const Membership = ({match:{params:{role}}}) => {
             <Colxx sm="12">
               <CardBody>
                 <Vendor
+                  user={currentUser}
+
                 // data={item}
                 // key={`qa_${item.key}`}
                 />
@@ -205,6 +232,8 @@ const Membership = ({match:{params:{role}}}) => {
             <Colxx sm="12">
               <CardBody>
                 <SuperEVP
+                  user={currentUser}
+
                 // data={item}
                 // key={`qa_${item.key}`}
                 />

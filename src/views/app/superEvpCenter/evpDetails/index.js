@@ -17,7 +17,7 @@ const EVPDetails = ({ history, getSingleSEVPRequest, singleSEVP, loading, match:
         // eslint-disable-next-line
     }, [])
     console.log(singleSEVP);
-    const {fullName, phoneNumber, address, photo,credit}=singleSEVP;
+    const { fullName, phoneNumber, address, photo, credit, transactions } = singleSEVP;
 
     return (
         <>
@@ -233,7 +233,9 @@ const EVPDetails = ({ history, getSingleSEVPRequest, singleSEVP, loading, match:
                         </Colxx>
                     </Row>
                     <div>
-                        <Table />
+                        <Table
+                            transactions={transactions}
+                        />
                     </div>
                 </div>
 

@@ -1,13 +1,18 @@
 // eslint-disable-next-line import/no-cycle
 import {
-   
+
     GET_USER,
     GET_USER_FAILED,
     GET_USER_SUCCESS,
 
     GET_SINGLE_USER,
     GET_SINGLE_USER_FAILED,
-    GET_SINGLE_USER_SUCCESS
+    GET_SINGLE_USER_SUCCESS,
+
+
+    GET_USER_TRANSACTION,
+    GET_USER_TRANSACTION_FAILED,
+    GET_USER_TRANSACTION_SUCCESS
 
 } from '../actions';
 
@@ -17,14 +22,15 @@ const init = {
     error: false,
     message: null,
     users: [],
-    singleUser: {}
+    singleUser: {},
+    transactions: []
 }
 
 const UserReducer = (state = init, action) => {
     const { type, payload } = action
     console.log(action);
     switch (type) {
-      
+
         case GET_USER:
             return { ...state, loading: true }
         case GET_USER_SUCCESS:
@@ -38,6 +44,13 @@ const UserReducer = (state = init, action) => {
         case GET_SINGLE_USER_SUCCESS:
             return { ...state, loading: false, message: payload, error: '', singleUser: payload.data }
         case GET_SINGLE_USER_FAILED:
+            return { ...state, loading: false, message: '', error: payload }
+
+        case GET_USER_TRANSACTION:
+            return { ...state, loading: true }
+        case GET_USER_TRANSACTION_SUCCESS:
+            return { ...state, loading: false, message: payload, error: '', transactions: payload.data }
+        case GET_USER_TRANSACTION_FAILED:
             return { ...state, loading: false, message: '', error: payload }
 
 

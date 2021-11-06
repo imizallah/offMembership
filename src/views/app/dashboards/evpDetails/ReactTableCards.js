@@ -10,49 +10,49 @@ import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
 
 // import products from 'data/products';
-const products = [{
-  amount: 'N2,000',
-  status: 'Complete',
-  details: "Customer Membership",
-  date: '23/03/2021',
-  type: 'Deposit'
-}, {
-  amount: 'N2,500',
-  status: 'Complete',
-  details: "Vendor Membership",
-  date: '23/03/2021',
-  type: 'Transfer'
-}, {
-  amount: 'N2,500',
-  status: 'Complete',
-  details: "Advert Placement",
-  date: '23/03/2021',
-  type: 'Transfer'
-}, {
-  amount: 'N4,000',
-  status: 'Complete',
-  details: "Advertiser Membership",
-  date: '23/03/2021',
-  type: 'Transfer'
-}, {
-  amount: 'N4,000',
-  status: 'Pending',
-  details: "Advert Placement",
-  date: '23/03/2021',
-  type: 'Transfer'
-}, {
-  amount: 'N3,000',
-  status: 'Pending',
-  details: "Advert Placement",
-  date: '23/03/2021',
-  type: 'Withdrawal'
-}, {
-  amount: 'N3,500',
-  status: 'Pending',
-  details: "Advert Placement",
-  date: '23/03/2021',
-  type: 'Transfer'
-}]
+// const products = [{
+//   amount: 'N2,000',
+//   status: 'Complete',
+//   details: "Customer Membership",
+//   date: '23/03/2021',
+//   type: 'Deposit'
+// }, {
+//   amount: 'N2,500',
+//   status: 'Complete',
+//   details: "Vendor Membership",
+//   date: '23/03/2021',
+//   type: 'Transfer'
+// }, {
+//   amount: 'N2,500',
+//   status: 'Complete',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
+//   type: 'Transfer'
+// }, {
+//   amount: 'N4,000',
+//   status: 'Complete',
+//   details: "Advertiser Membership",
+//   date: '23/03/2021',
+//   type: 'Transfer'
+// }, {
+//   amount: 'N4,000',
+//   status: 'Pending',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
+//   type: 'Transfer'
+// }, {
+//   amount: 'N3,000',
+//   status: 'Pending',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
+//   type: 'Withdrawal'
+// }, {
+//   amount: 'N3,500',
+//   status: 'Pending',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
+//   type: 'Transfer'
+// }]
 function Table({ columns, data, divided = false, defaultPageSize = 10 }) {
   const defaultColumn = React.useMemo(
     () => ({
@@ -156,7 +156,7 @@ function Table({ columns, data, divided = false, defaultPageSize = 10 }) {
   );
 }
 
-const ReactTableWithPaginationCard = () => {
+const ReactTableWithPaginationCard = ({ transactions}) => {
   const cols = React.useMemo(
     () => [
       {
@@ -206,7 +206,7 @@ const ReactTableWithPaginationCard = () => {
 
           Transaction History
         </h3>
-        <Table columns={cols} data={products} getTdProps={() => ({ style: { height: '20px' } })} />
+        <Table columns={cols} data={ transactions} getTdProps={() => ({ style: { height: '20px' } })} />
       </CardBody>
     </Card>
   );

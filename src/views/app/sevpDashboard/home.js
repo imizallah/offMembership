@@ -65,7 +65,7 @@ const DefaultDashboard = ({history}
                   <div className="min-width-zero">
 
                     <CardSubtitle className="truncate mb-1 font-weight-bold">
-                      Advertiser
+                      EmAds
                     </CardSubtitle>
 
                   </div>
@@ -118,7 +118,7 @@ const DefaultDashboard = ({history}
                   <div className="min-width-zero">
 
                     <CardSubtitle className="truncate mb-1 font-weight-bold">
-                      Customer
+                      EmHire
                     </CardSubtitle>
 
                   </div>
@@ -144,7 +144,7 @@ const DefaultDashboard = ({history}
                   <div className="min-width-zero">
 
                     <CardSubtitle className="truncate mb-1 font-weight-bold">
-                      Vendor
+                      EmJobs
                     </CardSubtitle>
 
                   </div>

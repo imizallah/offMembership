@@ -6,13 +6,14 @@ import {
 
 import { connect } from 'react-redux';
 import { getSEVP } from 'redux/actions';
+import { getCurrentUser } from 'helpers/Utils';
 
 import { Colxx } from 'components/common/CustomBootstrap';
 // import {NavLink } from 'react-dom';
 // import Breadcrumb from 'containers/navs/Breadcrumb';
 
 import Table from './ReactTableCards'
-import IconCardsCarousel from './IconCardsCarousel';
+import IconCardsCarousel from '../Home/IconCardsCarousel';
 // import 'react-quill/dist/quill.snow.css';
 // import 'react-quill/dist/quill.bubble.css';
 
@@ -28,13 +29,15 @@ const EVPDashboard = (
         // eslint-disable-next-line
     }, [])
 
+    const currentUser = getCurrentUser();
 
     return (
 
         <>
             <Row>
                 <Colxx lg="12" xl="12" md='12' className='mb-4'>
-                    <IconCardsCarousel />
+                    <IconCardsCarousel 
+                    user={currentUser}/>
                 </Colxx>
             </Row>
             <Row className='mt-5'>

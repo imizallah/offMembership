@@ -6,7 +6,7 @@ import {
 } from 'reactstrap';
 import { connect } from 'react-redux';
 import { IoMdCheckmarkCircle } from 'react-icons/io'
-import { createAdvert, getAdvert } from 'redux/actions';
+import { createAdvert, getAdvert, getUserTransaction } from 'redux/actions';
 import { getCurrentUser } from 'helpers/Utils';
 import { Colxx } from 'components/common/CustomBootstrap';
 import AdvertFeed from './AdvertFeed';
@@ -26,6 +26,8 @@ const DefaultDashboard = ({ history,
   createAdvertLoading,
   getAdvertRequest,
   adverts,
+  transactions,
+  getUserTransactionAction,
   loading }
 ) => {
 
@@ -48,8 +50,21 @@ const DefaultDashboard = ({ history,
   useEffect(() => {
     updateAdvertFeed(adverts);
     console.log(advertFeed)
-// eslint-disable-next-line
+    // eslint-disable-next-line
   }, [adverts])
+
+  useEffect(() => {
+    getUserTransactionAction()
+    // eslint-disable-next-line
+  }, [])
+  
+  useEffect(()=>{
+  console.log(transactions)
+
+  },[
+transactions
+
+  ])
 
 
   return (
@@ -89,7 +104,7 @@ const DefaultDashboard = ({ history,
                   <div className="min-width-zero">
 
                     <CardSubtitle className="truncate mb-1 font-weight-bold">
-                      Advertiser
+                      EmAds
                     </CardSubtitle>
 
                   </div>
@@ -112,32 +127,7 @@ const DefaultDashboard = ({ history,
             </Card>
 
 
-            <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
 
-
-              <div className=" d-flex flex-grow-1 min-width-zero">
-                <CardBody className=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
-                  <div className="min-width-zero">
-
-                    <CardSubtitle className="truncate mb-1 font-weight-bold">
-                      EVP
-                    </CardSubtitle>
-
-                  </div>
-                  {/* <NavLink to='/membership-registration'> */}
-                  {currentUser.role === 'evp' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
-                    :
-                    <CustomInput
-                      type="checkbox"
-                      onClick={() => { history.push('membership/EVP') }}
-                      name='membership'
-                      // onClick={() => setActiveTab('EVP')}
-                      id="EVP"
-                    />}
-                  {/* </NavLink> */}
-                </CardBody>
-              </div>
-            </Card>
 
 
             <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
@@ -148,7 +138,7 @@ const DefaultDashboard = ({ history,
                   <div className="min-width-zero">
 
                     <CardSubtitle className="truncate mb-1 font-weight-bold">
-                      Customer
+                      EmHire
                     </CardSubtitle>
 
                   </div>
@@ -176,7 +166,7 @@ const DefaultDashboard = ({ history,
                   <div className="min-width-zero">
 
                     <CardSubtitle className="truncate mb-1 font-weight-bold">
-                      Vendor
+                      EmJobs
                     </CardSubtitle>
 
                   </div>
@@ -189,6 +179,33 @@ const DefaultDashboard = ({ history,
                       name='membership'
                       // onClick={() => setActiveTab('Vendor')}
                       id="vendor"
+                    />}
+                  {/* </NavLink> */}
+                </CardBody>
+              </div>
+            </Card>
+
+            <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
+
+
+              <div className=" d-flex flex-grow-1 min-width-zero">
+                <CardBody className=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
+                  <div className="min-width-zero">
+
+                    <CardSubtitle className="truncate mb-1 font-weight-bold">
+                      EVP
+                    </CardSubtitle>
+
+                  </div>
+                  {/* <NavLink to='/membership-registration'> */}
+                  {currentUser.role === 'evp' ? <IoMdCheckmarkCircle size='21px' color='#0DAD57' />
+                    :
+                    <CustomInput
+                      type="checkbox"
+                      onClick={() => { history.push('membership/EVP') }}
+                      name='membership'
+                      // onClick={() => setActiveTab('EVP')}
+                      id="EVP"
                     />}
                   {/* </NavLink> */}
                 </CardBody>
@@ -228,14 +245,18 @@ const DefaultDashboard = ({ history,
       </Row>
       <Row>
         <Colxx md='12'>
-          <Table />
+
+          <Table
+            data={transactions}
+          />
         </Colxx>
       </Row>
     </>
   );
 };
-const mapStateToProps = ({ advert }) => {
+const mapStateToProps = ({ advert, payment }) => {
   const { loading, createAdvertLoading, error, message, adverts } = advert;
-  return { createAdvertLoading, error, loading, message, adverts };
+  const { transactions } = payment;
+  return { createAdvertLoading, error, loading, message, adverts, transactions };
 };
-export default injectIntl(connect(mapStateToProps, { createAdvertRequest: createAdvert, getAdvertRequest: getAdvert })(DefaultDashboard))
+export default injectIntl(connect(mapStateToProps, { getUserTransactionAction: getUserTransaction, createAdvertRequest: createAdvert, getAdvertRequest: getAdvert })(DefaultDashboard))

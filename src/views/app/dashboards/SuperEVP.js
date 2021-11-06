@@ -12,8 +12,12 @@ import { updateSEVP } from 'redux/actions';
 
 const SuperEVP = ({
     loading ,
-    updateSEVPRequest
+    updateSEVPRequest,
+    user
  }) => {
+
+    console.log(user);
+    
     const [error, setError] = useState('');
     const [error1, setError1] = useState('');
     const [error2, setError2] = useState('');
@@ -605,7 +609,7 @@ const SuperEVP = ({
                                         <span className="bounce3" />
                                     </span>
                                     <span className="label">
-                                        Pay
+                                        Pay N1,500,000
                                     </span>
                                 </Button>
                             </Colxx>

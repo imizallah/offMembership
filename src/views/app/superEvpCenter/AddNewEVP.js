@@ -106,7 +106,7 @@ const NewEVP = ({ history }) => {
         <div >
             <div className='d-flex align-items-center justify-content-between'>
                 <h2 className='mb-0'>
-                    <BsArrowLeft onClick={() => { history.goBack() }} style={{ cursor: 'pointer' }} />New EVP
+                    <BsArrowLeft onClick={() => { history.goBack() }} style={{ cursor: 'pointer' }} />
                 </h2>
                 <Button color='primary' className='mx-2 mb-3' onClick={() => { history.push('/app/dashboards/add-new-evp') }}>Add New</Button>
             </div>

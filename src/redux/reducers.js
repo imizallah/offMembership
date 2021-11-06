@@ -12,6 +12,8 @@ import membership from './membershipProfileUpdate/reducer';
 import analytics from './analytics/reducer';
 import subEVP from'./subEVP/reducer';
 import user from'./userManagement/reducer';
+import payment from './payment/reducer';
+
 
 
 const reducers = combineReducers({
@@ -27,7 +29,8 @@ const reducers = combineReducers({
   membership,
   analytics,
   subEVP,
-  user
+  user,
+  payment
 });
 
 export default reducers;
