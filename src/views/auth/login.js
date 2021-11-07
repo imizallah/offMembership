@@ -9,7 +9,7 @@ import { NotificationManager } from 'components/common/react-notifications';
 import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { loginUser } from 'redux/actions';
-import plugbayLogo from '../../assets/logos/plugbay.jpg'
+import plugbayLogo from '../../assets/logos/plugbaylogo.png'
 
 const validatePassword = (value) => {
   let error;
@@ -71,7 +71,7 @@ const Login = ({ history, loading, error, message,
           <div className="form-side">
             <NavLink to="/" className="white">
               {/* <span className="logo-single" /> */}
-              <img src={plugbayLogo} width='85px' alt='navbrand-logo' />
+              <img src={plugbayLogo} width='220px' alt='navbrand-logo' />
             </NavLink>
             {/* <CardTitle className="mb-4">
               <IntlMessages id="user.login-title" />

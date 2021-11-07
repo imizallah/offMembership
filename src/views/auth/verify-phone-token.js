@@ -8,6 +8,7 @@ import { NotificationManager } from 'components/common/react-notifications';
 import { Colxx } from 'components/common/CustomBootstrap';
 
 import { verifyPhoneToken } from 'redux/actions';
+import plugbayLogo from '../../assets/logos/plugbaylogo.png'
 // import emChatlogo from '../../assets/logos/emChatlogo.png'
 
 
@@ -48,7 +49,9 @@ const VerifyPhoneToken = ({ history, message, loading, error,
           </div>
           <div className="form-side">
             <NavLink to="/" className="white">
-              <span className="logo-single mb-0" />
+              {/* <span className="logo-single mb-0" /> */}
+              <img src={plugbayLogo} width='220px' alt='navbrand-logo' />
+              
               {/* <img src={emChatlogo} width='130px' alt='navbrand-logo' /> */}
             </NavLink>
             <CardTitle className="mb-4" />

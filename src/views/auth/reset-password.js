@@ -7,6 +7,8 @@ import { Colxx } from 'components/common/CustomBootstrap';
 import IntlMessages from 'helpers/IntlMessages';
 import { resetPassword } from 'redux/actions';
 import { NotificationManager } from 'components/common/react-notifications';
+import plugbayLogo from '../../assets/logos/plugbaylogo.png'
+
 
 const validateNewPassword = (values) => {
   const { newPassword, newPasswordAgain } = values;
@@ -92,7 +94,10 @@ const ResetPassword = ({
           </div>
           <div className="form-side">
             <NavLink to="/" className="white">
-              <span className="logo-single" />
+              {/* <span className="logo-single" />
+               */}
+              <img src={plugbayLogo} width='220px' alt='navbrand-logo' />
+              
             </NavLink>
             <CardTitle className="mb-4">
               <IntlMessages id="user.reset-password" />

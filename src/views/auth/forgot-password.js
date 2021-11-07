@@ -8,6 +8,8 @@ import IntlMessages from 'helpers/IntlMessages';
 import { forgotPassword } from 'redux/actions';
 import { NotificationManager } from 'components/common/react-notifications';
 // import emChatlogo from '../../assets/logos/emChatlogo.png'
+import plugbayLogo from '../../assets/logos/plugbaylogo.png'
+
 
 
 const validatePhone = (value) => {
@@ -75,7 +77,8 @@ const ForgotPassword = ({
           </div>
           <div className="form-side">
             <NavLink to="/" className="white">
-              <span className="logo-single" />
+              {/* <span className="logo-single" /> */}
+              <img src={plugbayLogo} width='220px' alt='navbrand-logo' />
               {/* <img src={emChatlogo} width='130px' alt='navbrand-logo' /> */}
             </NavLink>
             <CardTitle className="mb-5" />
