@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Card, CardBody, Row, Button, CardSubtitle } from 'reactstrap'
 import { connect } from 'react-redux';
 import { getSingleSEVP } from 'redux/actions';
@@ -12,12 +12,21 @@ import Table from './ReactTableCards'
 
 const EVPDetails = ({ history, getSingleSEVPRequest, singleSEVP, loading, match: { params: { userId } } }) => {
     console.log(userId);
+    const [subEvp, updateSubEvp]=useState({})
     useEffect(() => {
         getSingleSEVPRequest(userId)
         // eslint-disable-next-line
     }, [])
+
+    useEffect(()=>{
+if(singleSEVP!==null){
+    updateSubEvp(singleSEVP)
+}
+        // eslint-disable-next-line
+
+    },[singleSEVP])
     console.log(singleSEVP);
-    const {fullName, phoneNumber, address, photo,credit,transactions}=singleSEVP;
+    const {fullName, phoneNumber, address, photo,credit}=subEvp;
 
     return (
         <>
@@ -233,9 +242,12 @@ const EVPDetails = ({ history, getSingleSEVPRequest, singleSEVP, loading, match:
                         </Colxx>
                     </Row>
                     <div>
-                        <Table 
-                    transactions={transactions}
-                        />
+                        {
+                            singleSEVP ?  <Table 
+                            user={singleSEVP}
+                                />:null
+                        }
+                      
                     </div>
                 </div>
 

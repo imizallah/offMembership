@@ -156,7 +156,8 @@ function Table({ columns, data, divided = false, defaultPageSize = 10 }) {
   );
 }
 
-const ReactTableWithPaginationCard = ({ transactions}) => {
+const ReactTableWithPaginationCard = (prop) => {
+  console.log(prop.user.transactions);
   const cols = React.useMemo(
     () => [
       {
@@ -206,7 +207,7 @@ const ReactTableWithPaginationCard = ({ transactions}) => {
 
           Transaction History
         </h3>
-        <Table columns={cols} data={ transactions} getTdProps={() => ({ style: { height: '20px' } })} />
+        <Table columns={cols} data={prop.user.transactions} getTdProps={() => ({ style: { height: '20px' } })} />
       </CardBody>
     </Card>
   );

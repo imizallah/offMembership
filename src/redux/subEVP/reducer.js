@@ -21,7 +21,7 @@ const init = {
     SEVPError: false,
     message: null,
     sevp: [],
-    singleSEVP: {}
+    singleSEVP:null
 }
 
 const SEVPReducer = (state = init, action) => {
