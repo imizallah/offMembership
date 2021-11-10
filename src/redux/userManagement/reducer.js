@@ -13,9 +13,33 @@ import {
     GET_USER_PROFILE_FAILED,
     GET_USER_PROFILE_SUCCESS,
 
-    SETTINGS_REQUEST,
-    SETTINGS_REQUEST_FAILED,
-    SETTINGS_REQUEST_SUCCESS
+    EVP_SETTINGS_REQUEST,
+    EVP_SETTINGS_REQUEST_FAILED,
+    EVP_SETTINGS_REQUEST_SUCCESS,
+
+    SEVP_SETTINGS_REQUEST,
+    SEVP_SETTINGS_REQUEST_FAILED,
+    SEVP_SETTINGS_REQUEST_SUCCESS,
+
+    VENDOR_SETTINGS_REQUEST,
+    VENDOR_SETTINGS_REQUEST_FAILED,
+    VENDOR_SETTINGS_REQUEST_SUCCESS,
+
+    CUSTOMER_SETTINGS_REQUEST,
+    CUSTOMER_SETTINGS_REQUEST_FAILED,
+    CUSTOMER_SETTINGS_REQUEST_SUCCESS,
+
+    ADVERTISER_SETTINGS_REQUEST,
+    ADVERTISER_SETTINGS_REQUEST_FAILED,
+    ADVERTISER_SETTINGS_REQUEST_SUCCESS,
+
+    ADVERTS_SETTINGS_REQUEST,
+    ADVERTS_SETTINGS_REQUEST_FAILED,
+    ADVERTS_SETTINGS_REQUEST_SUCCESS,
+
+    GET_SETTINGS_REQUEST,
+    GET_SETTINGS_REQUEST_FAILED,
+    GET_SETTINGS_REQUEST_SUCCESS,
 
 
     // GET_USER_TRANSACTION,
@@ -27,13 +51,21 @@ import {
 
 const init = {
     loading: false,
-    createLoading:false,
+    createLoading: false,
     error: false,
     message: null,
     users: [],
     singleUser: {},
     userProfile: null,
-    transactions: []
+    transactions: [],
+    settings: {
+        advertAmount: '',
+        advertiser: { amount: '', duration: '' },
+        customer: { amount: '', duration: '' },
+        evp: { level1: '', level2: '', level3: '' },
+        superevp: { startingCredit: '', percentageProfit: '' },
+        vendor: { amount: '', duration: '' }
+    }
 }
 
 const UserReducer = (state = init, action) => {
@@ -63,19 +95,56 @@ const UserReducer = (state = init, action) => {
             return { ...state, loading: false, message: '', error: payload }
 
 
-        case SETTINGS_REQUEST:
+        case EVP_SETTINGS_REQUEST:
             return { ...state, createLoading: true }
-        case SETTINGS_REQUEST_SUCCESS:
+        case EVP_SETTINGS_REQUEST_SUCCESS:
             return { ...state, createLoading: false, message: payload, error: '', }
-        case SETTINGS_REQUEST_FAILED:
+        case EVP_SETTINGS_REQUEST_FAILED:
             return { ...state, createLoading: false, message: '', error: payload }
 
-        // case GET_USER_TRANSACTION:
-        //     return { ...state, loading: true }
-        // case GET_USER_TRANSACTION_SUCCESS:
-        //     return { ...state, loading: false, message: payload, error: '', transactions: payload.data }
-        // case GET_USER_TRANSACTION_FAILED:
-        //     return { ...state, loading: false, message: '', error: payload }
+
+        case SEVP_SETTINGS_REQUEST:
+            return { ...state, createLoading: true }
+        case SEVP_SETTINGS_REQUEST_SUCCESS:
+            return { ...state, createLoading: false, message: payload, error: '', }
+        case SEVP_SETTINGS_REQUEST_FAILED:
+            return { ...state, createLoading: false, message: '', error: payload }
+
+        case VENDOR_SETTINGS_REQUEST:
+            return { ...state, createLoading: true }
+        case VENDOR_SETTINGS_REQUEST_SUCCESS:
+            return { ...state, createLoading: false, message: payload, error: '', }
+        case VENDOR_SETTINGS_REQUEST_FAILED:
+            return { ...state, createLoading: false, message: '', error: payload }
+
+        case CUSTOMER_SETTINGS_REQUEST:
+            return { ...state, createLoading: true }
+        case CUSTOMER_SETTINGS_REQUEST_SUCCESS:
+            return { ...state, createLoading: false, message: payload, error: '', }
+        case CUSTOMER_SETTINGS_REQUEST_FAILED:
+            return { ...state, createLoading: false, message: '', error: payload }
+
+        case ADVERTISER_SETTINGS_REQUEST:
+            return { ...state, createLoading: true }
+        case ADVERTISER_SETTINGS_REQUEST_SUCCESS:
+            return { ...state, createLoading: false, message: payload, error: '', }
+        case ADVERTISER_SETTINGS_REQUEST_FAILED:
+            return { ...state, createLoading: false, message: '', error: payload }
+
+        case ADVERTS_SETTINGS_REQUEST:
+            return { ...state, createLoading: true }
+        case ADVERTS_SETTINGS_REQUEST_SUCCESS:
+            return { ...state, createLoading: false, message: payload, error: '', }
+        case ADVERTS_SETTINGS_REQUEST_FAILED:
+            return { ...state, createLoading: false, message: '', error: payload }
+
+
+        case GET_SETTINGS_REQUEST:
+            return { ...state, loading: true }
+        case GET_SETTINGS_REQUEST_SUCCESS:
+            return { ...state, loading: false, message: payload, error: '', settings: payload.data }
+        case GET_SETTINGS_REQUEST_FAILED:
+            return { ...state, loading: false, message: '', error: payload }
 
 
         default:

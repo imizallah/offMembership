@@ -5,7 +5,7 @@
 
   .image-side {
     width: 40%;
-    background: url('/assets/img/login/balloon.jpg') no-repeat center top;
+    background:linear-gradient(0deg, rgba(70, 69, 69, 0.03), rgba(24, 23, 23, 0.64)), url('/assets/logos/loginside.jpg') no-repeat center top;
     background-size: cover;
     padding: 80px 40px;
 
@@ -16,7 +16,7 @@
 
   .form-side {
     width: 60%;
-    padding: 80px;
+    padding: 50px 60px;
   }
 
   @include respond-below(md) {
