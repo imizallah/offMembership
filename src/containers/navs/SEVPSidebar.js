@@ -8,7 +8,7 @@ import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import IntlMessages from 'helpers/IntlMessages';
-import { getCurrentUser } from 'helpers/Utils';
+
 
 import {
   setContainerClassnames,
@@ -17,31 +17,10 @@ import {
   changeSelectedMenuHasSubItems,
 } from 'redux/actions';
 
-import userMenu from 'constants/menu';
+
 import SEVPDashboard from 'constants/SEVPDashboard';
-import EVPDashboard from 'constants/EVPDashboard';
-import superAdminDashboard from 'constants/superAdminDashboard';
 
-
-const user = getCurrentUser();
-const { role } = user
-console.log(role)
-let menuItems = []
-
-if (role === 'superadmin') {
-  menuItems = superAdminDashboard
-}
-else if (role === 'superevp') {
-  menuItems = SEVPDashboard
-}
-else if (role === 'evp') {
-  menuItems = EVPDashboard
-} else {
-  menuItems = userMenu
-
-}
-
-
+const menuItems = SEVPDashboard
 
 class Sidebar extends Component {
   constructor(props) {

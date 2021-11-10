@@ -20,7 +20,7 @@ import {
 
 function* getUser() {
     try {
-        const response = yield axios.get(`/analytics/all-users`)
+        const response = yield axios.get(`analytics/all-users`)
         console.log(response.data)
         if (response.data.success) {
             yield put(getUserSuccess(response.data));
