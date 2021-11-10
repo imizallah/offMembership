@@ -204,7 +204,6 @@ const DefaultDashboard = ({ history,
 
                   <Card className="py-0 d-flex flex-row mb-4 pl-3" style={{ minWidth: '220px', height: '60px' }}>
 
-
                     <div className=" d-flex flex-grow-1 min-width-zero">
                       <CardBody className=" pl-0 align-self-center d-flex flex-column flex-lg-row justify-content-between min-width-zero">
                         <div className="min-width-zero">
