@@ -13,11 +13,12 @@ const Customer = ({loading,
     updateCustomerRequest,
     message,
     error,
-    user
+    user,
+    membership,
 }) => {
 
 
-    useEffect(() => {
+    useEffect(() => {   
         if (error) {
           NotificationManager.warning(error, 'Update Membership', 3000, null, null, '');
         } else if (message) {
@@ -31,6 +32,9 @@ const Customer = ({loading,
         country: user.country,
         state: user.state,
         address: user.address,
+         /* eslint  no-underscore-dangle:0 */
+         membershipId: membership[0]._id,
+         email:''
 
     }
 
@@ -77,6 +81,18 @@ const Customer = ({loading,
         return err;
     };
 
+    
+    const validateEmail=(value) => {
+        const re = /\S+@\S+\.\S+/;
+        let err;
+        if (!value) {
+            err = 'Please enter your current location';
+        }
+        if(!re.test(value)){
+            err='Enter a valid email address'
+        }
+        return err;
+    };
 
     const registerCustomer = (values) => {
         updateCustomerRequest(values);
@@ -89,7 +105,7 @@ const Customer = ({loading,
                 <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the Customer Membership Package. Membership is N1000 yearly</h3>
             </div>
             <Row className='mt-5'>
-                <Colxx xxs="6" md='6' sm='12'>
+                <Colxx xxs="12" md='6' sm='12'>
                     <Formik initialValues={initialValues} onSubmit={registerCustomer}>
                         {({ errors, touched }) => (
                             <Form encType="multipart/form-data"  >
@@ -194,6 +210,28 @@ const Customer = ({loading,
                                                     {errors.address && touched.address && (
                                                         <div className="invalid-feedback d-block">
                                                             {errors.address}
+                                                        </div>
+                                                    )}
+                                                </FormGroup>
+
+                                            </Colxx>
+
+                                        </Row>
+
+                                        <Row  >
+                                            <Colxx className='mt-2' xxs="12" md='12' sm='12'>
+                                                <Label className='mb-0 text-muted'>Email</Label>
+                                                <FormGroup className="w-100 my-1">
+                                                    <Field
+                                                        className="py-2 w-100 border-muted custom-input"
+                                                        name="email"
+                                                       placeholder='Email addres to recieve receipt'
+                                                       validate={validateEmail}
+
+                                                    />
+                                                    {errors.email && touched.email && (
+                                                        <div className="invalid-feedback d-block">
+                                                            {errors.email}
                                                         </div>
                                                     )}
                                                 </FormGroup>

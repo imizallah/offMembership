@@ -37,6 +37,17 @@ const AdvertCenter = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './advertCenter')
 );
 
+
+const MembershipPayment = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './membershipPayment')
+);
+
+
+const AccountFunding = React.lazy(() =>
+  import(/* webpackChunkName: "dashboards" */ './accountFunding')
+);
+
+
 const User = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './userManagement')
 );
@@ -119,6 +130,18 @@ const App = ({ match }) => {
               render={(props) => <Settings {...props} />}
 
             />
+            <Route
+              path={`${match.url}/membership-payment/:membershipId`}
+              // component={Transaction}
+              render={(props) => <MembershipPayment {...props} />}
+            />
+
+            <Route
+              path={`${match.url}/account-funding`}
+              // component={Transaction}
+              render={(props) => <AccountFunding {...props} />}
+            />
+
             <Route
               path={`${match.url}/applications`}
               render={(props) => <Applications {...props} />}

@@ -3,9 +3,6 @@ import React from 'react';
 import { Card, CardBody, Button } from 'reactstrap';
 import GlideComponent from 'components/carousel/GlideComponent';
 
-const handleRedirect = (e) => {
-  console.log(e);
-}
 const getHelp = () => {
   console.log('help')
 }
@@ -36,15 +33,19 @@ const IconCard = ({ className = 'mb-4', icon, title, value, button, buttonTitle,
   );
 };
 
-const IconCardsCarousel = ({ className = 'icon-cards-row', history, userDetails }) => {
+const IconCardsCarousel = ({ className = 'icon-cards-row', history, userDetails,setModal}) => {
 
   const getInfo = () => {
     history.push("/app/knowledgebase")
   }
-  console.log(userDetails.adverts.length)
+
+  const handleAccountFund=()=>{
+    setModal(true)
+  }
+  
 
   const counterData = [
-    { title: 'Credit Balance', value: `N${userDetails.wallet}`, button: true, buttonTitle: 'Fund', func: handleRedirect },
+    { title: 'Credit Balance', value: `N${userDetails.credit}`, button: true, buttonTitle: 'Fund', func: handleAccountFund },
     { title: 'My Adverts', icon: 'iconsminds-clock', button: false, value: userDetails.adverts.length.toString() },
     { title: 'Help Center', icon: 'iconsminds-bar-chart-4', button: true, buttonTitle: 'Contact', func: getHelp, cardClassName: 'py-3 pb-5' },
     { title: 'Knowledge Base', icon: 'iconsminds-arrow-shuffle', button: true, buttonTitle: 'Get Info', func: getInfo, cardClassName: 'py-3 pb-5' },

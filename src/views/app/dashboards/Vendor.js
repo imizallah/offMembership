@@ -10,14 +10,16 @@ import { updateVendor } from 'redux/actions';
 
 const SuperEVP = (
     { loading,
-        updateVendorRequest,
+        // updateVendorRequest,
         message,
         error,
-        user
+        user,
+        membership
     }
 ) => {
 
     useEffect(() => {
+        
         if (error) {
             NotificationManager.warning(error, 'Update Membership', 3000, null, null, '');
         } else if (message) {
@@ -34,11 +36,25 @@ const SuperEVP = (
         state: user.state,
         address: user.address,
         specialty: user.specialty,
+         /* eslint  no-underscore-dangle:0 */
+         membershipId: membership[0]._id,
+         email:''
 
     }
 
     console.log(user);
 
+    const validateEmail=(value) => {
+        const re = /\S+@\S+\.\S+/;
+        let err;
+        if (!value) {
+            err = 'Please enter your current location';
+        }
+        if(!re.test(value)){
+            err='Enter a valid email address'
+        }
+        return err;
+    };
 
     const validateBVN = (value) => {
         let err;
@@ -92,7 +108,7 @@ const SuperEVP = (
         console.log(values);
         const data = { ...values, volunteer }
         console.log(data);
-        updateVendorRequest(data)
+        // updateVendorRequest(data)
     }
 
 
@@ -102,7 +118,7 @@ const SuperEVP = (
                 <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the EmJobs Membership Package. Membership is N1000 yearly</h3>
             </div>
             <Row className='mt-5'>
-                <Colxx xxs="6" md='6' sm='12'>
+                <Colxx xxs="12" md='6' sm='12'>
                     <Formik initialValues={initialValues} onSubmit={handleVendorMembership}>
                         {({ errors, touched }) => (
                             <Form encType="multipart/form-data" method="post" action="#">
@@ -232,6 +248,27 @@ const SuperEVP = (
                                                     {errors.specialty && touched.specialty && (
                                                         <div className="invalid-feedback d-block">
                                                             {errors.specialty}
+                                                        </div>
+                                                    )}
+                                                </FormGroup>
+
+                                            </Colxx>
+
+                                        </Row>
+                                        <Row  >
+                                            <Colxx className='mt-2' xxs="12" md='12' sm='12'>
+                                                <Label className='mb-0 text-muted'>Email</Label>
+                                                <FormGroup className="w-100 my-1">
+                                                    <Field
+                                                        className="py-2 w-100 border-muted custom-input"
+                                                        name="email"
+                                                       placeholder='Email addres to recieve receipt'
+                                                       validate={validateEmail}
+
+                                                    />
+                                                    {errors.email && touched.email && (
+                                                        <div className="invalid-feedback d-block">
+                                                            {errors.email}
                                                         </div>
                                                     )}
                                                 </FormGroup>

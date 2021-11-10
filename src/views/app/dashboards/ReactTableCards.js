@@ -176,26 +176,26 @@ const ReactTableWithPaginationCard = (
       {
         Header: 'STATUS',
         accessor: 'status',
-        cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
+        cellClass: 'mb-0 py-0 my-0 align-items-center text-capitalize font-family-m w-20',
         Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value}</p>,
       },
       {
         Header: 'DETAILS',
-        accessor: 'details',
-        cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
+        accessor: 'purpose',
+        cellClass: 'mb-0 py-0 my-0 align-items-center text-capitalize font-family-m w-20',
         Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value}</p>,
       },
       {
         Header: 'DATE',
-        accessor: 'date',
+        accessor: 'createdAt',
         cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
-        Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value}</p>,
+        Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value.split('T')[0]}</p>,
       },
       {
         Header: 'TYPE',
-        accessor: 'type',
+        accessor: 'paymentType',
         cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
-        Cell: (props) => <p className={`my-2 py-1 py-0 mb-0 ${props.value === 'Deposit' ? 'text-success' : props.value === 'Withdrawal' ? 'text-danger' : 'text-info'}`}>{props.value}</p>,
+        Cell: (props) => <p className={`my-2 py-1 py-0 mb-0 ${props.value === 'Deposit' ? 'text-success' : props.value === 'Withdrawal' ? 'text-danger' : 'text-info'}`}>{props.value.toUpperCase()}</p>,
       },
     ],
     []

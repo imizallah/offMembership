@@ -2,16 +2,19 @@
 import { all, fork, put, takeEvery } from 'redux-saga/effects';
 import axios from 'helpers/axios';
 import {
-   
+
     GET_USER,
     GET_SINGLE_USER,
-    GET_USER_TRANSACTION,
+    GET_USER_PROFILE,
+    SETTINGS_REQUEST,
     getUserSuccess,
     getUserFailed,
     getSingleUserSuccess,
     getSingleUserFailed,
-    getUserTransactionSuccess,
-    getUserTransactionFailed
+    getUserProfileSuccess,
+    getUserProfileFailed,
+    // saveSettingsFailed,
+    // saveSettingsSuccess
 } from '../actions';
 
 
@@ -88,16 +91,15 @@ function* getSingleUser(payload) {
 
 
 
-function* getUserTransaction(payload) {
+function* getUserProfile() {
 
-    // yield console.log(payload.payload.data);
     try {
-        const response = yield axios.get(`/user-management/single-user?userId=${payload.payload.id}`)
+        const response = yield axios.get(`/user/view-profile`)
         console.log(response.data)
         if (response.data.success) {
-            yield put(getUserTransactionSuccess(response.data));
+            yield put(getUserProfileSuccess(response.data));
         } else {
-            yield put(getUserTransactionFailed(response.data.message));
+            yield put(getUserProfileFailed(response.data.message));
         }
     } catch (error) {
         console.log(error.response);
@@ -120,8 +122,46 @@ function* getUserTransaction(payload) {
         else if (error.message) {
             message = error.message;
         }
-        yield put(getUserTransactionFailed(message));
+        yield put(getUserProfileFailed(message));
     }
+}
+
+
+function* saveSettings(payload) {
+    yield console.log(payload.payload.formData)
+
+
+    // try {
+    //     const response = yield axios.post(`/user/view-profile`,{formData})
+    //     console.log(response.data)
+    //     if (response.data.success) {
+    //         yield put(saveSettingsSuccess(response.data));
+    //     } else {
+    //         yield put(saveSettingsFailed(response.data.message));
+    //     }
+    // } catch (error) {
+    //     console.log(error.response);
+    //     let message;
+    //     if (error.response) {
+    //         switch (error.response.status) {
+    //             case 500:
+    //                 message = 'Internal Server Error';
+    //                 break;
+    //             case 404:
+    //                 message = 'Not found';
+    //                 break;
+    //             case 401:
+    //                 message = 'Invalid credentials';
+    //                 break;
+    //             default:
+    //                 message = error.response.data.message;
+    //         }
+    //     }
+    //     else if (error.message) {
+    //         message = error.message;
+    //     }
+    //     yield put(saveSettingsFailed(message));
+    // }
 }
 
 
@@ -133,16 +173,20 @@ export function* watchGetSingleUser() {
     yield takeEvery(GET_SINGLE_USER, getSingleUser);
 }
 
-export function* watchGetUserTransaction() {
-    yield takeEvery(GET_USER_TRANSACTION, getUserTransaction);
+export function* watchGetUserProfile() {
+    yield takeEvery(GET_USER_PROFILE, getUserProfile);
+}
+
+export function* watchSaveSettings() {
+    yield takeEvery(SETTINGS_REQUEST, saveSettings);
 }
 
 
 export default function* rootSaga() {
     yield all([
-
         fork(watchGetUser),
         fork(watchGetSingleUser),
-        fork(watchGetUserTransaction)
+        fork(watchGetUserProfile),
+        fork(watchSaveSettings)
     ]);
 }

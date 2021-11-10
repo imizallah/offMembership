@@ -9,23 +9,33 @@ import {
     UPDATE_VENDOR,
     UPDATE_EVP,
     UPDATE_SEVP,
-    updateAdvertiserSuccess,
+    GET_MEMBERSHIP_REQUEST,
+    initiatePayment,
+    // updateAdvertiserSuccess,
     updateAdvertiserFailed,
-    updateCustomerSuccess,
+    // updateCustomerSuccess,
     updateCustomerFailed,
-    updateVendorSuccess,
+    // updateVendorSuccess,
     updateVendorFailed,
-    updateEVPSuccess,
+    // updateEVPSuccess,
     updateEVPFailed,
-    updateSEVPSuccess,
+    // updateSEVPSuccess,
     updateSEVPFailed,
+    getMembershipFailed,
+    getMembershipSuccess
 } from '../actions';
 
 
 
-
-
 function* updateAdvertiser(payload) {
+    const config = {
+        membershipId: payload.payload.data.membershipId,
+        email: payload.payload.data.email,
+        redirect_url: `http://${window.location.host}/app/membership-payment/${payload.payload.data.membershipId}`,
+        payment_options: 'card,mobilemoney,ussd',
+        currency: 'NGN'
+
+    }
 
     const currentUser = getCurrentUser();
     const { phoneNumber } = currentUser
@@ -33,7 +43,8 @@ function* updateAdvertiser(payload) {
     try {
         const response = yield axios.post('profile/advertiser', { ...payload.payload.data, phoneNumber })
         if (response.data.success) {
-            yield put(updateAdvertiserSuccess(response.data.message))
+            // yield put(updateAdvertiserSuccess(response.data.message))
+            yield put(initiatePayment(config))
         } else {
             yield put(updateAdvertiserFailed(response.data.message));
         }
@@ -63,7 +74,14 @@ function* updateAdvertiser(payload) {
 }
 
 function* updateCustomer(payload) {
+    const config = {
+        membershipId: payload.payload.data.membershipId,
+        email: payload.payload.data.email,
+        redirect_url: `http://${window.location.host}/app/membership-payment/${payload.payload.data.membershipId}`,
+        payment_options: 'card,mobilemoney,ussd',
+        currency: 'NGN'
 
+    }
     const currentUser = getCurrentUser();
     const { phoneNumber } = currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
@@ -71,7 +89,8 @@ function* updateCustomer(payload) {
         const response = yield axios.post('profile/customer', { ...payload.payload.data, phoneNumber })
         console.log(response)
         if (response.data.success) {
-            yield put(updateCustomerSuccess(response.data.message))
+            // yield put(updateCustomerSuccess(response.data.message))
+            yield put(initiatePayment(config))
         } else {
             yield put(updateCustomerFailed(response.data.message));
         }
@@ -102,6 +121,14 @@ function* updateCustomer(payload) {
 
 
 function* updateVendor(payload) {
+    const config = {
+        membershipId: payload.payload.data.membershipId,
+        email: payload.payload.data.email,
+        redirect_url: `http://${window.location.host}/app/membership-payment/${payload.payload.data.membershipId}`,
+        payment_options: 'card,mobilemoney,ussd',
+        currency: 'NGN'
+
+    }
 
     const currentUser = getCurrentUser();
     const { phoneNumber } = currentUser
@@ -109,7 +136,10 @@ function* updateVendor(payload) {
     try {
         const response = yield axios.post('profile/vendor', { ...payload.payload.data, phoneNumber })
         if (response.data.success) {
-            yield put(updateVendorSuccess(response.data.message))
+            // yield put(updateVendorSuccess(response.data.message))
+            yield put(initiatePayment(config))
+
+
         } else {
             yield put(updateVendorFailed(response.data.message));
         }
@@ -140,14 +170,22 @@ function* updateVendor(payload) {
 
 
 function* updateEVP(payload) {
+    const config = {
+        membershipId: payload.payload.data.membershipId,
+        email: payload.payload.data.email,
+        redirect_url: `http://${window.location.host}/app/membership-payment/${payload.payload.data.membershipId}`,
+        payment_options: 'card,mobilemoney,ussd',
+        currency: 'NGN'
 
+    }
     const currentUser = getCurrentUser();
     const { phoneNumber } = currentUser
     //    yield console.log({...payload.payload.data, phoneNumber})
     try {
         const response = yield axios.post('profile/evp', { ...payload.payload.data, phoneNumber })
         if (response.data.success) {
-            yield put(updateEVPSuccess(response.data.message))
+            // yield put(updateEVPSuccess(response.data.message))
+            yield put(initiatePayment(config))
         } else {
             yield put(updateEVPFailed(response.data.message));
         }
@@ -179,15 +217,24 @@ function* updateEVP(payload) {
 
 
 function* updateSEVP(payload) {
+    const config = {
+        membershipId: payload.payload.data.membershipId,
+        email: payload.payload.data.email,
+        redirect_url: `http://${window.location.host}/app/membership-payment/${payload.payload.data.membershipId}`,
+        payment_options: 'card,mobilemoney,ussd',
+        currency: 'NGN'
 
+    }
     const currentUser = getCurrentUser();
-    const {phoneNumber}=currentUser
+    const { phoneNumber } = currentUser
     yield console.log(payload.payload.data)
-   
+
     try {
-        const response = yield axios.post('/profile/superevp', {...payload.payload.data, phoneNumber})
+        const response = yield axios.post('/profile/superevp', { ...payload.payload.data, phoneNumber })
         if (response.data.success) {
-            yield put(updateSEVPSuccess(response.data.message))
+            // yield put(updateSEVPSuccess(response.data.message))
+            yield put(initiatePayment(config))
+
         } else {
             yield put(updateSEVPFailed(response.data.message));
         }
@@ -218,6 +265,45 @@ function* updateSEVP(payload) {
 
 
 
+
+function* getMembership() {
+    try {
+        const response = yield axios.get('membership/all-memberships')
+        if (response.data.success) {
+            yield put(getMembershipSuccess(response.data.data))
+            console.log(response.data.data);
+        } else {
+            yield put(getMembershipFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(getMembershipFailed(message));
+    }
+}
+
+
+
+
+
 export function* watchUpdateAdvertiser() {
     yield takeEvery(UPDATE_ADVERTISER, updateAdvertiser);
 }
@@ -233,7 +319,9 @@ export function* watchUpdateEVP() {
 export function* watchUpdateSEVP() {
     yield takeEvery(UPDATE_SEVP, updateSEVP);
 }
-
+export function* watchGetMembership() {
+    yield takeEvery(GET_MEMBERSHIP_REQUEST, getMembership);
+}
 export default function* rootSaga() {
     yield all([
         fork(watchUpdateAdvertiser),
@@ -241,5 +329,7 @@ export default function* rootSaga() {
         fork(watchUpdateVendor),
         fork(watchUpdateEVP),
         fork(watchUpdateSEVP),
+        fork(watchGetMembership),
+
     ]);
 }

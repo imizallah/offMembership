@@ -13,7 +13,8 @@ import { updateSEVP } from 'redux/actions';
 const SuperEVP = ({
     loading ,
     updateSEVPRequest,
-    user
+    user,
+    membership
  }) => {
 
     console.log(user);
@@ -38,8 +39,9 @@ const SuperEVP = ({
         contactNumber: "",
         organizationType: "",
         regNum: "",
+         /* eslint  no-underscore-dangle:0 */
+         membershipId: membership._id
     }
-
 
 
     const validateBVN = (value) => {
@@ -248,7 +250,7 @@ const SuperEVP = ({
                 {({ errors, touched }) => (
                     <Form encType="multipart/form-data" method="post" action="#">
                         <Row className='mt-5'>
-                            <Colxx xxs="6" md='6' sm='12'>
+                            <Colxx xxs="12" md='6' sm='12'>
                                 <Card style={{ borderRadius: '20px' }}>
                                     <div className='my-3 '>
                                         <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>Membership Requirements</h1>
@@ -589,6 +591,27 @@ const SuperEVP = ({
 
                                                 </FormGroup>
                                             </Colxx>
+                                            <Row  >
+                                            <Colxx className='mt-2' xxs="12" md='12' sm='12'>
+                                                <Label className='mb-0 text-muted'>Email</Label>
+                                                <FormGroup className="w-100 my-1">
+                                                    <Field
+                                                        className="py-2 w-100 border-muted custom-input"
+                                                        name="email"
+                                                       placeholder='Email addres to recieve receipt'
+                                                       validate={validateEmail}
+
+                                                    />
+                                                    {errors.email && touched.email && (
+                                                        <div className="invalid-feedback d-block">
+                                                            {errors.email}
+                                                        </div>
+                                                    )}
+                                                </FormGroup>
+
+                                            </Colxx>
+
+                                        </Row>
                                         </Row>
                                         <br />
                                         <br />

@@ -4,6 +4,11 @@ import {
     UPDATE_ADVERTISER_FAILED,
     UPDATE_ADVERTISER_SUCCESS,
 
+    GET_MEMBERSHIP_REQUEST,
+    GET_MEMBERSHIP_FAILED,
+    GET_MEMBERSHIP_SUCCESS,
+
+
     UPDATE_CUSTOMER,
     UPDATE_CUSTOMER_FAILED,
     UPDATE_CUSTOMER_SUCCESS,
@@ -94,4 +99,18 @@ export const updateSEVPSuccess = (message) => ({
 export const updateSEVPFailed = (message) => ({
     type: UPDATE_SEVP_FAILED,
     payload: message
+})
+
+export const getMembership=()=>({
+    type:GET_MEMBERSHIP_REQUEST
+})
+
+export const getMembershipSuccess=(data)=>({
+    type:GET_MEMBERSHIP_SUCCESS,
+    payload:{data}
+})
+
+export const getMembershipFailed=(message)=>({
+    type:GET_MEMBERSHIP_FAILED,
+    payload:{message}
 })

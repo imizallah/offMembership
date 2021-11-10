@@ -26,7 +26,6 @@ const init = {
 
 const SEVPReducer = (state = init, action) => {
     const { type, payload } = action
-    console.log(action);
     switch (type) {
         case CREATE_SEVP:
             return { ...state, createSEVPLoading: true }

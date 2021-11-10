@@ -18,6 +18,10 @@ import {
     UPDATE_SEVP,
     UPDATE_SEVP_FAILED,
     UPDATE_SEVP_SUCCESS,
+
+    GET_MEMBERSHIP_REQUEST,
+    GET_MEMBERSHIP_FAILED,
+    GET_MEMBERSHIP_SUCCESS,
 } from '../actions';
 
 
@@ -25,7 +29,8 @@ import {
 const init = {
     loading: false,
     error: '',
-    message: ''
+    message: '',
+    membershipDetails: null
 }
 
 const MembershipReducer = (state = init, action) => {
@@ -64,6 +69,14 @@ const MembershipReducer = (state = init, action) => {
         case UPDATE_SEVP_SUCCESS:
             return { ...state, loading: false, message: payload, error: '' }
         case UPDATE_SEVP_FAILED:
+            return { ...state, loading: false, message: '', error: payload }
+
+
+        case GET_MEMBERSHIP_REQUEST:
+            return { ...state, loading: true }
+        case GET_MEMBERSHIP_SUCCESS:
+            return { ...state, loading: false, membershipDetails: payload.data, error: '' }
+        case GET_MEMBERSHIP_FAILED:
             return { ...state, loading: false, message: '', error: payload }
 
 
