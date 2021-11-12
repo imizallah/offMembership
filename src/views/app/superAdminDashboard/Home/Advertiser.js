@@ -118,9 +118,9 @@ const SuperEVP = ({
 
     const handleMemberShipCreation = (values) => {
         
-        const { _id } = userData
+        const { _id,phoneNumber } = userData
         /* eslint no-underscore-dangle:0 */
-        const data = { ...values, userId: _id, membershipId: membership[0]._id }
+        const data = { ...values, userId: _id,phoneNumber, membershipId: membership[0]._id }
         console.log(data)
         createAdvertiserAction(data);
     }

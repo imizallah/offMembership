@@ -263,7 +263,7 @@ const SuperEVP = ({
     }
 
     const handleSEVP = async (values) => {
-        const { _id } = userData
+        const { _id,phoneNumber } = userData
         const regDocUrl = await cloudinaryUpload(dropzoneRegDoc.current.myDropzone.files[0]);
         const logoUrl = await cloudinaryUpload(logo);
         const dirId1Url = await cloudinaryUpload(dropzoneDir1Passport.current.myDropzone.files[0]);
@@ -275,6 +275,7 @@ const SuperEVP = ({
         const data = {
             ...values,
             userId: _id,
+            phoneNumber,
             membershipId: membership[0]._id,
             regDoc: regDocUrl,
             dir1Id: dirId1Url,

@@ -13,7 +13,7 @@ import {
     GET_SINGLE_USER,
     GET_SINGLE_USER_FAILED,
     GET_SINGLE_USER_SUCCESS,
-    
+
     GET_SETTINGS_REQUEST,
     GET_SETTINGS_REQUEST_FAILED,
     GET_SETTINGS_REQUEST_SUCCESS,
@@ -72,6 +72,10 @@ import {
     CREATE_SUPEREVP,
     CREATE_SUPEREVP_FAILED,
     CREATE_SUPEREVP_SUCCESS,
+
+    GET_MY_USERS,
+    GET_MY_USERS_FAILED,
+    GET_MY_USERS_SUCCESS,
 
     // GET_USER_TRANSACTION,
     // GET_USER_TRANSACTION_FAILED,
@@ -232,16 +236,16 @@ export const saveAdvertsSettingsFailed = (message) => ({
 
 
 export const getSettings = () => ({
-    type:GET_SETTINGS_REQUEST,
+    type: GET_SETTINGS_REQUEST,
 })
 
 export const getSettingsSuccess = (message) => ({
-    type:GET_SETTINGS_REQUEST_SUCCESS,
+    type: GET_SETTINGS_REQUEST_SUCCESS,
     payload: message
 })
 
 export const getSettingsFailed = (message) => ({
-    type:GET_SETTINGS_REQUEST_FAILED,
+    type: GET_SETTINGS_REQUEST_FAILED,
     payload: message
 })
 
@@ -349,5 +353,19 @@ export const createSuperEVPSuccess = (message) => ({
 
 export const createSuperEVPFailed = (message) => ({
     type: CREATE_SUPEREVP_FAILED,
+    payload: message
+})
+
+export const getMyUsers = () => ({
+    type: GET_MY_USERS,
+})
+
+export const getMyUsersSuccess = (message) => ({
+    type: GET_MY_USERS_SUCCESS,
+    payload: message
+})
+
+export const getMyUsersFailed = (message) => ({
+    type: GET_MY_USERS_FAILED,
     payload: message
 })

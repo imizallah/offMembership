@@ -16,9 +16,9 @@ const getHelp = () => {
 
 const IconCard = (
   { className = 'mb-4',
-   icon, title, value, button, buttonTitle, func, cardClassName }) => {
+    icon, title, value, button, buttonTitle, func, cardClassName }) => {
 
-   
+
   return (
     <div className={`icon-row-item icon-card ${className}`}>
       <Card style={{ minHeight: '200px', maxHeight: '200px' }}>
@@ -27,8 +27,8 @@ const IconCard = (
           <p className="card-text icon-card-text font-family-m  mb-0" style={{ fontSize: '12px' }}>
             {title}
           </p>
-          {value?<p className="card-text icon-card-text font-family-m text-primary text-center" style={{fontSize:'25px'}}>{value}</p>:null}
-          
+          {value ? <p className="card-text icon-card-text font-family-m text-primary text-center" style={{ fontSize: '25px' }}>{value}</p> : null}
+
           {button ?
             <Button color='primary' className='px-0 mx-2 mt-4 ' onClick={() => func()}>
               {buttonTitle}
@@ -40,20 +40,20 @@ const IconCard = (
   );
 };
 
-const IconCardsCarousel = ({ className = 'icon-cards-row',history,user }) => {
+const IconCardsCarousel = ({ className = 'icon-cards-row', history, user, myUsers }) => {
   const getInfo = () => {
     history.push("/app/knowledgebase")
   }
-console.log(user);
+  console.log(user);
   const counterData = [
     { title: 'Credit Balance', icon: 'iconsminds-book', value: `N${user.credit.toString()}` },
     { title: 'My Advert', icon: 'iconsminds-clock', button: false, value: user.adverts.length.toString() },
-    { title: 'Help Center', icon: 'iconsminds-bar-chart-4', button: true, buttonTitle: 'Contact', func: getHelp,  cardClassName: 'py-3 pb-5' },
+    { title: 'Help Center', icon: 'iconsminds-bar-chart-4', button: true, buttonTitle: 'Contact', func: getHelp, cardClassName: 'py-3 pb-5' },
     { title: 'Knowledge Base', icon: 'iconsminds-arrow-shuffle', button: true, buttonTitle: 'Get Info', func: getInfo, cardClassName: 'py-3 pb-5' },
-    { title: 'Advertisers', icon: 'iconsminds-clock', button: false, value: 12 }, 
-    { title: 'Vendors', icon: 'iconsminds-clock', button: false, value: 12 },
-     { title: 'Customers', icon: 'iconsminds-clock', button: false, value: 12 },
-      { title: 'Sub EVPs', icon: 'iconsminds-clock', button: false, value: user.subEvps.length.toString() },
+    { title: 'Advertisers', icon: 'iconsminds-clock', button: false, value: myUsers.advertisers.toString() },
+    { title: 'Vendors', icon: 'iconsminds-clock', button: false, value: myUsers.vendors.toString() },
+    { title: 'Customers', icon: 'iconsminds-clock', button: false, value: myUsers.customers.toString() },
+    { title: 'Sub EVPs', icon: 'iconsminds-clock', button: false, value: user.subEvps.length.toString() },
   ];
 
 

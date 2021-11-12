@@ -9,10 +9,11 @@ import {
     TabPane,
     Row
 } from 'reactstrap';
+
 // import { getCurrentUser } from 'helpers/Utils';
 import { connect } from 'react-redux';
 import { Colxx } from 'components/common/CustomBootstrap';
-import { getMembership, getUserProfile } from 'redux/actions';
+import { getMembership, getUserProfile, getMyUsers } from 'redux/actions';
 
 
 // import {NavLink } from 'react-dom';
@@ -33,18 +34,27 @@ const EVPDashboard = (
     { history,
         getUserProfileAction,
         getMembershipAction,
+        getMyUsersAction,
         membershipDetails,
-        userProfile
+        userProfile,
+        myUsers
     }
 ) => {
     // const { messages } = intl;
+    console.log(myUsers)
     const [activeTab, setActiveTab] = useState('Advertiser');
+    useEffect(() => {
+        getMyUsersAction()
+        // eslint-disable-next-line
+    }, [])
+
 
     useEffect(() => {
         getMembershipAction()
         // eslint-disable-next-line
     }, [])
 
+   
 
     useEffect(() => {
         getUserProfileAction()
@@ -53,13 +63,13 @@ const EVPDashboard = (
 
 
     return (
-
         <>
             <Row>
                 <Colxx lg="12" xl="12" md='12' className='mb-4'>
-                    {userProfile&&<IconCardsCarousel
+                    {(userProfile && myUsers ) && <IconCardsCarousel
                         history={history}
                         user={userProfile}
+                        myUsers={myUsers}
                     />}
                 </Colxx>
             </Row>
@@ -282,8 +292,8 @@ const EVPDashboard = (
 
 const mapStateToProps = ({ membership, user }) => {
     const { membershipDetails } = membership;
-    const { userProfile } = user;
+    const { userProfile, myUsers } = user;
 
-    return { membershipDetails, userProfile };
+    return { membershipDetails, userProfile, myUsers };
 };
-export default connect(mapStateToProps, { getUserProfileAction: getUserProfile, getMembershipAction: getMembership })(EVPDashboard);
+export default connect(mapStateToProps, { getMyUsersAction: getMyUsers, getUserProfileAction: getUserProfile, getMembershipAction: getMembership })(EVPDashboard);

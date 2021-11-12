@@ -8,7 +8,7 @@ import { Card, CardBody } from 'reactstrap';
 import { useTable, usePagination, useSortBy } from 'react-table';
 import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 
 // import products from 'data/products';
 // const products = [{
@@ -195,12 +195,12 @@ const {users}=activities
         cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
         Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value}</p>,
       },
-      {
-        Header: 'ACTION',
-        accessor: '_id',
-        cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
-        Cell: (props) => <NavLink color='primary' className='mt-2 py-1 py-0 mb-0 bg-primary btn' to={`/app/dashboards/evp/details/${props.value}`} style={{ fontSize: '10px' }}>VIEW</NavLink>,
-      },
+      // {
+      //   Header: 'ACTION',
+      //   accessor: '_id',
+      //   cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
+      //   Cell: (props) => <NavLink color='primary' className='mt-2 py-1 py-0 mb-0 bg-primary btn' to={`/app/dashboards/evp/details/${props.value}`} style={{ fontSize: '10px' }}>VIEW</NavLink>,
+      // },
     ],
     []
   );

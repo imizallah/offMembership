@@ -69,6 +69,10 @@ import {
     CREATE_SUPEREVP_FAILED,
     CREATE_SUPEREVP_SUCCESS,
 
+    GET_MY_USERS,
+    GET_MY_USERS_FAILED,
+    GET_MY_USERS_SUCCESS,
+
     // GET_USER_TRANSACTION,
     // GET_USER_TRANSACTION_FAILED,
     // GET_USER_TRANSACTION_SUCCESS
@@ -89,31 +93,32 @@ const init = {
         advertiser: { amount: '', duration: '' },
         customer: { amount: '', duration: '' },
         evp:
-        [
-            {
-              "name": "level1",
-              amount: '',
-              percentageProfit: ''
-            },
-            {
-              "name": "level2",
-              amount: '',
-              percentageProfit: ''
-            },
-            {
-              "name": "level3",
-              amount: '',
-              percentageProfit: ''
-            }
-          ],
+            [
+                {
+                    "name": "level1",
+                    amount: '',
+                    percentageProfit: ''
+                },
+                {
+                    "name": "level2",
+                    amount: '',
+                    percentageProfit: ''
+                },
+                {
+                    "name": "level3",
+                    amount: '',
+                    percentageProfit: ''
+                }
+            ],
         superevp: { startingCredit: '', percentageProfit: '' },
         vendor: { amount: '', duration: '' }
     },
     userOTP: null,
-    userData:null,
+    userData: null,
     userMessage: '',
     userError: false,
-    membershipLoading:'',
+    membershipLoading: '',
+    myUsers:null
 
 }
 
@@ -245,6 +250,14 @@ const UserReducer = (state = init, action) => {
             return { ...state, membershipLoading: false, userMessage: payload, userError: '' }
         case CREATE_SUPEREVP_FAILED:
             return { ...state, membershipLoading: false, userMessage: '', userError: payload }
+
+        case GET_MY_USERS:
+            return { ...state, loading: true }
+        case GET_MY_USERS_SUCCESS:
+            return { ...state, loading: false, message: payload, error: '', myUsers: payload.data }
+        case GET_MY_USERS_FAILED:
+            return { ...state, loading: false, message: '', error: payload }
+
 
 
         default:

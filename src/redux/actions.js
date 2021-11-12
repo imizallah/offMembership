@@ -254,6 +254,12 @@ export const CREATE_SUPEREVP_FAILED = 'CREATE_SUPEREVP_FAILED'
 export const CREATE_SUPEREVP_SUCCESS = 'CREATE_SUPEREVP_SUCCESS'
 
 
+
+export const GET_MY_USERS = 'GET_MY_USERS'
+export const GET_MY_USERS_FAILED = 'GET_MY_USERS_FAILED'
+export const GET_MY_USERS_SUCCESS = 'GET_MY_USERS_SUCCESS'
+
+
 export * from './menu/actions';
 export * from './settings/actions';
 export * from './auth/actions';

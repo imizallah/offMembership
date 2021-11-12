@@ -126,9 +126,9 @@ const SuperEVP = ({
 
     const handleMemberShipCreation = (values) => {
 
-        const { _id } = userData
+        const { _id, phoneNumber } = userData
         /* eslint no-underscore-dangle:0 */
-        const data = { ...values, userId: _id, membershipId: membership[0]._id ,volunteer}
+        const data = { ...values, phoneNumber, userId: _id, membershipId: membership[0]._id, volunteer }
         // console.log(data)
         createVendorAction(data);
     }

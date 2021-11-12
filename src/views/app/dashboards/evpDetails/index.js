@@ -1,12 +1,14 @@
 import React, { useEffect,useState } from 'react';
-import { Card, CardBody, Row, Button, CardSubtitle } from 'reactstrap'
+import { Card, CardBody, Row, Button, 
+    // CardSubtitle 
+} from 'reactstrap'
 import { connect } from 'react-redux';
 import { getSingleSEVP } from 'redux/actions';
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import { BsArrowLeft } from 'react-icons/bs'
 import { BiMessageSquareDetail } from 'react-icons/bi'
 import { FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa'
-import ThumbnailLetters from 'components/cards/ThumbnailLetters'
+// import ThumbnailLetters from 'components/cards/ThumbnailLetters'
 import Table from './ReactTableCards'
 
 
@@ -30,7 +32,7 @@ if(singleSEVP!==null){
 
     return (
         <>
-            <div className='d-flex align-items-center justify-content-between'>
+            <div className='d-flex mb-3 align-items-center justify-content-between'>
                 <h2 className='mb-0'>
                     <BsArrowLeft onClick={() => { history.goBack() }} style={{ cursor: 'pointer' }} /> Sub EVP Info
                 </h2>
@@ -101,7 +103,9 @@ if(singleSEVP!==null){
                                         </div>
                                         <div xl='4' md='6'>
                                             <div className='d-flex pr-0'>
-                                                <div>
+
+                                                {' '}
+                                                {/* <div>
                                                     <Button className='mx-2' color='primary'>Fund
                                                     </Button>
                                                 </div>
@@ -112,7 +116,7 @@ if(singleSEVP!==null){
                                                 <div>
                                                     <Button className='mx-2' color='primary'>Delete
                                                     </Button>
-                                                </div>
+                                                </div> */}
 
                                             </div>
 
@@ -122,7 +126,7 @@ if(singleSEVP!==null){
                             </Card>
                         </Colxx>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Colxx xl='12'>
                             <div className='mt-4 d-flex justify-content-between align-items-center flex-wrap flex-row'>
 
@@ -240,8 +244,8 @@ if(singleSEVP!==null){
 
                             </div>
                         </Colxx>
-                    </Row>
-                    <div>
+                    </Row> */}
+                    <div className='mt-5'>
                         {
                             singleSEVP ?  <Table 
                             user={singleSEVP}

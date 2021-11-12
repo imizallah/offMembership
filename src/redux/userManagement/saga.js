@@ -4,6 +4,7 @@ import axios from 'helpers/axios';
 import {
 
     GET_USER,
+    GET_MY_USERS,
     GET_SINGLE_USER,
     GET_USER_PROFILE,
     EVP_SETTINGS_REQUEST,
@@ -53,7 +54,9 @@ import {
     createUserSuccess,
     createUserFailed,
     verifyUserSuccess,
-    verifyUserFailed
+    verifyUserFailed,
+    getMyUsersSuccess,
+    getMyUsersFailed
 
 } from '../actions';
 
@@ -174,37 +177,37 @@ function* saveEVPSettings(payload) {
     yield console.log(payload.payload.formData)
     const { membershipId, categories } = payload.payload.formData;
     try {
-        const response = yield axios.patch(`/settings/evp?membershipId=${membershipId}`, {categories})
-    console.log(response.data)
-    if (response.data.success) {
-        yield put(saveEVPSettingsSuccess(response.data))
-        window.location.reload();
-    } else {
-        yield put(saveEVPSettingsFailed(response.data.message));
-    }
-} catch (error) {
-    console.log(error.response);
-    let message;
-    if (error.response) {
-        switch (error.response.status) {
-            case 500:
-                message = 'Internal Server Error';
-                break;
-            case 404:
-                message = 'Not found';
-                break;
-            case 401:
-                message = 'Invalid credentials';
-                break;
-            default:
-                message = error.response.data.message;
+        const response = yield axios.patch(`/settings/evp?membershipId=${membershipId}`, { categories })
+        console.log(response.data)
+        if (response.data.success) {
+            yield put(saveEVPSettingsSuccess(response.data))
+            window.location.reload();
+        } else {
+            yield put(saveEVPSettingsFailed(response.data.message));
         }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(saveEVPSettingsFailed(message));
     }
-    else if (error.message) {
-        message = error.message;
-    }
-    yield put(saveEVPSettingsFailed(message));
-}
 }
 
 function* saveSEVPSettings(payload) {
@@ -710,6 +713,40 @@ function* createSuperEVP(payload) {
     }
 }
 
+function* getMyUsers() {
+    try {
+        const response = yield axios.get(`/auth/evp-superevp/my-users`)
+        console.log(response.data)
+        if (response.data.success) {
+            yield put(getMyUsersSuccess(response.data))
+            // window.location.reload();
+        } else {
+            yield put(getMyUsersFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(getMyUsersFailed(message));
+    }
+}
 
 
 export function* watchGetUser() {
@@ -768,6 +805,9 @@ export function* watchCreateEVP() {
 export function* watchCreateSuperEVP() {
     yield takeEvery(CREATE_SUPEREVP, createSuperEVP);
 }
+export function* watchGetMyUsers() {
+    yield takeEvery(GET_MY_USERS, getMyUsers);
+}
 
 
 
@@ -791,5 +831,6 @@ export default function* rootSaga() {
         fork(watchCreateVendor),
         fork(watchCreateEVP),
         fork(watchCreateSuperEVP),
+        fork(watchGetMyUsers)
     ]);
 }
