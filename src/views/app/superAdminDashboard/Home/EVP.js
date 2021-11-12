@@ -3,6 +3,7 @@ import { Card, Row, FormGroup, Label, CardBody, Button } from 'reactstrap'
 import { Colxx, Separator } from 'components/common/CustomBootstrap';
 import { NotificationManager } from 'components/common/react-notifications';
 import OtpInput from 'react-otp-input';
+import Select from 'react-select';
 import { Formik, Form, Field } from 'formik';
 import { connect } from 'react-redux';
 import { createUser, verifyUser, createEVP } from 'redux/actions';
@@ -23,6 +24,18 @@ const SuperEVP = ({
     createEVPAction
 }) => {
 
+    const options = [
+        {
+            label: 'Level 1', value: 'Level 1',
+        },
+        {
+            label: 'Level 2', value: 'Level 2',
+        },
+        {
+            label: 'Level 3', value: 'Level 3'
+        }
+
+    ]
     useEffect(() => {
         if (userError) {
             NotificationManager.warning(userError, 'Registration Error', 3000, null, null, '');
@@ -253,11 +266,11 @@ const SuperEVP = ({
                 <Colxx xxs="6" md='6' sm='12'>
 
                     <Formik initialValues={registerValues} onSubmit={(e) => { handleMemberShipCreation(e) }}>
-                        {({ errors, touched }) => (
+                        {({ values,errors, touched }) => (
                             <Form encType="multipart/form-data" method="post" action="#">
                                 <Card style={{ borderRadius: '20px' }}>
                                     <div className='my-3 '>
-                                        <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>EmHire Membership</h1>
+                                        <h1 className='mb-0 pl-4 pb-0 font-family-m font-weight-bold' style={{ fontSize: '20px' }}>EVP Membership</h1>
                                         <Separator />
                                     </div>
                                     <CardBody className='pt-0'>
@@ -372,11 +385,21 @@ const SuperEVP = ({
                                             <Colxx className='mt-2' xxs="12" md='12' sm='12'>
                                                 <Label className='mb-0 text-muted'>EVP Category</Label>
                                                 <FormGroup className="w-100 my-1">
-                                                    <Field
-                                                        className="py-2 w-100 border-muted custom-input"
-                                                        name="category"
+                                                    <Select
+                                                        // isMulti
+                                                        options={options}
+                                                        name='category'
+                                                        defaultValue={options[0]}
+                                                        // id="translators"
+                                                        /* eslint no-unused-vars:0 */  /* eslint no-param-reassign:0 */
+                                                        onChange={(opt, e) => {
+                                                            values.category = ((opt.name))
+                                                            // updateOptionSelected(opt)
 
-                                                        validate={validateCategory}
+                                                        }}
+                                                        placeholder="Select Category"
+                                                        className="w-100 mb-0 my-0"
+
                                                     />
                                                     {errors.category && touched.category && (
                                                         <div className="invalid-feedback d-block">

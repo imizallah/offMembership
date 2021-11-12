@@ -174,7 +174,7 @@ function* saveEVPSettings(payload) {
     yield console.log(payload.payload.formData)
     const { membershipId, categories } = payload.payload.formData;
     try {
-        const response = yield axios.post(`/settings/evp?membershipId=${membershipId}`, categories)
+        const response = yield axios.patch(`/settings/evp?membershipId=${membershipId}`, {categories})
     console.log(response.data)
     if (response.data.success) {
         yield put(saveEVPSettingsSuccess(response.data))

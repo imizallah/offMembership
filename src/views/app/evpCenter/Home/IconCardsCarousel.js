@@ -3,9 +3,9 @@ import React from 'react';
 import { Card, CardBody, Button } from 'reactstrap';
 import GlideComponent from 'components/carousel/GlideComponent';
 
-const handleRedirect = (e) => {
-  console.log(e);
-}
+// const handleRedirect = (e) => {
+//   console.log(e);
+// }
 const getHelp = () => {
   console.log('help')
 }
@@ -46,7 +46,7 @@ const IconCardsCarousel = ({ className = 'icon-cards-row',history,user }) => {
   }
 console.log(user);
   const counterData = [
-    { title: 'Credit Balance', value: `N${user.wallet.toString()}`, button: true, buttonTitle: 'Fund', func: handleRedirect },
+    { title: 'Credit Balance', icon: 'iconsminds-book', value: `N${user.credit.toString()}` },
     { title: 'My Advert', icon: 'iconsminds-clock', button: false, value: user.adverts.length.toString() },
     { title: 'Help Center', icon: 'iconsminds-bar-chart-4', button: true, buttonTitle: 'Contact', func: getHelp,  cardClassName: 'py-3 pb-5' },
     { title: 'Knowledge Base', icon: 'iconsminds-arrow-shuffle', button: true, buttonTitle: 'Get Info', func: getInfo, cardClassName: 'py-3 pb-5' },

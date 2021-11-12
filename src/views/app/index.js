@@ -8,12 +8,12 @@ import AppLayout from 'layout/AppLayout';
 const Dashboards = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './dashboards')
 );
-const SEVPDashboard = React.lazy(() =>
-  import(/* webpackChunkName: "dashboards" */ './sevpDashboard')
-);
-const EVPDashboard = React.lazy(() =>
-  import(/* webpackChunkName: "dashboards" */ './evpDashboard')
-);
+// const SEVPDashboard = React.lazy(() =>
+//   import(/* webpackChunkName: "dashboards" */ './sevpDashboard')
+// );
+// const EVPDashboard = React.lazy(() =>
+//   import(/* webpackChunkName: "dashboards" */ './evpDashboard')
+// );
 const SuperEVPCenter = React.lazy(() =>
   import(/* webpackChunkName: "dashboards" */ './superEvpCenter')
 );
@@ -79,14 +79,14 @@ const App = ({ match }) => {
               path={`${match.url}/dashboards`}
               render={(props) => <Dashboards {...props} />}
             />
-            <Route
+            {/* <Route
               path={`${match.url}/sevp`}
               render={(props) => <SEVPDashboard {...props} />}
             />
             <Route
               path={`${match.url}/evp`}
               render={(props) => <EVPDashboard {...props} />}
-            />
+            /> */}
             <Route
               path={`${match.url}/super-evp`}
               render={(props) => <SuperEVPCenter {...props} />}

@@ -108,12 +108,14 @@ const Settings = ({
 
     const handleEVPSettings = () => {
         /* eslint  no-underscore-dangle:0 */
+        console.log(level1Amount)
         const membershipId = membershipDetails.filter((el) => el.name.toLowerCase() === 'evp')[0]._id
-        saveEVPSettingsAction({ membershipId,
-            "categories":[ 
-                { "name": "Level 1", "amount": level1Amount, "percentageProfit": level1PercentageProfit},
-                { "name": "Level 2", "amount": level2Amount, "percentageProfit": level2PercentageProfit},
-                { "name": "Level 3",  "amount": level3Amount, "percentageProfit": level3PercentageProfit}
+        saveEVPSettingsAction({
+            membershipId,
+            "categories": [
+                { "name": "Level 1", "amount": level1Amount.length === 0 ? settings.evp[0].amount : level1Amount, "percentageProfit": level1PercentageProfit.length === 0 ? settings.evp[0].percentageProfit:level1PercentageProfit},
+                { "name": "Level 2", "amount": level2Amount.length === 0 ? settings.evp[1].amount : level1Amount, "percentageProfit": level2PercentageProfit.length === 0 ? settings.evp[1].percentageProfit:level2PercentageProfit},
+                { "name": "Level 3", "amount": level3Amount.length === 0 ? settings.evp[2].amount : level1Amount, "percentageProfit": level3PercentageProfit.length === 0 ? settings.evp[2].percentageProfit:level3PercentageProfit}
             ]
         })
     }
@@ -235,7 +237,7 @@ const Settings = ({
                                                     <FormGroup className="w-100 my-1">
 
                                                         <Input
-                                                            defaultValue={settings.evp[0].amount}
+                                                            defaultValue={settings.evp[2].amount}
                                                             onChange={(e) => { updatelevel3Amount(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="level3"
@@ -250,7 +252,7 @@ const Settings = ({
 
                                                     <FormGroup className="w-100 my-1">
                                                         <Input
-                                                            defaultValue={settings.evp[0].percentageProfit}
+                                                            defaultValue={settings.evp[2].percentageProfit}
                                                             onChange={(e) => { updatelevel3PercentageProfit(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="profit3"

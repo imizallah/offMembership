@@ -9,10 +9,10 @@ import {
     TabPane,
     Row
 } from 'reactstrap';
-import { getCurrentUser } from 'helpers/Utils';
+// import { getCurrentUser } from 'helpers/Utils';
 import { connect } from 'react-redux';
 import { Colxx } from 'components/common/CustomBootstrap';
-import { getMembership, } from 'redux/actions';
+import { getMembership, getUserProfile } from 'redux/actions';
 
 
 // import {NavLink } from 'react-dom';
@@ -27,12 +27,14 @@ import EVP from './EVP'
 // import 'react-quill/dist/quill.snow.css';
 // import 'react-quill/dist/quill.bubble.css';
 
-const currentUser = getCurrentUser();
+// const currentUser = getCurrentUser();
 
 const EVPDashboard = (
     { history,
+        getUserProfileAction,
         getMembershipAction,
-        membershipDetails
+        membershipDetails,
+        userProfile
     }
 ) => {
     // const { messages } = intl;
@@ -44,16 +46,21 @@ const EVPDashboard = (
     }, [])
 
 
+    useEffect(() => {
+        getUserProfileAction()
+        // eslint-disable-next-line
+    }, [])
+
+
     return (
 
         <>
             <Row>
                 <Colxx lg="12" xl="12" md='12' className='mb-4'>
-                    <IconCardsCarousel
+                    {userProfile&&<IconCardsCarousel
                         history={history}
-                        user={currentUser}
-
-                    />
+                        user={userProfile}
+                    />}
                 </Colxx>
             </Row>
 
@@ -272,8 +279,11 @@ const EVPDashboard = (
         </>
     );
 };
-const mapStateToProps = ({ membership }) => {
+
+const mapStateToProps = ({ membership, user }) => {
     const { membershipDetails } = membership;
-    return { membershipDetails };
+    const { userProfile } = user;
+
+    return { membershipDetails, userProfile };
 };
-export default connect(mapStateToProps, { getMembershipAction: getMembership })(EVPDashboard);
+export default connect(mapStateToProps, { getUserProfileAction: getUserProfile, getMembershipAction: getMembership })(EVPDashboard);

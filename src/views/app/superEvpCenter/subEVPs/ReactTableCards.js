@@ -4,7 +4,7 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/display-name */
 import React from 'react';
-import { Card, CardBody } from 'reactstrap';
+import { Card, CardBody,Button } from 'reactstrap';
 import { useTable, usePagination, useSortBy } from 'react-table';
 import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
@@ -157,7 +157,7 @@ function Table({ columns, data, divided = false, defaultPageSize = 10 }) {
   );
 }
 
-const ReactTableWithPaginationCard = ({ sevp }) => {
+const ReactTableWithPaginationCard = ({ sevp,history }) => {
   console.log(sevp);
   const cols = React.useMemo(
     () => [
@@ -207,10 +207,14 @@ const ReactTableWithPaginationCard = ({ sevp }) => {
   return (
     <Card className="mb-4">
       <CardBody>
-        <h3 className='font-weight-bold'>
+        <div className='d-flex align-items-center justify-content-between'>
+          <h3 className='font-weight-bold'>
 
-          SUB EVPS
-        </h3>
+            SUB EVPS
+          </h3>
+          <Button color='primary' className='mx-2 mt-2' onClick={() => { history.push('/app/dashboards/add-new-evp') }}>Add Sub EVP</Button>
+        </div>
+
         <Table columns={cols} data={sevp} getTdProps={() => ({ style: { height: '20px' } })} />
       </CardBody>
     </Card>

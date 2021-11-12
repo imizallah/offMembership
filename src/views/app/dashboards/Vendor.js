@@ -302,7 +302,7 @@ const SuperEVP = (
                                         <span className="bounce3" />
                                     </span>
                                     <span className="label">
-                                        Pay N${settings.vendor.amount}
+                                        Pay N{settings.vendor.amount}
                                     </span>
                                 </Button>
 
