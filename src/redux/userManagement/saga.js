@@ -13,14 +13,31 @@ import {
     ADVERTISER_SETTINGS_REQUEST,
     ADVERTS_SETTINGS_REQUEST,
     GET_SETTINGS_REQUEST,
+    CREATE_USER_REQUEST,
+    VERIFY_USER_REQUEST,
+    CREATE_ADVERTISER,
+    CREATE_CUSTOMER,
+    CREATE_VENDOR,
+    CREATE_EVP,
+    CREATE_SUPEREVP,
+    createAdvertiserSuccess,
+    createAdvertiserFailed,
+    createCustomerSuccess,
+    createCustomerFailed,
+    createVendorSuccess,
+    createVendorFailed,
+    createEVPSuccess,
+    createEVPFailed,
+    createSuperEVPSuccess,
+    createSuperEVPFailed,
     getUserSuccess,
     getUserFailed,
     getSingleUserSuccess,
     getSingleUserFailed,
     getUserProfileSuccess,
     getUserProfileFailed,
-    // saveEVPSettingsFailed,
-    // saveEVPSettingsSuccess,
+    saveEVPSettingsFailed,
+    saveEVPSettingsSuccess,
     saveSEVPSettingsFailed,
     saveSEVPSettingsSuccess,
     saveVendorSettingsFailed,
@@ -32,7 +49,11 @@ import {
     saveAdvertsSettingsFailed,
     saveAdvertsSettingsSuccess,
     getSettingsFailed,
-    getSettingsSuccess
+    getSettingsSuccess,
+    createUserSuccess,
+    createUserFailed,
+    verifyUserSuccess,
+    verifyUserFailed
 
 } from '../actions';
 
@@ -151,40 +172,39 @@ function* getUserProfile() {
 
 function* saveEVPSettings(payload) {
     yield console.log(payload.payload.formData)
-
-
-    // try {
-    //     const response = yield axios.post(`/user/view-profile`,{formData})
-    //     console.log(response.data)
-    //     if (response.data.success) {
-    //         yield put(saveEVPSettingsSuccess(response.data))
-    window.location.reload();
-    //     } else {
-    //         yield put(saveEVPSettingsFailed(response.data.message));
-    //     }
-    // } catch (error) {
-    //     console.log(error.response);
-    //     let message;
-    //     if (error.response) {
-    //         switch (error.response.status) {
-    //             case 500:
-    //                 message = 'Internal Server Error';
-    //                 break;
-    //             case 404:
-    //                 message = 'Not found';
-    //                 break;
-    //             case 401:
-    //                 message = 'Invalid credentials';
-    //                 break;
-    //             default:
-    //                 message = error.response.data.message;
-    //         }
-    //     }
-    //     else if (error.message) {
-    //         message = error.message;
-    //     }
-    //     yield put(saveEVPSettingsFailed(message));
-    // }
+    const { membershipId, categories } = payload.payload.formData;
+    try {
+        const response = yield axios.post(`/settings/evp?membershipId=${membershipId}`, categories)
+    console.log(response.data)
+    if (response.data.success) {
+        yield put(saveEVPSettingsSuccess(response.data))
+        window.location.reload();
+    } else {
+        yield put(saveEVPSettingsFailed(response.data.message));
+    }
+} catch (error) {
+    console.log(error.response);
+    let message;
+    if (error.response) {
+        switch (error.response.status) {
+            case 500:
+                message = 'Internal Server Error';
+                break;
+            case 404:
+                message = 'Not found';
+                break;
+            case 401:
+                message = 'Invalid credentials';
+                break;
+            default:
+                message = error.response.data.message;
+        }
+    }
+    else if (error.message) {
+        message = error.message;
+    }
+    yield put(saveEVPSettingsFailed(message));
+}
 }
 
 function* saveSEVPSettings(payload) {
@@ -429,6 +449,269 @@ function* getSettings() {
 }
 
 
+function* createUser(payload) {
+    yield console.log(payload.payload.data);
+    try {
+        const response = yield axios.post(`/auth/evp-superevp/register`, payload.payload.data)
+        console.log(response.data)
+        if (response.data.success) {
+            yield put(createUserSuccess(response.data))
+            // window.location.reload();
+        } else {
+            yield put(createUserFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(createUserFailed(message));
+    }
+}
+
+
+function* verifyUser(payload) {
+    yield console.log(payload.payload.data);
+    try {
+        const response = yield axios.post('/auth/verify-token', { token: payload.payload.data });
+        console.log(response.data)
+        if (response.data.success) {
+            yield put(verifyUserSuccess(response.data))
+            // window.location.reload();
+        } else {
+            yield put(verifyUserFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(verifyUserFailed(message));
+    }
+}
+
+function* createAdvertiser(payload) {
+    console.log(payload.payload.data);
+    //    yield console.log({...payload.payload.data, phoneNumber})
+    try {
+        const response = yield axios.post('/profile/evp-superevp/advertiser', payload.payload.data)
+        if (response.data.success) {
+            yield put(createAdvertiserSuccess(response.data.message))
+            window.location.reload()
+        } else {
+            yield put(createAdvertiserFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = error.response.data.message;
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(createAdvertiserFailed(message));
+    }
+}
+
+function* createCustomer(payload) {
+    //    yield console.log({...payload.payload.data, phoneNumber})
+    try {
+        const response = yield axios.post('/profile/evp-superevp/customer', payload.payload.data)
+        console.log(response)
+        if (response.data.success) {
+            yield put(createCustomerSuccess(response.data.message))
+            window.location.reload()
+        } else {
+            yield put(createCustomerFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(createCustomerFailed(message));
+    }
+}
+
+
+function* createVendor(payload) {
+
+    yield console.log(payload.payload.data)
+    try {
+        const response = yield axios.post('/profile/evp-superevp/vendor', payload.payload.data)
+        if (response.data.success) {
+            yield put(createVendorSuccess(response.data.message))
+            window.location.reload()
+
+
+        } else {
+            yield put(createVendorFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(createVendorFailed(message));
+    }
+}
+
+
+function* createEVP(payload) {
+    //    yield console.log({...payload.payload.data, phoneNumber})
+    try {
+        const response = yield axios.post('/profile/evp-superevp/evp', payload.payload.data)
+        if (response.data.success) {
+            yield put(createEVPSuccess(response.data.message))
+            window.location.reload()
+
+        } else {
+            yield put(createEVPFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(createEVPFailed(message));
+    }
+}
+
+
+
+function* createSuperEVP(payload) {
+    yield console.log(payload.payload.data)
+
+    try {
+        const response = yield axios.post('/profile/evp-superevp/superevp', payload.payload.data)
+        if (response.data.success) {
+            yield put(createSuperEVPSuccess(response.data.message))
+            window.location.reload()
+
+
+        } else {
+            yield put(createSuperEVPFailed(response.data.message));
+        }
+    } catch (error) {
+        console.log(error.response);
+        let message;
+        if (error.response) {
+            switch (error.response.status) {
+                case 500:
+                    message = 'Internal Server Error';
+                    break;
+                case 404:
+                    message = 'Not found';
+                    break;
+                case 401:
+                    message = 'Invalid credentials';
+                    break;
+                default:
+                    message = error.response.data.message;
+            }
+        }
+        else if (error.message) {
+            message = error.message;
+        }
+        yield put(createSuperEVPFailed(message));
+    }
+}
+
+
+
 export function* watchGetUser() {
     yield takeEvery(GET_USER, getUser);
 }
@@ -463,6 +746,30 @@ export function* watchGetSettings() {
     yield takeEvery(GET_SETTINGS_REQUEST, getSettings);
 }
 
+export function* watchCreateUser() {
+    yield takeEvery(CREATE_USER_REQUEST, createUser);
+}
+export function* watchVerifyUser() {
+    yield takeEvery(VERIFY_USER_REQUEST, verifyUser);
+}
+
+export function* watchCreateAdvertiser() {
+    yield takeEvery(CREATE_ADVERTISER, createAdvertiser);
+}
+export function* watchCreateCustomer() {
+    yield takeEvery(CREATE_CUSTOMER, createCustomer);
+}
+export function* watchCreateVendor() {
+    yield takeEvery(CREATE_VENDOR, createVendor);
+}
+export function* watchCreateEVP() {
+    yield takeEvery(CREATE_EVP, createEVP);
+}
+export function* watchCreateSuperEVP() {
+    yield takeEvery(CREATE_SUPEREVP, createSuperEVP);
+}
+
+
 
 export default function* rootSaga() {
     yield all([
@@ -476,6 +783,13 @@ export default function* rootSaga() {
         fork(watchCustomerSaveSettings),
         fork(watchAdvertiserSaveSettings),
         fork(watchAdvertsSaveSettings),
-        fork(watchGetSettings)
+        fork(watchGetSettings),
+        fork(watchCreateUser),
+        fork(watchVerifyUser),
+        fork(watchCreateAdvertiser),
+        fork(watchCreateCustomer),
+        fork(watchCreateVendor),
+        fork(watchCreateEVP),
+        fork(watchCreateSuperEVP),
     ]);
 }

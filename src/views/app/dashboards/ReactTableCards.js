@@ -189,7 +189,7 @@ const ReactTableWithPaginationCard = (
         Header: 'DATE',
         accessor: 'createdAt',
         cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
-        Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value.split('T')[0]}</p>,
+        Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value ? props.value.split('T')[0] : ""}</p>,
       },
       {
         Header: 'TYPE',
@@ -208,10 +208,10 @@ const ReactTableWithPaginationCard = (
 
           Transaction History
         </h3>
-       
-          <Table columns={cols} data={data.data} getTdProps={() => ({ style: { height: '20px' } })} />
 
-        
+        <Table columns={cols} data={data.data} getTdProps={() => ({ style: { height: '20px' } })} />
+
+
       </CardBody>
     </Card>
   );

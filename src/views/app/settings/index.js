@@ -46,7 +46,13 @@ const Settings = ({
         profit3: "",
 
     }
-    const [superEVPAmount, updateSuperEVPAmount] = useState(settings.superevp.startingCredit)
+    const [level1Amount, updatelevel1Amount] = useState(settings.evp[0].amount)
+    const [level1PercentageProfit, updatelevel1PercentageProfit] = useState(settings.evp[0].percentageProfit)
+    const [level2Amount, updatelevel2Amount] = useState(settings.evp[1].amount)
+    const [level2PercentageProfit, updatelevel2PercentageProfit] = useState(settings.evp[1].percentageProfit)
+    const [level3Amount, updatelevel3Amount] = useState(settings.evp[2].amount)
+    const [level3PercentageProfit, updatelevel3PercentageProfit] = useState(settings.evp[2].percentageProfit)
+    const [superEVPAmount, updateSuperEVPAmount] = useState(settings.superevp.amount)
     const [superEVPProfit, updateSuperEVPProfit] = useState(settings.superevp.percentageProfit)
     const [vendorAmount, updateVendorAmount] = useState(settings.vendor.amount)
     const [vendorDuration, updateVendorDuration] = useState(settings.vendor.duration)
@@ -103,7 +109,13 @@ const Settings = ({
     const handleEVPSettings = () => {
         /* eslint  no-underscore-dangle:0 */
         const membershipId = membershipDetails.filter((el) => el.name.toLowerCase() === 'evp')[0]._id
-        saveEVPSettingsAction({  membershipId })
+        saveEVPSettingsAction({ membershipId,
+            "categories":[ 
+                { "name": "Level 1", "amount": level1Amount, "percentageProfit": level1PercentageProfit},
+                { "name": "Level 2", "amount": level2Amount, "percentageProfit": level2PercentageProfit},
+                { "name": "Level 3",  "amount": level3Amount, "percentageProfit": level3PercentageProfit}
+            ]
+        })
     }
 
     const handleSEVPSettings = () => {
@@ -149,11 +161,14 @@ const Settings = ({
                                     {({ errors, touched }) => (
                                         <Form encType="multipart/form-data" method="post" action="#">
                                             <Label className='font-weight-bold mb-0 '>EVP</Label>
-                                            <Row  >
+                                            <p className='mb-0'>Level 1</p>
+                                            <Row className='align-items-center' >
                                                 <Colxx className='pr-1' xxs="6" md='6' sm='12'>
 
                                                     <FormGroup className="w-100 my-1">
                                                         <Input
+                                                            defaultValue={settings.evp[0].amount}
+                                                            onChange={(e) => { updatelevel1Amount(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="level1"
                                                             placeholder='Start up amount (level 1)'
@@ -166,6 +181,8 @@ const Settings = ({
 
                                                     <FormGroup className="w-100 my-1">
                                                         <Input
+                                                            defaultValue={settings.evp[0].percentageProfit}
+                                                            onChange={(e) => { updatelevel1PercentageProfit(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="profit1"
                                                             placeholder='Percentage profit'
@@ -177,11 +194,14 @@ const Settings = ({
                                                 </Colxx>
 
                                             </Row>
+                                            <p className='mb-0'>Level 2</p>
                                             <Row  >
                                                 <Colxx className='pr-1' xxs="6" md='6' sm='12'>
 
                                                     <FormGroup className="w-100 my-1">
                                                         <Input
+                                                            defaultValue={settings.evp[1].amount}
+                                                            onChange={(e) => { updatelevel2Amount(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="level2"
                                                             placeholder='Start up amount (level 2)'
@@ -195,6 +215,8 @@ const Settings = ({
 
                                                     <FormGroup className="w-100 my-1">
                                                         <Input
+                                                            defaultValue={settings.evp[1].percentageProfit}
+                                                            onChange={(e) => { updatelevel2PercentageProfit(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="profit2"
                                                             placeholder='Percentage profit'
@@ -206,11 +228,15 @@ const Settings = ({
                                                 </Colxx>
 
                                             </Row>
+                                            <p className='mb-0'>Level 3</p>
                                             <Row  >
                                                 <Colxx className='pr-1' xxs="6" md='6' sm='12'>
 
                                                     <FormGroup className="w-100 my-1">
+
                                                         <Input
+                                                            defaultValue={settings.evp[0].amount}
+                                                            onChange={(e) => { updatelevel3Amount(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="level3"
                                                             placeholder='Start up amount (level 3)'
@@ -224,6 +250,8 @@ const Settings = ({
 
                                                     <FormGroup className="w-100 my-1">
                                                         <Input
+                                                            defaultValue={settings.evp[0].percentageProfit}
+                                                            onChange={(e) => { updatelevel3PercentageProfit(e.target.value) }}
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="profit3"
                                                             placeholder='Percentage profit'
@@ -255,7 +283,7 @@ const Settings = ({
                                                             <Input
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
                                                                 name="superEVPAmount"
-                                                                onChange={(e)=>{updateSuperEVPAmount(e.target.value)}}
+                                                                onChange={(e) => { updateSuperEVPAmount(e.target.value) }}
                                                                 defaultValue={settings.superevp.startingCredit}
                                                                 placeholder='Start up amount'
 
@@ -273,7 +301,7 @@ const Settings = ({
                                                         <FormGroup className="w-100 my-1">
                                                             <Input
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
-                                                                onChange={(e)=>{updateSuperEVPProfit(e.target.value)}}
+                                                                onChange={(e) => { updateSuperEVPProfit(e.target.value) }}
                                                                 defaultValue={settings.superevp.percentageProfit}
                                                                 name="superEVPProfit"
                                                                 placeholder='Percentage profit'
@@ -308,7 +336,7 @@ const Settings = ({
                                                             <Input
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
                                                                 name="vendorAmount"
-                                                                onChange={(e)=>{updateVendorAmount(e.target.value)}}
+                                                                onChange={(e) => { updateVendorAmount(e.target.value) }}
 
                                                                 defaultValue={settings.vendor.amount}
                                                                 placeholder='Start up amount '
@@ -328,7 +356,7 @@ const Settings = ({
                                                             <Input
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
                                                                 name="vendorDuration"
-                                                                onChange={(e)=>{updateVendorDuration(e.target.value)}}
+                                                                onChange={(e) => { updateVendorDuration(e.target.value) }}
 
                                                                 placeholder='Duration'
                                                                 defaultValue={settings.vendor.duration}
@@ -366,7 +394,7 @@ const Settings = ({
                                                             <Input
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
                                                                 name="advertiserAmount"
-                                                                onChange={(e)=>{updateAdvertiserAmount(e.target.value)}}
+                                                                onChange={(e) => { updateAdvertiserAmount(e.target.value) }}
 
                                                                 placeholder='Start up amount '
                                                                 defaultValue={settings.advertiser.amount}
@@ -386,7 +414,7 @@ const Settings = ({
                                                             <Input
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
                                                                 name="advertiserDuration"
-                                                                onChange={(e)=>{updateAdvertiserDuration(e.target.value)}}
+                                                                onChange={(e) => { updateAdvertiserDuration(e.target.value) }}
 
                                                                 placeholder='Duration'
                                                                 defaultValue={settings.advertiser.duration}
@@ -425,7 +453,7 @@ const Settings = ({
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
                                                                 name="customerAmount"
                                                                 placeholder='Start up amount'
-                                                                onChange={(e)=>{updateCustomerAmount(e.target.value)}}
+                                                                onChange={(e) => { updateCustomerAmount(e.target.value) }}
 
                                                                 defaultValue={settings.customer.amount}
 
@@ -446,7 +474,7 @@ const Settings = ({
                                                                 className="pl-1 py-3 w-100 border-muted custom-input"
                                                                 name="customerDuration"
                                                                 placeholder='Duration'
-                                                                onChange={(e)=>{updateCustomerDuration(e.target.value)}}
+                                                                onChange={(e) => { updateCustomerDuration(e.target.value) }}
                                                                 defaultValue={settings.customer.duration}
 
 
@@ -483,7 +511,7 @@ const Settings = ({
                                                         <Input
                                                             className="pl-1 py-3 w-100 border-muted custom-input"
                                                             name="advertAmount"
-                                                            onChange={(e)=>{updateAdvertAmount(e.target.value)}}
+                                                            onChange={(e) => { updateAdvertAmount(e.target.value) }}
 
                                                             placeholder='Amount per advert'
                                                             required

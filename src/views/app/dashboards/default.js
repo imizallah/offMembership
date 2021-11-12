@@ -58,7 +58,7 @@ const DefaultDashboard = ({ history,
 
   useEffect(() => {
     updateAdvertFeed(adverts);
-    console.log(advertFeed)
+    // console.log(advertFeed)
     // eslint-disable-next-line
   }, [adverts])
 
@@ -70,7 +70,7 @@ const DefaultDashboard = ({ history,
   useEffect(() => {
     getUserProfileAction()
     // eslint-disable-next-line
-  }, [])
+  }, [adverts])
 
 
   const [modal, setModal] = useState(false);

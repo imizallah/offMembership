@@ -43,6 +43,36 @@ import {
     ADVERTS_SETTINGS_REQUEST_SUCCESS,
 
 
+
+    CREATE_USER_REQUEST,
+    CREATE_USER_REQUEST_FAILED,
+    CREATE_USER_REQUEST_SUCCESS,
+
+
+    VERIFY_USER_REQUEST,
+    VERIFY_USER_REQUEST_FAILED,
+    VERIFY_USER_REQUEST_SUCCESS,
+
+    CREATE_ADVERTISER,
+    CREATE_ADVERTISER_FAILED,
+    CREATE_ADVERTISER_SUCCESS,
+
+    CREATE_CUSTOMER,
+    CREATE_CUSTOMER_FAILED,
+    CREATE_CUSTOMER_SUCCESS,
+
+    CREATE_VENDOR,
+    CREATE_VENDOR_FAILED,
+    CREATE_VENDOR_SUCCESS,
+
+    CREATE_EVP,
+    CREATE_EVP_FAILED,
+    CREATE_EVP_SUCCESS,
+
+    CREATE_SUPEREVP,
+    CREATE_SUPEREVP_FAILED,
+    CREATE_SUPEREVP_SUCCESS,
+
     // GET_USER_TRANSACTION,
     // GET_USER_TRANSACTION_FAILED,
     // GET_USER_TRANSACTION_SUCCESS
@@ -212,5 +242,112 @@ export const getSettingsSuccess = (message) => ({
 
 export const getSettingsFailed = (message) => ({
     type:GET_SETTINGS_REQUEST_FAILED,
+    payload: message
+})
+
+
+export const createUser = (data) => ({
+    type: CREATE_USER_REQUEST,
+    payload: { data }
+})
+
+export const createUserSuccess = (data) => ({
+    type: CREATE_USER_REQUEST_SUCCESS,
+    payload: data
+})
+
+export const createUserFailed = (message) => ({
+    type: CREATE_USER_REQUEST_FAILED,
+    payload: message
+})
+
+export const verifyUser = (data) => ({
+    type: VERIFY_USER_REQUEST,
+    payload: { data }
+})
+
+export const verifyUserSuccess = (data) => ({
+    type: VERIFY_USER_REQUEST_SUCCESS,
+    payload: data
+})
+
+export const verifyUserFailed = (message) => ({
+    type: VERIFY_USER_REQUEST_FAILED,
+    payload: message
+})
+
+
+export const createAdvertiser = (data) => ({
+    type: CREATE_ADVERTISER,
+    payload: { data }
+})
+
+export const createAdvertiserSuccess = (message) => ({
+    type: CREATE_ADVERTISER_SUCCESS,
+    payload: message
+})
+
+export const createAdvertiserFailed = (message) => ({
+    type: CREATE_ADVERTISER_FAILED,
+    payload: message
+})
+
+export const createCustomer = (data) => ({
+    type: CREATE_CUSTOMER,
+    payload: { data }
+})
+
+export const createCustomerSuccess = (message) => ({
+    type: CREATE_CUSTOMER_SUCCESS,
+    payload: message
+})
+
+export const createCustomerFailed = (message) => ({
+    type: CREATE_CUSTOMER_FAILED,
+    payload: message
+})
+
+export const createVendor = (data) => ({
+    type: CREATE_VENDOR,
+    payload: { data }
+})
+
+export const createVendorSuccess = (message) => ({
+    type: CREATE_VENDOR_SUCCESS,
+    payload: message
+})
+
+export const createVendorFailed = (message) => ({
+    type: CREATE_VENDOR_FAILED,
+    payload: message
+})
+
+export const createEVP = (data) => ({
+    type: CREATE_EVP,
+    payload: { data }
+})
+
+export const createEVPSuccess = (message) => ({
+    type: CREATE_EVP_SUCCESS,
+    payload: message
+})
+
+export const createEVPFailed = (message) => ({
+    type: CREATE_EVP_FAILED,
+    payload: message
+})
+
+export const createSuperEVP = (data) => ({
+    type: CREATE_SUPEREVP,
+    payload: { data }
+})
+
+export const createSuperEVPSuccess = (message) => ({
+    type: CREATE_SUPEREVP_SUCCESS,
+    payload: message
+})
+
+export const createSuperEVPFailed = (message) => ({
+    type: CREATE_SUPEREVP_FAILED,
     payload: message
 })

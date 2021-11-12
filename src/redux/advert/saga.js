@@ -7,6 +7,7 @@ import {
     DELETE_ADVERT,
     GET_ADVERT,
     GET_USER_ADVERT,
+    // getUserProfile,
     createAdvertSuccess,
     createAdvertFailed,
     updateAdvertSuccess,
@@ -99,7 +100,8 @@ function* createAdvert(payload) {
         if (response.data.success) {
             yield put(createAdvertSuccess(response.data.message));
             yield call(getAdvert);
-            yield call(getUserAdvert)
+            yield call(getUserAdvert);
+            // yield call(getUserProfile)
         } else {
             yield put(createAdvertFailed(response.data.message));
         }

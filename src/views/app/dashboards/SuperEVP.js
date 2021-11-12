@@ -14,7 +14,8 @@ const SuperEVP = ({
     loading ,
     updateSEVPRequest,
     user,
-    membership
+    membership,
+    settings
  }) => {
 
     console.log(user);
@@ -243,8 +244,8 @@ const SuperEVP = ({
     return (
         <>
             <div>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the Super EVP. Your required start up capital is N1,500,000 </h3>
-                <h3 className='font-weight-bold w-50' style={{ fontSize: '16px' }}>You will enjoy a profit Margin of 20%.</h3>
+                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the Super EVP. Your required start up capital is N{settings.superevp.startingCredit} </h3>
+                <h3 className='font-weight-bold w-50' style={{ fontSize: '16px' }}>You will enjoy a profit Margin of {settings.superevp.percentageProfit}%.</h3>
             </div>
             <Formik initialValues={initialValues} onSubmit={handleSEVP}>
                 {({ errors, touched }) => (
@@ -632,7 +633,7 @@ const SuperEVP = ({
                                         <span className="bounce3" />
                                     </span>
                                     <span className="label">
-                                        Pay N1,500,000
+                                        Pay N{settings.superevp.startingCredit}
                                     </span>
                                 </Button>
                             </Colxx>

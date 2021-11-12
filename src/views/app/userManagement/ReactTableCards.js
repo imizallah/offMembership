@@ -157,8 +157,9 @@ function Table({ columns, data, divided = false, defaultPageSize = 10 }) {
   );
 }
 
-const ReactTableWithPaginationCard = ({ sevp }) => {
-  console.log(sevp);
+const ReactTableWithPaginationCard = ({ activities }) => {
+
+const {users}=activities
   const cols = React.useMemo(
     () => [
       {
@@ -210,7 +211,7 @@ const ReactTableWithPaginationCard = ({ sevp }) => {
         <h3 className='font-weight-bold'>
           ALL USERS
         </h3>
-        <Table columns={cols} data={sevp} getTdProps={() => ({ style: { height: '20px' } })} />
+        <Table columns={cols} data={users} getTdProps={() => ({ style: { height: '20px' } })} />
       </CardBody>
     </Card>
   );

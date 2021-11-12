@@ -14,7 +14,7 @@ import {
 import { connect } from 'react-redux';
 import { IoMdCheckmarkCircle } from 'react-icons/io'
 import { getCurrentUser } from 'helpers/Utils';
-import { getMembership } from 'redux/actions';
+import { getMembership, getSettings, } from 'redux/actions';
 import Advertiser from './Advertiser'
 import Customer from './Customer'
 import Vendor from './Vendor'
@@ -23,17 +23,23 @@ import EVP from './EVP'
 
 
 
-const Membership = ({ match: { params: { role } }, getMembershipAction, membershipDetails, loading,paymentURL }) => {
+const Membership = ({ match: { params: { role } }, getSettingsAction, getMembershipAction, settings, membershipDetails, loading, paymentURL }) => {
   const [activeTab, setActiveTab] = useState(role);
   const currentUser = getCurrentUser();
 
   useEffect(() => {
     console.log(paymentURL)
     if (paymentURL) {
-        window.location.href = paymentURL
+      window.location.href = paymentURL
     }
     // eslint-disable-next-line
-}, [paymentURL])
+  }, [paymentURL])
+
+  useEffect(() => {
+    getSettingsAction()
+    // eslint-disable-next-line
+  }, [])
+
   useEffect(() => {
     getMembershipAction()
     // eslint-disable-next-line
@@ -43,8 +49,8 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
     loading ?
       <div className='loading' />
       :
-      
-        membershipDetails && <>
+
+      membershipDetails && <>
         <h2 className=''>Register Membership</h2>
         <Separator />
         <div className='mt-4 d-flex justify-content-between align-items-center flex-wrap flex-row'>
@@ -189,6 +195,7 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
           </Card>
 
         </div>
+        
         <TabContent activeTab={activeTab}>
           <TabPane tabId="Advertiser">
             <Row>
@@ -196,6 +203,7 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
                 <Advertiser
                   membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'advertiser')}
                   user={currentUser}
+                  settings={settings}
                 // event={singleEvent} 
                 />
               </Colxx>
@@ -207,6 +215,7 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
                 <EVP
                   user={currentUser}
                   membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'evp')}
+                  settings={settings}
 
                 // id={eventId}
                 // event={singleEvent}
@@ -222,6 +231,7 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
                   <Customer
                     user={currentUser}
                     membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'customer')}
+                    settings={settings}
 
                   // data={item}
                   // key={`qa_${item.key}`}
@@ -238,6 +248,7 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
                   <Vendor
                     user={currentUser}
                     membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'vendor')}
+                    settings={settings}
 
 
                   // data={item}
@@ -255,6 +266,7 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
                   <SuperEVP
                     user={currentUser}
                     membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'super evp')}
+                    settings={settings}
 
                   // data={item}
                   // key={`qa_${item.key}`}
@@ -269,9 +281,10 @@ const Membership = ({ match: { params: { role } }, getMembershipAction, membersh
   )
 }
 
-const mapStateToProps = ({ membership,payment }) => {
+const mapStateToProps = ({ user, membership, payment }) => {
   const { loading, error, membershipDetails } = membership;
-  const {paymentURL}=payment
-  return { loading, error, membershipDetails ,paymentURL};
+  const { settings } = user;
+  const { paymentURL } = payment
+  return { loading, error, settings, membershipDetails, paymentURL };
 };
-export default connect(mapStateToProps, { getMembershipAction: getMembership })(Membership);
+export default connect(mapStateToProps, { getSettingsAction: getSettings, getMembershipAction: getMembership })(Membership);

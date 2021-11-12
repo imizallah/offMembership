@@ -5,7 +5,7 @@ import {
 } from 'reactstrap';
 
 import { connect } from 'react-redux';
-import { getUser } from 'redux/actions';
+import { getActivities } from 'redux/actions';
 
 import { Colxx } from 'components/common/CustomBootstrap';
 // import {NavLink } from 'react-dom';
@@ -18,13 +18,14 @@ import Table from './ReactTableCards'
 
 const EVPDashboard = (
     { history,
-        users,
-        getUserRequest,
+        // users,
+        getAnalytics,
+        activities
     }
 ) => {
     // const { messages } = intl;
     useEffect(() => {
-        getUserRequest()
+        getAnalytics()
         // eslint-disable-next-line
     }, [])
 
@@ -35,14 +36,18 @@ const EVPDashboard = (
 
             <Row className='mt-5'>
                 <Colxx md='12'>
-                    <Table history={history} sevp={users} />
+                    {
+                        activities && <Table history={history} activities={activities} />
+                    }
+
                 </Colxx>
             </Row>
         </>
     );
 };
-const mapStateToProps = ({ user }) => {
-    const { loading,  error, message, users } = user;
-    return {  error, loading, message, users };
+const mapStateToProps = ({ analytics }) => {
+    const { loading, error, message, activities } = analytics;
+
+    return { error, loading, message, activities };
 };
-export default (connect(mapStateToProps, { getUserRequest: getUser }))(EVPDashboard);
+export default (connect(mapStateToProps, { getAnalytics: getActivities, }))(EVPDashboard);

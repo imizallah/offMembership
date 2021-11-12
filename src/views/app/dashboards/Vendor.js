@@ -14,7 +14,8 @@ const SuperEVP = (
         message,
         error,
         user,
-        membership
+        membership,
+        settings
     }
 ) => {
 
@@ -115,7 +116,7 @@ const SuperEVP = (
     return (
         <>
             <div>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the EmJobs Membership Package. Membership is N1000 yearly</h3>
+                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the EmJobs Membership Package. Membership is N{settings.vendor.amount} yearly</h3>
             </div>
             <Row className='mt-5'>
                 <Colxx xxs="12" md='6' sm='12'>
@@ -301,7 +302,7 @@ const SuperEVP = (
                                         <span className="bounce3" />
                                     </span>
                                     <span className="label">
-                                        Pay N1000
+                                        Pay N${settings.vendor.amount}
                                     </span>
                                 </Button>
 

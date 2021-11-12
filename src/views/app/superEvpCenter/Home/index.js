@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { injectIntl } from 'react-intl';
 import {
     Card,
@@ -9,8 +9,12 @@ import {
     TabPane,
     Row
 } from 'reactstrap';
-import { getCurrentUser } from 'helpers/Utils';
+// import { getCurrentUser } from 'helpers/Utils';
+import { connect } from 'react-redux';
 import { Colxx } from 'components/common/CustomBootstrap';
+import { getMembership, getUserProfile } from 'redux/actions';
+
+
 // import {NavLink } from 'react-dom';
 // import Breadcrumb from 'containers/navs/Breadcrumb';
 
@@ -23,13 +27,29 @@ import EVP from './EVP'
 // import 'react-quill/dist/quill.snow.css';
 // import 'react-quill/dist/quill.bubble.css';
 
-const currentUser = getCurrentUser();
+// const currentUser = getCurrentUser();
 
 const EVPDashboard = (
-    { history }
+    { history,
+        getUserProfileAction,
+        getMembershipAction,
+        membershipDetails,
+        userProfile
+    }
 ) => {
     // const { messages } = intl;
     const [activeTab, setActiveTab] = useState('Advertiser');
+
+    useEffect(() => {
+        getMembershipAction()
+        // eslint-disable-next-line
+    }, [])
+
+
+    useEffect(() => {
+        getUserProfileAction()
+        // eslint-disable-next-line
+    }, [])
 
 
     return (
@@ -37,11 +57,10 @@ const EVPDashboard = (
         <>
             <Row>
                 <Colxx lg="12" xl="12" md='12' className='mb-4'>
-                    <IconCardsCarousel
+                    {userProfile&&<IconCardsCarousel
                         history={history}
-                        user={currentUser}
-
-                    />
+                        user={userProfile}
+                    />}
                 </Colxx>
             </Row>
 
@@ -92,7 +111,7 @@ const EVPDashboard = (
                                     type="checkbox"
                                     name='membership'
                                     onClick={() => setActiveTab('Customer')}
-                checked={activeTab === 'Customer'}
+                                    checked={activeTab === 'Customer'}
 
                                     id="customer"
                                 />
@@ -120,8 +139,8 @@ const EVPDashboard = (
                                     type="checkbox"
                                     name='membership'
                                     onClick={() => setActiveTab('Vendor')}
-                checked={activeTab === 'Vendor'}
-                                    
+                                    checked={activeTab === 'Vendor'}
+
                                     id="vendor"
                                 />
                             </CardBody>
@@ -186,69 +205,85 @@ const EVPDashboard = (
 
             </Row>
 
+            {
+                membershipDetails && <TabContent activeTab={activeTab}>
+                    <TabPane tabId="Advertiser">
+                        <Row>
+                            <Colxx sm="12">
+                                <Advertiser
+                                    membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'advertiser')}
 
-            <TabContent activeTab={activeTab}>
-                <TabPane tabId="Advertiser">
-                    <Row>
-                        <Colxx sm="12">
-                            <Advertiser
-                            // event={singleEvent} 
-                            />
-                        </Colxx>
-                    </Row>
-                </TabPane>
-                <TabPane tabId="EVP">
-                    <Row>
-                        <Colxx sm="12">
-                            <EVP
-                            // id={eventId}
-                            // event={singleEvent}
-                            // addParticipants={addParticipantAction}
-                            />
-                        </Colxx>
-                    </Row>
-                </TabPane>
-                <TabPane tabId="Customer">
-                    <Row>
-                        <Colxx sm="12">
-                            <CardBody>
-                                <Customer
-                                // data={item}
-                                // key={`qa_${item.key}`}
+                                // event={singleEvent} 
                                 />
-
-                            </CardBody>
-                        </Colxx>
-                    </Row>
-                </TabPane>
-                <TabPane tabId="Vendor">
-                    <Row>
-                        <Colxx sm="12">
-                            <CardBody>
-                                <Vendor
-                                // data={item}
-                                // key={`qa_${item.key}`}
+                            </Colxx>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="EVP">
+                        <Row>
+                            <Colxx sm="12">
+                                <EVP
+                                // id={eventId}
+                                // event={singleEvent}
+                                // addParticipants={addParticipantAction}
                                 />
+                            </Colxx>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="Customer">
+                        <Row>
+                            <Colxx sm="12">
+                                <CardBody>
+                                    <Customer
+                                        membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'customer')}
 
-                            </CardBody>
-                        </Colxx>
-                    </Row>
-                </TabPane>
-                <TabPane tabId="superEVP">
-                    <Row>
-                        <Colxx sm="12">
-                            <CardBody>
-                                <SuperEVP
-                                // data={item}
-                                // key={`qa_${item.key}`}
-                                />
+                                    // data={item}
+                                    // key={`qa_${item.key}`}
+                                    />
 
-                            </CardBody>
-                        </Colxx>
-                    </Row>
-                </TabPane>
-            </TabContent>
+                                </CardBody>
+                            </Colxx>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="Vendor">
+                        <Row>
+                            <Colxx sm="12">
+                                <CardBody>
+                                    <Vendor
+                                        membership={membershipDetails.filter((el) => el.name.toLowerCase() === 'vendor')}
+
+                                    // data={item}
+                                    // key={`qa_${item.key}`}
+                                    />
+
+                                </CardBody>
+                            </Colxx>
+                        </Row>
+                    </TabPane>
+                    <TabPane tabId="superEVP">
+                        <Row>
+                            <Colxx sm="12">
+                                <CardBody>
+                                    <SuperEVP
+
+                                    // data={item}
+                                    // key={`qa_${item.key}`}
+                                    />
+
+                                </CardBody>
+                            </Colxx>
+                        </Row>
+                    </TabPane>
+                </TabContent>
+            }
+
         </>
     );
 };
-export default EVPDashboard;
+
+const mapStateToProps = ({ membership, user }) => {
+    const { membershipDetails } = membership;
+    const { userProfile } = user;
+
+    return { membershipDetails, userProfile };
+};
+export default connect(mapStateToProps, { getUserProfileAction: getUserProfile, getMembershipAction: getMembership })(EVPDashboard);

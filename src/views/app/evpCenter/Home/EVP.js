@@ -51,10 +51,7 @@ const SuperEVP = () => {
 
     return (
         <>
-            <div>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the Super EVP. Your required start up capital is N1,500,000 </h3>
-                <h3 className='font-weight-bold w-50' style={{ fontSize: '16px' }}>You will enjoy a profit Margin of 20%.</h3>
-            </div>
+            
             <Row className='mt-5'>
                 <Colxx xxs="6" md='6' sm='12'>
                     <Card style={{ borderRadius: '20px' }}>

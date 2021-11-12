@@ -3,9 +3,9 @@ import React from 'react';
 import { Card, CardBody, Button } from 'reactstrap';
 import GlideComponent from 'components/carousel/GlideComponent';
 
-const handleRedirect = (e) => {
-  console.log(e);
-}
+// const handleRedirect = (e) => {
+//   console.log(e);
+// }
 
 
 
@@ -38,15 +38,16 @@ const IconCardsCarousel = ({ className = 'icon-cards-row', activities,advertsCou
   const { advertisersCount,
     customersCount,
     evpsCount,
-    incomeCount,
+    usersCount,
+    // incomeCount,
     superevpsCount,
     vendorsCount } = activities;
 
   console.log(activities);
   const counterData = [
-    { title: 'Total Income', value: incomeCount.toString(), button: true, buttonTitle: 'Transaction', func: handleRedirect },
+    { title: 'Total Users',icon: 'iconsminds-user', value: usersCount.toString(), button: false},
     { title: 'Total Advert', icon: 'iconsminds-clock', button: false, value: advertsCount.toString() },
-    { title: 'Super EVPs', icon: 'iconsminds-bar-chart-4', value: 12 },
+    { title: 'Super EVPs', icon: 'iconsminds-bar-chart-4', value: superevpsCount.toString() },
     { title: 'EVPs', icon: 'iconsminds-arrow-shuffle', value: evpsCount.toString() },
     { title: 'Advertisers', icon: 'iconsminds-clock', button: false, value: advertisersCount.toString()},
     { title: 'Vendors', icon: 'iconsminds-clock', button: false, value: vendorsCount.toString() },

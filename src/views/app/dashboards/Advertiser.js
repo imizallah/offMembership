@@ -14,7 +14,8 @@ const Advertiser = ({ loading,
     message,
     user,
     error,
-    membership
+    membership,
+    settings
 }) => {
 
 
@@ -103,7 +104,7 @@ const Advertiser = ({ loading,
     return (
         <>
             <div>
-                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>You have selected the EmAds Membership Package. Membership is N1000 yearly</h3>
+                <h3 className='font-weight-bold w-75' style={{ fontSize: '16px' }}>{`You have selected the EmAds Membership Package. Membership is N${settings.advertiser.amount} yearly`}</h3>
             </div>
             <Row className='mt-5'>
                 <Colxx xxs="12" md='6' sm='12'>
@@ -263,7 +264,7 @@ const Advertiser = ({ loading,
                                         <span className="bounce3" />
                                     </span>
                                     <span className="label">
-                                        Pay N1000
+                                        {`Pay N${settings.advertiser.amount}`}
                                     </span>
                                 </Button>
                             </Form>)
