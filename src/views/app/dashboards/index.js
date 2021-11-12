@@ -24,7 +24,9 @@ const Sevp =React.lazy(()=>
 const EVPDetails=React.lazy(()=>
 import(/* webpackChunkName: "dashboard-ecommerce" */ './evpDetails')
 )
-
+const UserDetails=React.lazy(()=>
+import(/* webpackChunkName: "dashboard-ecommerce" */ './userDetails.js')
+)
 const NewEVP=React.lazy(()=>
 import(/* webpackChunkName: "dashboard-ecommerce" */ './AddNewEVP')
 )
@@ -60,6 +62,10 @@ const Dashboards = ({ match }) => (
         <Route
         path={`${match.url}/evp/details/:userId`}
         render={(props) => <EVPDetails {...props} />}
+      />
+       <Route
+        path={`${match.url}/user/details/:userId`}
+        render={(props) => <UserDetails {...props} />}
       />
        <Route
         path={`${match.url}/add-new-evp`}

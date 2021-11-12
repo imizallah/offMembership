@@ -8,51 +8,50 @@ import { Card, CardBody } from 'reactstrap';
 import { useTable, usePagination, useSortBy } from 'react-table';
 import classnames from 'classnames';
 import DatatablePagination from 'components/DatatablePagination';
-import { NavLink } from 'react-router-dom';
 
 // import products from 'data/products';
 // const products = [{
-//   name: 'Josh Broslin',
-//   phone: '080xxxxxxx',
-//  location: "Block 2 Hill, New Estate Abuja",
-//   credit: 'N56,000',
+//   amount: 'N2,000',
+//   status: 'Complete',
+//   details: "Customer Membership",
+//   date: '23/03/2021',
 //   type: 'Deposit'
 // }, {
-//   name: 'Josh Broslin',
-//   phone: '080xxxxxxx',
-//  location:  "Block 2 Hill, New Estate Abuja",
-//   credit: 'N56,000',
-
+//   amount: 'N2,500',
+//   status: 'Complete',
+//   details: "Vendor Membership",
+//   date: '23/03/2021',
+//   type: 'Transfer'
 // }, {
-//   name: 'Josh Broslin',
-//   phone: '080xxxxxxx',
-//  location:  "Block 2 Hill, New Estate Abuja",
-//   credit: 'N56,000',
-
+//   amount: 'N2,500',
+//   status: 'Complete',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
+//   type: 'Transfer'
 // }, {
-//   name: 'Josh Broslin',
-//   phone: '080xxxxxxx',
-//  location:  "Block 2 Hill, New Estate Abuja",
-//   credit: 'N56,000',
-
+//   amount: 'N4,000',
+//   status: 'Complete',
+//   details: "Advertiser Membership",
+//   date: '23/03/2021',
+//   type: 'Transfer'
 // }, {
-//   name: 'Josh Broslin',
-//   phone: '080xxxxxxxx',
-//   location:  "Block 2 Hill, New Estate Abuja",
-//   credit: 'N56,000',
-
+//   amount: 'N4,000',
+//   status: 'Pending',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
+//   type: 'Transfer'
 // }, {
-//   name: 'Josh Broslin',
-//   phone: '080xxxxxxxx',
-//   location:  "Block 2 Hill, New Estate Abuja",
-//   credit: 'N56,000',
+//   amount: 'N3,000',
+//   status: 'Pending',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
 //   type: 'Withdrawal'
 // }, {
-//   name: 'Josh Broslin',
-//   phone: '080xxxxxxxx',
-//   location:  "Block 2 Hill, New Estate Abuja",
-//   credit: 'N56,000',
-
+//   amount: 'N3,500',
+//   status: 'Pending',
+//   details: "Advert Placement",
+//   date: '23/03/2021',
+//   type: 'Transfer'
 // }]
 function Table({ columns, data, divided = false, defaultPageSize = 10 }) {
   const defaultColumn = React.useMemo(
@@ -157,49 +156,45 @@ function Table({ columns, data, divided = false, defaultPageSize = 10 }) {
   );
 }
 
-const ReactTableWithPaginationCard = ({ activities }) => {
-
-const {users}=activities
+const ReactTableWithPaginationCard = (prop) => {
+  console.log(prop.user.transactions);
   const cols = React.useMemo(
     () => [
       {
         Header: '#',
-        accessor: 'photo',
-        cellClass: ' py-0 mt-5 align-items-center list-item-heading w-5',
-        Cell: (props) => <div className='mt-1'>
-          <img src={props.value} alt='' width='40px'
-            height='40px' style={{ borderRadius: '50%' }} />
-        </div>,
+        accessor: '',
+        cellClass: ' py-0 my-0 align-items-center list-item-heading w-5',
+        Cell: (props) => <p className='my-2 py-1 font-weight-bold mb-0 py-0 mr-5'>{(props.cell.row.id) * 1 + 1}</p>,
       },
       {
-        Header: 'NAME',
-        accessor: 'fullName',
+        Header: 'AMOUNT',
+        accessor: 'amount',
         cellClass: 'mb-0 py-0 my-0 font-family-m align-items-center w-20',
         Cell: (props) => <h6 className='my-2 py-1 py-0 mb-0'>{props.value}</h6>,
       },
       {
-        Header: 'Phone Numbers',
-        accessor: 'phoneNumber',
+        Header: 'STATUS',
+        accessor: 'status',
         cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
         Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value}</p>,
       },
       {
-        Header: 'LOCATION',
-        accessor: 'address',
-        cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-30',
-        Cell: (props) => <p className='my-2 py-1 py-0 mb-0 text-grey'>{props.value}</p>,
-      },
-      {
-        Header: 'Credit',
-        accessor: 'credit',
+        Header: 'DETAILS',
+        accessor: 'details',
         cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
         Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value}</p>,
       },
       {
-        Header: 'ACTION',
-        accessor: '_id',
+        Header: 'DATE',
+        accessor: 'date',
         cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
-        Cell: (props) => <NavLink color='primary' className='mt-2 py-1 py-0 mb-0 bg-primary btn' to={`/app/dashboards/user/details/${props.value}`} style={{ fontSize: '10px' }}>VIEW</NavLink>,
+        Cell: (props) => <p className='my-2 py-1 py-0 mb-0'>{props.value}</p>,
+      },
+      {
+        Header: 'TYPE',
+        accessor: 'type',
+        cellClass: 'mb-0 py-0 my-0 align-items-center font-family-m w-20',
+        Cell: (props) => <p className={`my-2 py-1 py-0 mb-0 ${props.value === 'Deposit' ? 'text-success' : props.value === 'Withdrawal' ? 'text-danger' : 'text-info'}`}>{props.value}</p>,
       },
     ],
     []
@@ -209,9 +204,10 @@ const {users}=activities
     <Card className="mb-4">
       <CardBody>
         <h3 className='font-weight-bold'>
-          ALL USERS
+
+          Transaction History
         </h3>
-        <Table columns={cols} data={users} getTdProps={() => ({ style: { height: '20px' } })} />
+        <Table columns={cols} data={prop.user.transactions} getTdProps={() => ({ style: { height: '20px' } })} />
       </CardBody>
     </Card>
   );
